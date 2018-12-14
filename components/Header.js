@@ -1,0 +1,174 @@
+// @flow
+import React, { useRef } from 'react';
+import Router from 'next/router';
+import styled from 'styled-components';
+import Karma from './icons/karma.svg';
+
+const HeaderStyles = styled.header.attrs({ className: 'header' })`
+  display: flex;
+  align-items: center;
+  height: 80px;
+  background-color: white;
+  position: fixed;
+  width: 100%;
+  z-index: ${props => props.theme.zIndexHeader};
+  border-bottom: 1px solid #eaeaea;
+  top: 0;
+  left: 0;
+
+  .header__logo-container {
+    display: flex;
+    align-items: center;
+    max-width: 100px;
+    margin-left: 20px;
+  }
+
+  .header__logo-container::after {
+    content: '';
+    display: block;
+    margin-left: 20px;
+    flex: 1 0 1px;
+    width: 1px;
+    height: 36px;
+  }
+
+  .header__search-container {
+    flex: 1 0 auto;
+    display: none;
+  }
+
+  .header__search {
+    -webkit-appearance: none;
+    appearance: none;
+    background: #fafafa;
+    border: 1px solid #eaeaea;
+    box-sizing: border-box;
+    border-radius: 5px;
+    padding: 14px;
+    font-size: 14px;
+    min-width: 400px;
+    height: 40px;
+    color: black;
+    outline: none;
+  }
+
+  .header__search:hover,
+  .header__search:focus {
+    border-color: #d0d0d0;
+  }
+
+  .header__user-area {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    flex: 0 1 150px;
+    text-align: left;
+    line-height: 15px;
+  }
+
+  .header__user-area::before {
+    content: '';
+    display: block;
+    margin-right: 20px;
+    flex: 0 0 1px;
+    width: 1px;
+    height: 36px;
+    background-color: #eaeaea;
+  }
+
+  .header__karma-container {
+    display: flex;
+    align-items: center;
+  }
+
+  .header__karma-thing {
+    width: 10px;
+    height: 10px;
+    margin-right: 6px;
+  }
+
+  .header__karma-thing path {
+    fill: #ff4500;
+  }
+
+  .header__karma-counter {
+    line-height: normal;
+    font-size: 12px;
+    color: #999999;
+  }
+
+  .header__avatar-container {
+    width: 30px;
+    height: 30px;
+    margin-left: 20px;
+  }
+
+  .header__avatar {
+    border-radius: 5px;
+  }
+
+  .header form {
+    margin: 0;
+  }
+
+  @media (min-width: 768px) {
+    .header__search-container {
+      display: block;
+    }
+
+    .header__user-area {
+      margin-left: initial;
+    }
+  }
+`;
+
+const Header = () => {
+  const fetch = useRef();
+  return (
+    <HeaderStyles>
+      <div className="header__logo-container">
+        <img
+          className="header__logo"
+          alt="Logo"
+          src="https://logos-download.com/wp-content/uploads/2016/06/Reddit_logo_full_1.png"
+        />
+      </div>
+      <div className="header__search-container">
+        <form
+          method="POST"
+          onSubmit={event => {
+            event.preventDefault();
+            if (fetch.current && fetch.current.value) {
+              Router.push(`/?fetch=${fetch.current.value}`);
+            }
+          }}
+        >
+          <input
+            ref={fetch}
+            name="fetch"
+            className="header__search"
+            placeholder="Enter a Subreddit..."
+          />
+        </form>
+      </div>
+      <div className="header__user-area">
+        <div>
+          <div className="header__username">evilrabbit</div>
+          <div className="header__karma-container">
+            <Karma />
+            <div className="header__karma-counter">1 karma</div>
+          </div>
+        </div>
+        <div className="header__avatar-container">
+          <img
+            className="header__avatar"
+            alt="Evil Rabbit"
+            src="https://avatars.io/twitter/evilrabbit_"
+          />
+        </div>
+      </div>
+    </HeaderStyles>
+  );
+};
+
+export default Header;

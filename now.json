@@ -1,0 +1,27 @@
+{
+  "name": "reddit",
+  "alias": "reddit.loganmcansh.com",
+  "version": 2,
+  "builds": [
+    {
+      "src": "/static",
+      "use": "@now/static"
+    },
+    {
+      "src": "package.json",
+      "use": "@now/next@canary",
+      "config": {
+        "useBuildUtils": "@now/build-utils@canary"
+      }
+    }
+  ],
+  "regions": [
+    "iad"
+  ],
+  "routes": [
+    {
+      "src": "/r/(.*)",
+      "dest": "/?slug=$1"
+    }
+  ]
+}

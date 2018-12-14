@@ -1,0 +1,5 @@
+.next
+node_modules
+flow-typed
+server.js
+types
