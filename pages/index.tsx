@@ -1,22 +1,22 @@
 import React from 'react';
-import styled from 'styled-components'
+import styled from 'styled-components';
 import fetch from 'isomorphic-unfetch';
 import Header from '../components/Header';
 import Sidebar from '../components/Sidebar';
 import Post from '../components/Post';
 import { Post as PostType } from '../types/Post';
 
-type Props = {
+interface Props {
   subreddit: {
     data: {
       children: {
-        data: PostType,
-      }[],
-    },
-  },
+        data: PostType;
+      }[];
+    };
+  };
   query: {
-    fetch: string,
-  },
+    fetch: string;
+  };
 };
 
 const App = styled.div.attrs({ className: 'App' })`
@@ -34,7 +34,7 @@ const App = styled.div.attrs({ className: 'App' })`
       grid-gap: 25px;
     }
   }
-`
+`;
 
 const Index = ({ subreddit, query }: Props) => (
   <App>
@@ -51,7 +51,7 @@ const Index = ({ subreddit, query }: Props) => (
           ))}
       </div>
     </div>
-  </App >
+  </App>
 );
 
 Index.getInitialProps = async ({ query }) => {

@@ -46,7 +46,7 @@ const PostStyles = styled(StyledLink).attrs({
 
     &::before,
     &::after {
-      content: "";
+      content: '';
       position: absolute;
       top: 6px;
       left: 0;
@@ -62,7 +62,8 @@ const PostStyles = styled(StyledLink).attrs({
     &::after {
       top: auto;
       bottom: 6px;
-      border-bottom: calc(${props => props.theme.arrow_size} - 3px) solid transparent;
+      border-bottom: calc(${props => props.theme.arrow_size} - 3px) solid
+        transparent;
       border-top: ${props => props.theme.arrow_size} solid black;
     }
   }
@@ -193,7 +194,7 @@ const Post = ({ post }: { post: Props }) => {
           </div>
           <div className="feed-item__info">
             <div className="feed-item__header">
-              <h2 className="feed-item__heading">{post.title}</h2>
+              <h2 className="feed-item__heading" title={post.title}>{post.title.slice(0, 60)}</h2>
               <span className="feed_item__short-link">{url}</span>
             </div>
             <div className="feed-item__meta">
