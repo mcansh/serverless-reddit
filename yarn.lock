@@ -896,6 +896,11 @@
   dependencies:
     source-map "^0.6.1"
 
+"@types/url-parse@1.4.1":
+  version "1.4.1"
+  resolved "https://registry.npmjs.org/@types/url-parse/-/url-parse-1.4.1.tgz#c7ad9eb4f409fc14b93ea5d0d3c3dd812ac5b372"
+  integrity sha512-3McaEYdd8DHiXqOTx36PaZdbc8l8drr9iJQYCaKnEsgd/n5JIEgIVCaSVSZqtDik4Pydax1Zo+JB99r82bBYDA==
+
 "@types/webpack@*":
   version "4.4.21"
   resolved "https://registry.npmjs.org/@types/webpack/-/webpack-4.4.21.tgz#1a80de6d3e465f35067dd2f4533bf6e04c2e7187"
@@ -3477,11 +3482,6 @@ lodash.isplainobject@^4.0.6:
   resolved "https://registry.npmjs.org/lodash.isplainobject/-/lodash.isplainobject-4.0.6.tgz#7c526a52d89b45c45cc690b88163be0497f550cb"
   integrity sha1-fFJqUtibRcRcxpC4gWO+BJf1UMs=
 
-lodash.unescape@4.0.1:
-  version "4.0.1"
-  resolved "https://registry.npmjs.org/lodash.unescape/-/lodash.unescape-4.0.1.tgz#bf2249886ce514cda112fae9218cdc065211fc9c"
-  integrity sha1-vyJJiGzlFM2hEvrpIYzcBlIR/Jw=
-
 lodash@^4.17.10, lodash@^4.17.11, lodash@^4.17.4, lodash@^4.17.5:
   version "4.17.11"
   resolved "https://registry.npmjs.org/lodash/-/lodash-4.17.11.tgz#b39ea6229ef607ecd89e2c8df12536891cac9b8d"
@@ -3765,20 +3765,7 @@ neo-async@^2.5.0:
   resolved "https://registry.npmjs.org/neo-async/-/neo-async-2.6.0.tgz#b9d15e4d71c6762908654b5183ed38b753340835"
   integrity sha512-MFh0d/Wa7vkKO3Y3LlacqAEeHK0mckVqzDieUKTT+KGxi+zIpeVsFxymkIiRpbpDziHc290Xr9A1O4Om7otoRA==
 
-next-server@7.0.2-canary.42:
-  version "7.0.2-canary.42"
-  resolved "https://registry.npmjs.org/next-server/-/next-server-7.0.2-canary.42.tgz#8a36dc781be16e491cd8d5762b6bc99e37cbaf6d"
-  integrity sha512-sVF1KGXPXAFQsaFERDWeRzE2ybfPrB9Dyo6iQza3yqTmQu554lDtDjtud5duowWB8wQcWxOPECXIAywtzXhA0A==
-  dependencies:
-    etag "1.8.1"
-    find-up "3.0.0"
-    fresh "0.5.2"
-    path-to-regexp "2.1.0"
-    prop-types "15.6.2"
-    send "0.16.1"
-    url "0.11.0"
-
-next-server@^7.0.2-canary.43:
+next-server@7.0.2-canary.43, next-server@^7.0.2-canary.43:
   version "7.0.2-canary.43"
   resolved "https://registry.npmjs.org/next-server/-/next-server-7.0.2-canary.43.tgz#5ba7c0a388c533702c86d08d506175846b6fe6d0"
   integrity sha512-9VJtQFsvlMNGNiT7ofBF6QrU7U4cjYqqzoUloLHNHLQiVqXMa61l9hL0KzVd+h9H8PmN4PfBOrlSEsmplDF5lQ==
@@ -4796,11 +4783,6 @@ schema-utils@^1.0.0:
   resolved "https://registry.npmjs.org/semver/-/semver-5.6.0.tgz#7e74256fbaa49c75aa7c7a205cc22799cac80004"
   integrity sha512-RS9R6R35NYgQn++fkDWaOmqGoj4Ek9gGs+DPxNUZKuwE183xjJroKvyo1IzVFeXvUrvmALy6FWD5xrdJT25gMg==
 
-semver@5.5.0:
-  version "5.5.0"
-  resolved "https://registry.npmjs.org/semver/-/semver-5.5.0.tgz#dc4bbc7a6ca9d916dee5d43516f0092b58f7b8ab"
-  integrity sha512-4SJ3dm0WAwWy/NVeioZh5AntkdJoWKxHxcmyP622fOkgHa4z3R0TdBJICINyaSDE6uNwVc8gZr+ZinwZAH4xIA==
-
 send@0.16.1:
   version "0.16.1"
   resolved "https://registry.npmjs.org/send/-/send-0.16.1.tgz#a70e1ca21d1382c11d0d9f6231deb281080d7ab3"
@@ -5409,23 +5391,6 @@ typedarray@^0.0.6:
   version "0.0.6"
   resolved "https://registry.npmjs.org/typedarray/-/typedarray-0.0.6.tgz#867ac74e3864187b1d3d47d996a78ec5c8830777"
   integrity sha1-hnrHTjhkGHsdPUfZlqeOxciDB3c=
-
-typescript-eslint-parser@21.0.2:
-  version "21.0.2"
-  resolved "https://registry.npmjs.org/typescript-eslint-parser/-/typescript-eslint-parser-21.0.2.tgz#270af10e4724528677fbcf34ea495284bec3a894"
-  integrity sha512-u+pj4RVJBr4eTzj0n5npoXD/oRthvfUCjSKndhNI714MG0mQq2DJw5WP7qmonRNIFgmZuvdDOH3BHm9iOjIAfg==
-  dependencies:
-    eslint-scope "^4.0.0"
-    eslint-visitor-keys "^1.0.0"
-    typescript-estree "5.3.0"
-
-typescript-estree@5.3.0:
-  version "5.3.0"
-  resolved "https://registry.npmjs.org/typescript-estree/-/typescript-estree-5.3.0.tgz#fb6c977b5e21073eb16cbdc0338a7f752da99ff5"
-  integrity sha512-Vu0KmYdSCkpae+J48wsFC1ti19Hq3Wi/lODUaE+uesc3gzqhWbZ5itWbsjylLVbjNW4K41RqDzSfnaYNbmEiMQ==
-  dependencies:
-    lodash.unescape "4.0.1"
-    semver "5.5.0"
 
 typescript@3.2.2:
   version "3.2.2"
