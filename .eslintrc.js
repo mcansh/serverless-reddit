@@ -1,6 +1,20 @@
 module.exports = {
   extends: ['mcansh'],
-  plugins: ['flowtype'],
+  plugins: ['typescript'],
+  parserOptions: {
+    sourceType: 'module',
+  },
+  overrides: [
+    {
+      files: ['*.ts', '*.tsx'],
+      parser: 'typescript-eslint-parser',
+      parserOptions: {
+        ecmaFeatures: {
+          jsx: true,
+        },
+      },
+    },
+  ],
   rules: {
     'jsx-a11y/anchor-is-valid': [
       'error',

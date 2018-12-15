@@ -1,4 +1,3 @@
-// @flow
 import React, { useRef } from 'react';
 import Router from 'next/router';
 import styled from 'styled-components';
@@ -123,7 +122,7 @@ const HeaderStyles = styled.header.attrs({ className: 'header' })`
 `;
 
 const Header = () => {
-  const fetch = useRef();
+  const fetch = useRef(null);
   return (
     <HeaderStyles>
       <div className="header__logo-container">

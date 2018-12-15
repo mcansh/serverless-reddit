@@ -1,5 +1,3 @@
-// @flow
-
 export type Gildings = {
   gid_1: number,
   gid_2: number,

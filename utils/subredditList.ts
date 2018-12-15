@@ -1,4 +1,3 @@
-// @flow
 /*
  * A static list of subreddits I want to show. In order to
  * - show static asset deployment on Now,

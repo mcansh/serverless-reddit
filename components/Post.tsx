@@ -1,10 +1,9 @@
-// @flow
 import React from 'react';
 import Link from 'next/link';
 import URL from 'url-parse';
 import styled from 'styled-components';
 import DefaultThumbnail from './icons/default_thumbnail.svg';
-import type { Post as Props } from '../types/Post';
+import { Post as Props } from '../types/Post';
 import Comments from './icons/comments.svg';
 import StyledLink from './Link';
 
@@ -19,10 +18,6 @@ const PostStyles = styled(StyledLink).attrs({
     border-bottom: 1px solid #eaeaea;
   }
 
-  &:last-child {
-    margin-bottom: 25px;
-  }
-
   .feed-item {
     position: relative;
     display: flex;
@@ -34,7 +29,7 @@ const PostStyles = styled(StyledLink).attrs({
 
   .feed-item:hover {
     box-shadow: 0 0 50px #79797922;
-    z-index: var(--z-index__feed-item);
+    z-index: ${props => props.theme.zIndexFeedItem};
     cursor: pointer;
   }
 
@@ -48,28 +43,28 @@ const PostStyles = styled(StyledLink).attrs({
     font-size: 14px;
     color: #000000;
     height: 100%;
-  }
 
-  .feed-item__voting::before,
-  .feed-item__voting::after {
-    content: '';
-    position: absolute;
-    top: 6px;
-    left: 0;
-    right: 0;
-    margin: 0 auto;
-    display: block;
-    width: 0;
-    height: 0;
-    border: calc(var(--voting-arrow-size) - 3px) solid transparent;
-    border-bottom: var(--voting-arrow-size) solid black;
-  }
+    &::before,
+    &::after {
+      content: "";
+      position: absolute;
+      top: 6px;
+      left: 0;
+      right: 0;
+      margin: 0 auto;
+      display: block;
+      width: 0;
+      height: 0;
+      border: calc(${props => props.theme.arrow_size} - 3px) solid transparent;
+      border-bottom: ${props => props.theme.arrow_size} solid black;
+    }
 
-  .feed-item__voting::after {
-    top: auto;
-    bottom: 6px;
-    border-bottom: calc(var(--voting-arrow-size) - 3px) solid transparent;
-    border-top: var(--voting-arrow-size) solid black;
+    &::after {
+      top: auto;
+      bottom: 6px;
+      border-bottom: calc(${props => props.theme.arrow_size} - 3px) solid transparent;
+      border-top: ${props => props.theme.arrow_size} solid black;
+    }
   }
 
   .feed-item__image-container {
@@ -102,7 +97,6 @@ const PostStyles = styled(StyledLink).attrs({
 
   .feed-item__heading {
     margin: 0 12px 0 0;
-    font-size: 18px;
     font-size: 14px;
     color: #000000;
     text-align: left;
@@ -161,6 +155,10 @@ const PostStyles = styled(StyledLink).attrs({
 
     .feed_item__short-link {
       display: block;
+    }
+
+    .header__user-area {
+      margin-left: initial;
     }
 
     .feed-item__meta {

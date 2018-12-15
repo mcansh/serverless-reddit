@@ -1,4 +1,3 @@
-// @flow
 import React from 'react';
 import App, { Container } from 'next/app';
 import Head from 'next/head';
@@ -13,6 +12,7 @@ const SENTRY_PUBLIC_DSN =
 export default class MyApp extends App {
   // $FlowFixMe
   constructor(...args) {
+    // @ts-ignore
     super(...args);
     Sentry.init({ dsn: SENTRY_PUBLIC_DSN });
   }

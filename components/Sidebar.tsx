@@ -1,4 +1,3 @@
-// @flow
 import React from 'react';
 import Link from 'next/link';
 import styled from 'styled-components';
@@ -14,15 +13,19 @@ import StyledLink from './Link';
 
 const Aside = styled.aside.attrs({ className: 'section' })`
   display: none;
-  position: fixed;
+  position: sticky;
   width: 280px;
   top: 105px;
   left: 25px;
   background-color: white;
   padding: 18px;
-  height: calc(100vh - 80px);
+  height: calc(100vh - 80px - 50px);
   overflow: auto;
   -webkit-overflow-scrolling: touch;
+
+  @media (min-width: 1024px) {
+    display: block;
+  }
 
   .section__heading {
     margin: 0 0 16px;
@@ -75,10 +78,6 @@ const Aside = styled.aside.attrs({ className: 'section' })`
   .section__list-item:last-child {
     margin-bottom: 28px;
   }
-
-  @media (min-width: 1024px) {
-    display: block;
-  }
 `;
 
 type Props = { activeSubreddit: string };
@@ -91,7 +90,7 @@ const Sidebar = ({ activeSubreddit }: Props) => (
         <Home
           className={`section__list-item-icon ${
             activeSubreddit === '' ? ' active' : ''
-          }`}
+            }`}
         />
         <Link href="?" as="/" passHref prefetch>
           <StyledLink>Home</StyledLink>

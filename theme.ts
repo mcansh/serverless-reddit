@@ -1,4 +1,3 @@
-// @flow
 const theme = {
   arrow_size: '8px',
   zIndexHeader: 100,
