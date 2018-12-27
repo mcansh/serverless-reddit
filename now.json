@@ -16,12 +16,19 @@
     }
   ],
   "regions": [
-    "iad"
+    "all"
   ],
   "routes": [
     {
       "src": "/r/(.*)",
       "dest": "/?fetch=$1"
+    },
+    {
+      "src": "/static",
+      "dest": "/static/$1",
+      "headers": {
+        "Cache-Control": "s-maxage=31536000, maxage=0"
+      }
     }
   ]
 }
