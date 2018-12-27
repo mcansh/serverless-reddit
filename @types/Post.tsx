@@ -1,30 +1,30 @@
-export type Gildings = {
+export interface Gildings {
   gid_1: number;
   gid_2: number;
   gid_3: number;
-};
+}
 
-export type MediaEmbed = {};
+export interface MediaEmbed { }
 
-export type Source = {
+export interface Source {
   url: string;
   width: number;
   height: number;
-};
+}
 
-export type Image = {
+export interface Image {
   source: Source;
   resolutions: Source[];
   variants: MediaEmbed;
   id: string;
-};
+}
 
-export type Preview = {
+export interface Preview {
   images: Image[];
   enabled: boolean;
-};
+}
 
-export type Post = {
+export interface Post {
   approved_at_utc: null;
   subreddit: string;
   selftext: string;
@@ -121,4 +121,4 @@ export type Post = {
   created_utc: number;
   media: null;
   is_video: boolean;
-};
+}
