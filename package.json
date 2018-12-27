@@ -1,5 +1,6 @@
 {
   "name": "reddit",
+  "description": "a serverless now lambda reddit client",
   "version": "1.0.0",
   "main": "index.js",
   "author": "Logan McAnsh <logan@mcan.sh> (https://mcan.sh)",
