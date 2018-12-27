@@ -1,9 +1,9 @@
-import React from 'react';
+import * as React from 'react';
 import Link from 'next/link';
 import URL from 'url-parse';
 import styled from 'styled-components';
 import DefaultThumbnail from './icons/default_thumbnail.svg';
-import { Post as Props } from '../types/Post';
+import { Post as Props } from '../@types/Post';
 import Comments from './icons/comments.svg';
 import StyledLink from './Link';
 
@@ -194,7 +194,9 @@ const Post = ({ post }: { post: Props }) => {
           </div>
           <div className="feed-item__info">
             <div className="feed-item__header">
-              <h2 className="feed-item__heading" title={post.title}>{post.title.slice(0, 60)}</h2>
+              <h2 className="feed-item__heading" title={post.title}>
+                {post.title.slice(0, 60)}
+              </h2>
               <span className="feed_item__short-link">{url}</span>
             </div>
             <div className="feed-item__meta">

@@ -1,10 +1,11 @@
-import React from 'react';
+import * as React from 'react';
+import { NextContext } from 'next';
 import styled from 'styled-components';
 import fetch from 'isomorphic-unfetch';
 import Header from '../components/Header';
 import Sidebar from '../components/Sidebar';
 import Post from '../components/Post';
-import { Post as PostType } from '../types/Post';
+import { Post as PostType } from '../@types/Post';
 
 interface Props {
   subreddit: {
@@ -17,7 +18,7 @@ interface Props {
   query: {
     fetch: string;
   };
-};
+}
 
 const App = styled.div.attrs({ className: 'App' })`
   text-align: center;
@@ -54,8 +55,8 @@ const Index = ({ subreddit, query }: Props) => (
   </App>
 );
 
-Index.getInitialProps = async ({ query }) => {
-  const isServer = typeof window === 'undefined';
+Index.getInitialProps = async ({ req, query }: NextContext) => {
+  const isServer = !!req;
   const proxy = isServer ? '' : 'https://cors-anywhere.herokuapp.com/';
 
   const url = query.fetch

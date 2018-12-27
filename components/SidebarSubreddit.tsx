@@ -1,8 +1,10 @@
-import React from 'react';
+import * as React from 'react';
 import Link from 'next/link';
 import StyledLink from './Link';
 
-type Props = { subreddit: string };
+interface Props {
+  subreddit: string;
+}
 
 const SidebarSubreddit = ({ subreddit }: Props) => (
   <li className="section__list-item">

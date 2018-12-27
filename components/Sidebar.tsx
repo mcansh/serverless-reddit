@@ -1,15 +1,15 @@
-import React from 'react';
+import * as React from 'react';
 import Link from 'next/link';
 import styled from 'styled-components';
-import { subscriptions, favorites } from '../utils/subredditList';
-import Home from './icons/home.svg';
-import Popular from './icons/popular.svg';
-import All from './icons/all.svg';
-import OriginalContent from './icons/original_content.svg';
+import { favorites, subscriptions } from '../utils/subredditList';
 import Account from './icons/account.svg';
+import All from './icons/all.svg';
+import Home from './icons/home.svg';
 import Messages from './icons/messages.svg';
-import SidebarSubreddit from './SidebarSubreddit';
+import OriginalContent from './icons/original_content.svg';
+import Popular from './icons/popular.svg';
 import StyledLink from './Link';
+import SidebarSubreddit from './SidebarSubreddit';
 
 const Aside = styled.aside.attrs({ className: 'section' })`
   display: none;
@@ -80,7 +80,9 @@ const Aside = styled.aside.attrs({ className: 'section' })`
   }
 `;
 
-type Props = { activeSubreddit: string };
+interface Props {
+  activeSubreddit: string;
+}
 
 const Sidebar = ({ activeSubreddit }: Props) => (
   <Aside>
@@ -90,7 +92,7 @@ const Sidebar = ({ activeSubreddit }: Props) => (
         <Home
           className={`section__list-item-icon ${
             activeSubreddit === '' ? ' active' : ''
-            }`}
+          }`}
         />
         <Link href="?" as="/" passHref prefetch>
           <StyledLink>Home</StyledLink>
