@@ -8,7 +8,7 @@ const GlobalStyle = createGlobalStyle`
     line-height: normal;
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
-    background-color: ${props => props.theme.backgroundColor};
+    background-color: #eaeaea;
   }
 
   html {

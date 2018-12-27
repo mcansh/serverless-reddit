@@ -55,16 +55,16 @@ const PostStyles = styled(StyledLink).attrs({
       display: block;
       width: 0;
       height: 0;
-      border: calc(${props => props.theme.arrow_size} - 3px) solid transparent;
-      border-bottom: ${props => props.theme.arrow_size} solid black;
+      border: calc(${props => props.theme.arrowSize} - 3px) solid transparent;
+      border-bottom: ${props => props.theme.arrowSize} solid black;
     }
 
     &::after {
       top: auto;
       bottom: 6px;
-      border-bottom: calc(${props => props.theme.arrow_size} - 3px) solid
+      border-bottom: calc(${props => props.theme.arrowSize} - 3px) solid
         transparent;
-      border-top: ${props => props.theme.arrow_size} solid black;
+      border-top: ${props => props.theme.arrowSize} solid black;
     }
   }
 
