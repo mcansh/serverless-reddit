@@ -20,15 +20,19 @@ const HeaderStyles = styled.header.attrs({ className: 'header' })`
     align-items: center;
     max-width: 100px;
     margin-left: 20px;
-  }
 
-  .header__logo-container::after {
-    content: '';
-    display: block;
-    margin-left: 20px;
-    flex: 1 0 1px;
-    width: 1px;
-    height: 36px;
+    &::after {
+      content: '';
+      display: block;
+      margin-left: 20px;
+      flex: 1 0 1px;
+      width: 1px;
+      height: 36px;
+    }
+
+    img {
+      max-width: 100px;
+    }
   }
 
   .header__search-container {
@@ -49,11 +53,11 @@ const HeaderStyles = styled.header.attrs({ className: 'header' })`
     height: 40px;
     color: black;
     outline: none;
-  }
 
-  .header__search:hover,
-  .header__search:focus {
-    border-color: #d0d0d0;
+    &:hover,
+    &:focus {
+      border-color: #d0d0d0;
+    }
   }
 
   .header__user-area {
@@ -63,16 +67,15 @@ const HeaderStyles = styled.header.attrs({ className: 'header' })`
     flex: 0 1 150px;
     text-align: left;
     line-height: 15px;
-  }
-
-  .header__user-area::before {
-    content: '';
-    display: block;
-    margin-right: 20px;
-    flex: 0 0 1px;
-    width: 1px;
-    height: 36px;
-    background-color: #eaeaea;
+    &::before {
+      content: '';
+      display: block;
+      margin-right: 20px;
+      flex: 0 0 1px;
+      width: 1px;
+      height: 36px;
+      background-color: #eaeaea;
+    }
   }
 
   .header__karma-container {
@@ -126,11 +129,15 @@ const Header = () => {
   return (
     <HeaderStyles>
       <div className="header__logo-container">
-        <img
-          className="header__logo"
-          alt="Logo"
-          src="https://logos-download.com/wp-content/uploads/2016/06/Reddit_logo_full_1.png"
-        />
+        <picture>
+          <source srcSet="/static/img/reddit.webp" type="image/webp" />
+          <source srcSet="/static/img/reddit.png" type="image/png" />
+          <img
+            className="header__logo"
+            alt="Logo"
+            src="/static/img/reddit.png"
+          />
+        </picture>
       </div>
       <div className="header__search-container">
         <form
@@ -159,11 +166,15 @@ const Header = () => {
           </div>
         </div>
         <div className="header__avatar-container">
-          <img
-            className="header__avatar"
-            alt="Evil Rabbit"
-            src="https://avatars.io/twitter/evilrabbit_"
-          />
+          <picture>
+            <source srcSet="/static/img/evilrabbit_.webp" type="image/webp" />
+            <source srcSet="/static/img/evilrabbit_.jpeg" type="image/jpeg" />
+            <img
+              className="header__avatar"
+              alt="Evil Rabbit"
+              src="/static/img/evilrabbit_.jpeg"
+            />
+          </picture>
         </div>
       </div>
     </HeaderStyles>
