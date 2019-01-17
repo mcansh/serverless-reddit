@@ -130,6 +130,10 @@ const PostStyles = styled(StyledLink).attrs({
     color: black;
     font-size: 12px;
     font-weight: bold;
+
+    svg {
+      margin-right: 1rem;
+    }
   }
 
   @media (min-width: 768px) {
