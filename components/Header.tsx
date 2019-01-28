@@ -145,7 +145,8 @@ const Header = () => {
           onSubmit={event => {
             event.preventDefault();
             if (fetch.current && fetch.current.value) {
-              Router.push(`/?fetch=${fetch.current.value}`);
+              const { value } = fetch.current;
+              Router.push(`/?fetch=${value}`, `/r/${value}`);
             }
           }}
         >
