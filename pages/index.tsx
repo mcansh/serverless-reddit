@@ -2,6 +2,7 @@ import * as React from 'react';
 import { NextContext } from 'next';
 import styled from 'styled-components';
 import fetch from 'isomorphic-unfetch';
+import Head from 'next/head';
 import Header from '../components/Header';
 import Sidebar from '../components/Sidebar';
 import Post from '../components/Post';
@@ -40,6 +41,11 @@ const App = styled.div.attrs({ className: 'App' })`
 const Index = ({ subreddit, query }: Props) => (
   <App>
     <Header />
+    <Head>
+      <title>
+        {query.fetch ? `${query.fetch} - ` : ''} Next.js: ZEIT Serverless SSR
+      </title>
+    </Head>
     <div className="main">
       <Sidebar activeSubreddit={query.fetch} />
       <div className="feed">

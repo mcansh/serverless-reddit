@@ -36,7 +36,6 @@ export default class MyApp extends App {
     return (
       <Container>
         <Head>
-          <title>Next.js: ZEIT Serverless SSR</title>
           <meta name="description" content={description} />
           <meta charSet="utf-8" />
           <meta
