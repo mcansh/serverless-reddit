@@ -22,6 +22,7 @@ const SidebarSubreddit = ({ subreddit }: Props) => (
         className="section__list-item-icon section__list-item-icon_image"
         alt={subreddit}
         src={`/static/img/subreddits/${subreddit}.png`}
+        importance="low"
       />
     </picture>
     <Link href={`?fetch=${subreddit}`} as={`/r/${subreddit}`} prefetch passHref>

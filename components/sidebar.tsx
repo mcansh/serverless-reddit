@@ -71,14 +71,14 @@ const Aside = styled.aside.attrs({ className: 'section' })`
     line-height: normal;
     font-size: 14px;
     color: #000000;
-  }
 
-  .section__list-item:not(:last-child) {
-    margin-bottom: 17px;
-  }
+    &:not(:last-child) {
+      margin-bottom: 17px;
+    }
 
-  .section__list-item:last-child {
-    margin-bottom: 28px;
+    &:last-child {
+      margin-bottom: 28px;
+    }
   }
 `;
 

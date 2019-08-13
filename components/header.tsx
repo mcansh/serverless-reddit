@@ -7,6 +7,7 @@ import Karma from '~/static/img/icons/karma.svg';
 const HeaderStyles = styled.header.attrs({ className: 'header' })`
   display: flex;
   align-items: center;
+  justify-content: space-between;
   height: 80px;
   background-color: white;
   position: fixed;
@@ -15,29 +16,23 @@ const HeaderStyles = styled.header.attrs({ className: 'header' })`
   border-bottom: 1px solid #eaeaea;
   top: 0;
   left: 0;
+  padding: 0 2rem;
 
   .header__logo-container {
-    display: flex;
-    align-items: center;
-    max-width: 100px;
-    margin-left: 20px;
+    width: 100px;
+    position: relative;
+    height: 36px;
 
-    &::after {
-      content: '';
-      display: block;
-      margin-left: 20px;
-      flex: 1 0 1px;
-      width: 1px;
-      height: 36px;
-    }
-
-    img {
-      max-width: 100px;
+    .header__logo {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: auto;
     }
   }
 
   .header__search-container {
-    flex: 1 0 auto;
     display: none;
   }
 
@@ -65,18 +60,8 @@ const HeaderStyles = styled.header.attrs({ className: 'header' })`
     margin-left: auto;
     display: flex;
     align-items: center;
-    flex: 0 1 150px;
     text-align: left;
     line-height: 15px;
-    &::before {
-      content: '';
-      display: block;
-      margin-right: 20px;
-      flex: 0 0 1px;
-      width: 1px;
-      height: 36px;
-      background-color: #eaeaea;
-    }
   }
 
   .header__karma-container {
@@ -104,10 +89,17 @@ const HeaderStyles = styled.header.attrs({ className: 'header' })`
     width: 30px;
     height: 30px;
     margin-left: 20px;
+    position: relative;
   }
 
   .header__avatar {
     border-radius: 5px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: block;
   }
 
   .header form {
@@ -136,6 +128,7 @@ const Header = () => {
             className="header__logo"
             alt="Logo"
             src="/static/img/reddit.png"
+            importance="low"
           />
         </picture>
       </div>
@@ -171,6 +164,7 @@ const Header = () => {
               className="header__avatar"
               alt="Evil Rabbit"
               src="/static/img/evilrabbit_.jpeg"
+              importance="low"
             />
           </picture>
         </div>
