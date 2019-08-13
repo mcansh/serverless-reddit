@@ -1,8 +1,10 @@
-import * as React from 'react';
+import React from 'react';
 import { NextPage } from 'next';
 import styled from 'styled-components';
 import fetch from 'isomorphic-unfetch';
 import Head from 'next/head';
+import { oc } from 'ts-optchain';
+import { useRouter } from 'next/router';
 
 import Sidebar from '~/components/sidebar';
 import Post from '~/components/post';
@@ -16,9 +18,6 @@ interface Props {
         data: PostType;
       }[];
     };
-  };
-  query: {
-    fetch: string;
   };
 }
 
@@ -39,28 +38,45 @@ const App = styled.div.attrs({ className: 'App' })`
   }
 `;
 
-const Index: NextPage<Props> = ({ subreddit, query }: Props) => (
-  <App>
-    <Header />
-    <Head>
-      <title>
-        {query.fetch ? `${query.fetch} - ` : ''} Next.js: ZEIT Serverless SSR
-      </title>
-    </Head>
-    <div className="main">
-      <Sidebar activeSubreddit={query.fetch} />
-      <div className="feed">
-        {subreddit &&
-          subreddit.data &&
-          subreddit.data.children &&
-          subreddit.data.children.length !== 0 &&
-          subreddit.data.children.map(({ data }) => (
-            <Post key={data.id} post={data} />
-          ))}
+const Index: NextPage<Props> = ({ subreddit }: Props) => {
+  const router = useRouter();
+  const query = Array.isArray(router.query.fetch)
+    ? router.query.fetch[0]
+    : router.query.fetch;
+  const posts = oc(subreddit).data.children([]);
+  return (
+    <App>
+      <Header />
+      <Head>
+        <title>{query ? `${query} - ` : ''} Next.js: ZEIT Serverless SSR</title>
+      </Head>
+      <div className="main">
+        <Sidebar activeSubreddit={query || ''} />
+        <div className="feed">
+          {posts.length ? (
+            posts.map(({ data }) => <Post key={data.id} post={data} />)
+          ) : (
+            <div
+              css={{
+                height: '100%',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                textAlign: 'center',
+                h1: {
+                  fontSize: '2.4rem',
+                  fontFamily: "'SF Mono', menlo, monospace",
+                },
+              }}
+            >
+              <h1>Sorry &quot;{query}&quot; has no posts</h1>
+            </div>
+          )}
+        </div>
       </div>
-    </div>
-  </App>
-);
+    </App>
+  );
+};
 
 Index.getInitialProps = async ({ req, query }) => {
   const isServer = !!req;
@@ -73,12 +89,7 @@ Index.getInitialProps = async ({ req, query }) => {
   const promise = await fetch(url);
   const subreddit = await promise.json();
 
-  return {
-    subreddit,
-    query: {
-      fetch: Array.isArray(query.fetch) ? query.fetch[0] : query.fetch || '',
-    },
-  };
+  return { subreddit };
 };
 
 export default Index;
