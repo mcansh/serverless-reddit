@@ -4,7 +4,7 @@ export interface Gildings {
   gid_3: number;
 }
 
-export interface MediaEmbed { }
+export interface MediaEmbed {}
 
 export interface Source {
   url: string;
