@@ -1,5 +1,4 @@
 import * as React from 'react';
-import Link from 'next/link';
 import URL from 'url-parse';
 import styled from 'styled-components';
 
@@ -184,37 +183,37 @@ const Post = ({ post }: { post: Props }) => {
     post.thumbnail && /^$|self|default|nsfw/.test(post.thumbnail);
   const url = new URL(post.url).host;
   return (
-    <Link href={post.url} passHref>
-      <PostStyles>
-        <div className="feed__feed-item feed-item">
-          <div className="feed-item__voting">{post.score}</div>
-          <div
-            className="feed-item__image-container"
-            style={{
-              border: hasThumbnail ? '1px solid #eaeaea' : '',
-              backgroundImage: hasThumbnail ? '' : `url(${post.thumbnail})`,
-            }}
-          >
-            {hasThumbnail && <DefaultThumbnail />}
+    <PostStyles href={post.url}>
+      <div className="feed__feed-item feed-item">
+        <div className="feed-item__voting">{post.score}</div>
+        <div
+          className="feed-item__image-container"
+          css={{
+            border: hasThumbnail ? '1px solid #eaeaea' : undefined,
+            backgroundImage: hasThumbnail
+              ? undefined
+              : `url(${post.thumbnail})`,
+          }}
+        >
+          {hasThumbnail && <DefaultThumbnail />}
+        </div>
+        <div className="feed-item__info">
+          <div className="feed-item__header">
+            <h2 className="feed-item__heading" title={post.title}>
+              {post.title.slice(0, 60)}
+            </h2>
+            <span className="feed_item__short-link">{url}</span>
           </div>
-          <div className="feed-item__info">
-            <div className="feed-item__header">
-              <h2 className="feed-item__heading" title={post.title}>
-                {post.title.slice(0, 60)}
-              </h2>
-              <span className="feed_item__short-link">{url}</span>
-            </div>
-            <div className="feed-item__meta">
-              r/{post.subreddit} • Posted by <strong>u/{post.author}</strong>
-            </div>
-          </div>
-          <div className="feed-item__comments">
-            <Comments />
-            {post.num_comments}
+          <div className="feed-item__meta">
+            r/{post.subreddit} • Posted by <strong>u/{post.author}</strong>
           </div>
         </div>
-      </PostStyles>
-    </Link>
+        <div className="feed-item__comments">
+          <Comments />
+          {post.num_comments}
+        </div>
+      </div>
+    </PostStyles>
   );
 };
 
