@@ -1,5 +1,5 @@
 import React from 'react';
-import Router from 'next/router';
+import Router, { useRouter } from 'next/router';
 import styled from 'styled-components';
 
 import Karma from '~/static/img/icons/karma.svg';
@@ -118,6 +118,7 @@ const HeaderStyles = styled.header.attrs({ className: 'header' })`
 `;
 
 const Header = () => {
+  const { fetch } = useRouter().query;
   return (
     <HeaderStyles>
       <div className="header__logo-container">
@@ -138,13 +139,18 @@ const Header = () => {
           onSubmit={event => {
             event.preventDefault();
             const { value } = event.currentTarget.fetch;
-            Router.push(`/r/[fetch]`, `/r/${value}`);
+            if (!value) {
+              Router.push('/');
+            } else {
+              Router.push(`/r/[fetch]`, `/r/${value}`);
+            }
           }}
         >
           <input
             name="fetch"
             className="header__search"
             placeholder="Enter a Subreddit..."
+            defaultValue={fetch}
           />
         </form>
       </div>
