@@ -1,6 +1,7 @@
 import * as React from 'react';
 import Link from 'next/link';
-import StyledLink from './Link';
+
+import StyledLink from './link';
 
 interface Props {
   subreddit: string;

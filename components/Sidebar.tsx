@@ -1,15 +1,16 @@
 import * as React from 'react';
 import Link from 'next/link';
 import styled from 'styled-components';
-import { favorites, subscriptions } from '../utils/subredditList';
-import Account from './icons/account.svg';
-import All from './icons/all.svg';
-import Home from './icons/home.svg';
-import Messages from './icons/messages.svg';
-import OriginalContent from './icons/original_content.svg';
-import Popular from './icons/popular.svg';
-import StyledLink from './Link';
-import SidebarSubreddit from './SidebarSubreddit';
+
+import StyledLink from './link';
+import SidebarSubreddit from './sidebar-subreddit';
+import { favorites, subscriptions } from '~/utils/subredditList';
+import Account from '~/static/img/icons/account.svg';
+import All from '~/static/img/icons/all.svg';
+import Home from '~/static/img/icons/home.svg';
+import Messages from '~/static/img/icons/messages.svg';
+import OriginalContent from '~/static/img/icons/original_content.svg';
+import Popular from '~/static/img/icons/popular.svg';
 
 const Aside = styled.aside.attrs({ className: 'section' })`
   display: none;

@@ -2,10 +2,11 @@ import * as React from 'react';
 import Link from 'next/link';
 import URL from 'url-parse';
 import styled from 'styled-components';
-import DefaultThumbnail from './icons/default_thumbnail.svg';
-import { Post as Props } from '../@types/Post';
-import Comments from './icons/comments.svg';
-import StyledLink from './Link';
+
+import StyledLink from './link';
+import { Post as Props } from '~/@types/Post';
+import DefaultThumbnail from '~/static/img/icons/default_thumbnail.svg';
+import Comments from '~/static/img/icons/comments.svg';
 
 const PostStyles = styled(StyledLink).attrs({
   className: 'feed__feed-link feed-link',

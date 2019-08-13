@@ -1,7 +1,8 @@
 import React from 'react';
 import Router from 'next/router';
 import styled from 'styled-components';
-import Karma from './icons/karma.svg';
+
+import Karma from '~/static/img/icons/karma.svg';
 
 const HeaderStyles = styled.header.attrs({ className: 'header' })`
   display: flex;
