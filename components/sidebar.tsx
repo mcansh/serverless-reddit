@@ -1,6 +1,7 @@
-import * as React from 'react';
+import React from 'react';
 import Link from 'next/link';
 import styled from 'styled-components';
+import clsx from 'clsx';
 
 import StyledLink from './link';
 import SidebarSubreddit from './sidebar-subreddit';
@@ -91,34 +92,29 @@ const Sidebar = ({ activeSubreddit }: Props) => (
     <ul className="section__list">
       <li className="section__list-item">
         <Home
-          className={`section__list-item-icon ${
-            activeSubreddit === '' ? ' active' : ''
-          }`}
+          className={clsx('section__list-item-icon', {
+            active: activeSubreddit === '',
+          })}
         />
-        <Link href="?" as="/" passHref prefetch>
+        <Link href="/" as="/" passHref prefetch>
           <StyledLink>Home</StyledLink>
         </Link>
       </li>
       <li className="section__list-item">
         <Popular />
-        <Link href="?fetch=popular" as="/r/popular" passHref prefetch>
+        <Link href="/r/[fetch]" as="/r/popular" passHref prefetch>
           <StyledLink>Popular</StyledLink>
         </Link>
       </li>
       <li className="section__list-item">
         <All />
-        <Link href="?fetch=all" as="/r/all" passHref prefetch>
+        <Link href="/r/[fetch]" as="/r/all" passHref prefetch>
           <StyledLink>All</StyledLink>
         </Link>
       </li>
       <li className="section__list-item">
         <OriginalContent />
-        <Link
-          href="?fetch=originalcontent"
-          as="/r/originalcontent"
-          passHref
-          prefetch
-        >
+        <Link href="/r/[fetch]" as="/r/originalcontent" passHref prefetch>
           <StyledLink>Original Content</StyledLink>
         </Link>
       </li>
@@ -142,13 +138,13 @@ const Sidebar = ({ activeSubreddit }: Props) => (
     <ul className="section__list">
       <li className="section__list-item">
         <Account />
-        <Link href="?fetch=myaccount" as="/r/myaccount" passHref prefetch>
+        <Link href="/r/[fetch]" as="/r/myaccount" passHref prefetch>
           <StyledLink>My Account</StyledLink>
         </Link>
       </li>
       <li className="section__list-item">
         <Messages />
-        <Link href="?fetch=messages" as="/r/messages" passHref prefetch>
+        <Link href="/r/[fetch]" as="/r/messages" passHref prefetch>
           <StyledLink>Messages</StyledLink>
         </Link>
       </li>

@@ -126,7 +126,6 @@ const HeaderStyles = styled.header.attrs({ className: 'header' })`
 `;
 
 const Header = () => {
-  const fetch = React.useRef<HTMLInputElement | null>(null);
   return (
     <HeaderStyles>
       <div className="header__logo-container">
@@ -145,14 +144,11 @@ const Header = () => {
           method="POST"
           onSubmit={event => {
             event.preventDefault();
-            if (fetch.current && fetch.current.value) {
-              const { value } = fetch.current;
-              Router.push(`/?fetch=${value}`, `/r/${value}`);
-            }
+            const { value } = event.currentTarget.fetch;
+            Router.push(`/r/[fetch]`, `/r/${value}`);
           }}
         >
           <input
-            ref={fetch}
             name="fetch"
             className="header__search"
             placeholder="Enter a Subreddit..."
