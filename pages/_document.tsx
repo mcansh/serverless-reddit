@@ -1,6 +1,7 @@
 import React from 'react';
 import Document, {
   DocumentContext,
+  Head,
   Main,
   NextScript,
   Html,
@@ -39,6 +40,7 @@ class MyDocument extends Document {
   render() {
     return (
       <Html lang="en">
+        <Head />
         <body>
           <Main />
           <NextScript />
