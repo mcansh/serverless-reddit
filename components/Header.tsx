@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React from 'react';
 import Router from 'next/router';
 import styled from 'styled-components';
 import Karma from './icons/karma.svg';
@@ -125,7 +125,7 @@ const HeaderStyles = styled.header.attrs({ className: 'header' })`
 `;
 
 const Header = () => {
-  const fetch = useRef(null);
+  const fetch = React.useRef<HTMLInputElement | null>(null);
   return (
     <HeaderStyles>
       <div className="header__logo-container">
