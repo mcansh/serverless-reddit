@@ -1,12 +1,13 @@
 import * as React from 'react';
-import { NextContext } from 'next';
+import { NextPage } from 'next';
 import styled from 'styled-components';
 import fetch from 'isomorphic-unfetch';
 import Head from 'next/head';
-import Header from '../components/Header';
-import Sidebar from '../components/Sidebar';
-import Post from '../components/Post';
-import { Post as PostType } from '../@types/Post';
+
+import Sidebar from '~/components/sidebar';
+import Post from '~/components/post';
+import { Post as PostType } from '~/@types/Post';
+import Header from '~/components/header';
 
 interface Props {
   subreddit: {
@@ -38,7 +39,7 @@ const App = styled.div.attrs({ className: 'App' })`
   }
 `;
 
-const Index = ({ subreddit, query }: Props) => (
+const Index: NextPage<Props> = ({ subreddit, query }: Props) => (
   <App>
     <Header />
     <Head>
@@ -61,7 +62,7 @@ const Index = ({ subreddit, query }: Props) => (
   </App>
 );
 
-Index.getInitialProps = async ({ req, query }: NextContext) => {
+Index.getInitialProps = async ({ req, query }) => {
   const isServer = !!req;
   const proxy = isServer ? '' : 'https://cors-anywhere.herokuapp.com/';
 
@@ -75,8 +76,7 @@ Index.getInitialProps = async ({ req, query }: NextContext) => {
   return {
     subreddit,
     query: {
-      ...query,
-      fetch: query.fetch || '',
+      fetch: Array.isArray(query.fetch) ? query.fetch[0] : query.fetch || '',
     },
   };
 };

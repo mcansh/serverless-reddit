@@ -1,37 +1,51 @@
-import * as React from 'react';
-import Document, { NextDocumentContext, Head, Main, NextScript } from 'next/document';
+import React from 'react';
+import Document, {
+  DocumentContext,
+  Main,
+  NextScript,
+  Html,
+} from 'next/document';
 import { ServerStyleSheet } from 'styled-components';
+import * as Sentry from '@sentry/browser';
 
-export default class MyDocument extends Document {
-  static async getInitialProps(ctx: NextDocumentContext) {
+process.on('unhandledRejection', err => {
+  Sentry.captureException(err);
+});
+
+process.on('uncaughtException', err => {
+  Sentry.captureException(err);
+});
+
+class MyDocument extends Document {
+  public static async getInitialProps(context: DocumentContext) {
     const sheet = new ServerStyleSheet();
 
-    const originalRenderPage = ctx.renderPage;
-    ctx.renderPage = () =>
+    const originalRenderPage = context.renderPage;
+    context.renderPage = () =>
       originalRenderPage({
-        // @ts-ignore
         enhanceApp: App => props => sheet.collectStyles(<App {...props} />),
       });
 
-    const initialProps = await Document.getInitialProps(ctx);
+    const initialProps = await Document.getInitialProps(context);
     return {
       ...initialProps,
-      // @ts-ignore
-      styles: [...initialProps.styles, ...sheet.getStyleElement()],
+      styles: [
+        ...(Array.isArray(initialProps.styles) ? initialProps.styles : []),
+        ...sheet.getStyleElement(),
+      ],
     };
   }
 
   render() {
-    const { styles } = this.props;
-
     return (
-      <html lang="en">
-        <Head>{styles}</Head>
+      <Html lang="en">
         <body>
           <Main />
           <NextScript />
         </body>
-      </html>
+      </Html>
     );
   }
 }
+
+export default MyDocument;

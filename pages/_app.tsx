@@ -1,42 +1,34 @@
-import * as React from 'react';
+import React from 'react';
 import * as Sentry from '@sentry/browser';
-import App, { Container } from 'next/app';
+import App from 'next/app';
 import Head from 'next/head';
 import { ThemeProvider } from 'styled-components';
-import GlobalStyle from '../components/GlobalStyle';
-import theme from '../theme';
-import { description } from '../package.json';
 
-const SENTRY_PUBLIC_DSN =
-  'https://3adaab30151b41069d006c7631a1df0d@sentry.io/1352474';
+import GlobalStyle from '~/components/global-style';
+import theme from '~/theme';
+
+Sentry.init({
+  dsn: process.env.SENTRY,
+  release: `reddit@${process.env.VERSION}_${process.env.BUILD_ID}`,
+  environment: process.env.NODE_ENV,
+});
 
 export default class MyApp extends App {
-  // @ts-ignore
-  constructor(...args) {
-    // @ts-ignore
-    super(...args);
-    Sentry.init({ dsn: SENTRY_PUBLIC_DSN });
-  }
-
-  // @ts-ignore
-  componentDidCatch(error: Error, errorInfo: any) {
-    Sentry.configureScope(scope => {
-      Object.keys(errorInfo).forEach(key => {
-        scope.setExtra(key, errorInfo[key]);
-      });
+  public componentDidCatch(error: Error, errorInfo: any) {
+    Sentry.withScope(scope => {
+      scope.setExtras(errorInfo);
+      Sentry.captureException(error);
     });
-    Sentry.captureException(error);
 
-    // @ts-ignore
     super.componentDidCatch(error, errorInfo);
   }
 
   render() {
     const { Component, pageProps } = this.props;
     return (
-      <Container>
+      <React.StrictMode>
         <Head>
-          <meta name="description" content={description} />
+          <meta name="description" content={process.env.DESCRIPTION} />
           <meta charSet="utf-8" />
           <meta
             name="viewport"
@@ -49,7 +41,7 @@ export default class MyApp extends App {
             <Component {...pageProps} />
           </>
         </ThemeProvider>
-      </Container>
+      </React.StrictMode>
     );
   }
 }
