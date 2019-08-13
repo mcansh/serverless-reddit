@@ -1,16 +1,6 @@
 import { createGlobalStyle } from 'styled-components';
 
 const GlobalStyle = createGlobalStyle`
-  html, body {
-    height: 100%;
-    width: 100%;
-    font-family: "SF Pro Text", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
-    line-height: normal;
-    -webkit-font-smoothing: antialiased;
-    text-rendering: optimizeLegibility;
-    background-color: #eaeaea;
-  }
-
   html {
     font-size: 10px;
     box-sizing: border-box
@@ -21,6 +11,22 @@ const GlobalStyle = createGlobalStyle`
   *::after {
     box-sizing: border-box;
     margin: 0;
+  }
+
+  html,
+  body {
+    width: 100%;
+    font-family: "SF Pro Text", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+    line-height: normal;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    background-color: #eaeaea;
+  }
+
+  html,
+  body,
+  #__next {
+    min-height: inherit;
   }
 
   img {
