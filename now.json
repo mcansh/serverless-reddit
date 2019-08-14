@@ -16,7 +16,21 @@
   ],
   "routes": [
     {
-      "src": "/static",
+      "src": "^/(manifest.webmanifest|manifest.json)$",
+      "dest": "/manifest.webmanifest",
+      "headers": {
+        "content-type": "application/manifest+json",
+        "Cache-Control": "public, max-age=43200, immutable"
+      }
+    },
+    {
+      "src": "/logos/*",
+      "headers": {
+        "Cache-Control": "s-maxage=31536000, maxage=0"
+      }
+    },
+    {
+      "src": "/static/*",
       "headers": {
         "Cache-Control": "s-maxage=31536000, maxage=0"
       }

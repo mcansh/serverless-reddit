@@ -1,9 +1,9 @@
 import React from 'react';
 import * as Sentry from '@sentry/browser';
 import App from 'next/app';
-import Head from 'next/head';
 import { ThemeProvider } from 'styled-components';
 
+import Meta from '~/components/meta';
 import GlobalStyle from '~/components/global-style';
 import theme from '~/theme';
 
@@ -27,14 +27,7 @@ export default class MyApp extends App {
     const { Component, pageProps } = this.props;
     return (
       <React.StrictMode>
-        <Head>
-          <meta name="description" content={process.env.DESCRIPTION} />
-          <meta charSet="utf-8" />
-          <meta
-            name="viewport"
-            content="width=device-width, initial-scale=1, user-scalable=0, viewport-fit=cover"
-          />
-        </Head>
+        <Meta />
         <ThemeProvider theme={theme}>
           <>
             <GlobalStyle />
