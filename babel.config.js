@@ -7,6 +7,7 @@ module.exports = api => {
       'styled-components',
       'root-import',
       ['inline-react-svg', { svgo: false }],
+      'ts-optchain',
     ],
   };
 };

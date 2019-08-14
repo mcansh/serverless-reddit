@@ -19,6 +19,7 @@
     "@sentry/browser": "5.6.1",
     "@zeit/next-source-maps": "0.0.4-canary.1",
     "babel-plugin-root-import": "6.4.1",
+    "babel-plugin-ts-optchain": "1.1.5",
     "clsx": "1.0.4",
     "isomorphic-unfetch": "3.0.0",
     "next": "9.0.3",
