@@ -4,6 +4,7 @@ export interface Gildings {
   gid_3: number;
 }
 
+// eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface MediaEmbed {}
 
 export interface Source {
