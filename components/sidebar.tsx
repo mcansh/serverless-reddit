@@ -3,7 +3,6 @@ import Link from 'next/link';
 import styled from 'styled-components';
 import clsx from 'clsx';
 
-import { invert } from 'polished';
 import StyledLink from './link';
 import SidebarSubreddit from './sidebar-subreddit';
 import { favorites, subscriptions } from '~/utils/subredditList';
@@ -41,10 +40,7 @@ const Aside = styled.aside.attrs({ className: 'section' })`
     text-transform: uppercase;
     font-weight: normal;
     text-align: left;
-    color: #999999;
-    @media (prefers-color-scheme: dark) {
-      color: ${invert('#999')};
-    }
+    color: env(--sidebar-color);
   }
 
   .section__list {

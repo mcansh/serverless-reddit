@@ -2,7 +2,6 @@ import * as React from 'react';
 import URL from 'url-parse';
 import styled from 'styled-components';
 
-import { invert } from 'polished';
 import StyledLink from './link';
 import { Post as Props } from '~/@types/Post';
 import DefaultThumbnail from '~/static/img/icons/default_thumbnail.svg';
@@ -16,10 +15,7 @@ const PostStyles = styled(StyledLink).attrs({
   display: block;
 
   &:not(:last-child) {
-    border-bottom: 1px solid #eaeaea;
-    @media (prefers-color-scheme: dark) {
-      border-bottom-color: ${invert('#eaeaea')};
-    }
+    border-bottom: 1px solid env(--background-color);
   }
 
   .feed-item {
@@ -42,7 +38,7 @@ const PostStyles = styled(StyledLink).attrs({
 
   .feed-item__voting {
     position: relative;
-    background-color: #fafafa;
+    background-color: env(--secondary-background-color);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -51,7 +47,6 @@ const PostStyles = styled(StyledLink).attrs({
     color: #000000;
     height: 100%;
     @media (prefers-color-scheme: dark) {
-      background-color: ${invert('#fafafa')};
       color: #fff;
     }
 
@@ -95,11 +90,8 @@ const PostStyles = styled(StyledLink).attrs({
     margin: 0 16px;
     background-size: cover;
     background-repeat: no-repeat;
-    background-color: #fafafa;
+    background-color: env(--secondary-background-color);
     border-radius: 10px;
-    @media (prefers-color-scheme: dark) {
-      background-color: ${invert('#fafafa')};
-    }
   }
 
   .feed-item__info {

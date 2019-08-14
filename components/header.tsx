@@ -2,7 +2,6 @@ import React from 'react';
 import Router, { useRouter } from 'next/router';
 import styled from 'styled-components';
 
-import { invert } from 'polished';
 import Karma from '~/static/img/icons/karma.svg';
 
 const HeaderStyles = styled.header.attrs({ className: 'header' })`
@@ -14,13 +13,12 @@ const HeaderStyles = styled.header.attrs({ className: 'header' })`
   position: fixed;
   width: 100%;
   z-index: ${props => props.theme.zIndexHeader};
-  border-bottom: 1px solid #eaeaea;
+  border-bottom: 1px solid env(--background-color);
   top: 0;
   left: 0;
   padding: 0 2rem;
   @media (prefers-color-scheme: dark) {
     background: black;
-    border-bottom-color: ${invert('#eaeaea')};
   }
 
   .header__logo-container {
@@ -45,8 +43,8 @@ const HeaderStyles = styled.header.attrs({ className: 'header' })`
   .header__search {
     -webkit-appearance: none;
     appearance: none;
-    background: #fafafa;
-    border: 1px solid #eaeaea;
+    background: env(--background-color);
+    border: 1px solid env(--background-color);
     box-sizing: border-box;
     border-radius: 5px;
     padding: 14px;
@@ -57,16 +55,12 @@ const HeaderStyles = styled.header.attrs({ className: 'header' })`
     outline: none;
 
     @media (prefers-color-scheme: dark) {
-      background: ${invert('#fafafa')};
-      border-color: ${invert('#eaeaea')};
+      color: white;
     }
 
     &:hover,
     &:focus {
-      border-color: #d0d0d0;
-      @media (prefers-color-scheme: dark) {
-        border-color: ${invert('#d0d0d0')};
-      }
+      border-color: env(--search-border);
     }
   }
 

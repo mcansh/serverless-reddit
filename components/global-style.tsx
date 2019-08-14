@@ -4,6 +4,16 @@ import { invert } from 'polished';
 const GlobalStyle = createGlobalStyle`
   :root {
     color-scheme: light dark;
+    --background-color: #eaeaea;
+    --secondary-background-color: #fafafa;
+    --sidebar-color: #999999;
+    --search-border: #d0d0d0;
+    @media (prefers-color-scheme: dark) {
+      --background-color: ${invert('#eaeaea')};
+      --secondary-background-color: ${invert('#fafafa')};
+      --sidebar-color: ${invert('#999999')};
+      --search-border: ${invert('#d0d0d0')};
+    }
   }
 
   html {
@@ -25,10 +35,7 @@ const GlobalStyle = createGlobalStyle`
     line-height: normal;
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
-    background-color: #eaeaea;
-    @media (prefers-color-scheme: dark) {
-      background-color: ${invert('#eaeaea')};
-    }
+    background-color: env(--background-color);
   }
 
   html,
