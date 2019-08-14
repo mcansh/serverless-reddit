@@ -1,0 +1,14 @@
+on: push
+name: Next.js diff
+jobs:
+  build:
+    name: nextdiff
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@master
+    - name: nextdiff
+      uses: zeit/nextdiff@0.1.2
+      with:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        ZEIT_TOKEN: ${{ secrets.ZEIT_TOKEN }}
+      
