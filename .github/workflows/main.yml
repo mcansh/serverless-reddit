@@ -6,11 +6,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@master
-    - name: Build
+    - name: Install
       uses: actions/npm@master
       with:
         args: install
-    - name: validate
+    - name: Validate
       uses: actions/npm@master
       with:
         args: validate
