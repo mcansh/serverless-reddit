@@ -2,6 +2,7 @@ import React from 'react';
 import Router, { useRouter } from 'next/router';
 import styled from 'styled-components';
 
+import { invert } from 'polished';
 import Karma from '~/static/img/icons/karma.svg';
 
 const HeaderStyles = styled.header.attrs({ className: 'header' })`
@@ -17,6 +18,10 @@ const HeaderStyles = styled.header.attrs({ className: 'header' })`
   top: 0;
   left: 0;
   padding: 0 2rem;
+  @media (prefers-color-scheme: dark) {
+    background: black;
+    border-bottom-color: ${invert('#eaeaea')};
+  }
 
   .header__logo-container {
     width: 100px;
@@ -50,9 +55,17 @@ const HeaderStyles = styled.header.attrs({ className: 'header' })`
     color: black;
     outline: none;
 
+    @media (prefers-color-scheme: dark) {
+      background: ${invert('#fafafa')};
+      border-color: ${invert('#eaeaea')};
+    }
+
     &:hover,
     &:focus {
       border-color: #d0d0d0;
+      @media (prefers-color-scheme: dark) {
+        border-color: ${invert('#d0d0d0')};
+      }
     }
   }
 

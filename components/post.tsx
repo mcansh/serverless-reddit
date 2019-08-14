@@ -2,6 +2,7 @@ import * as React from 'react';
 import URL from 'url-parse';
 import styled from 'styled-components';
 
+import { invert } from 'polished';
 import StyledLink from './link';
 import { Post as Props } from '~/@types/Post';
 import DefaultThumbnail from '~/static/img/icons/default_thumbnail.svg';
@@ -16,6 +17,9 @@ const PostStyles = styled(StyledLink).attrs({
 
   &:not(:last-child) {
     border-bottom: 1px solid #eaeaea;
+    @media (prefers-color-scheme: dark) {
+      border-bottom-color: ${invert('#eaeaea')};
+    }
   }
 
   .feed-item {
@@ -25,6 +29,9 @@ const PostStyles = styled(StyledLink).attrs({
     background-color: white;
     height: 73px;
     transition: 0.2s box-shadow ease;
+    @media (prefers-color-scheme: dark) {
+      background-color: black;
+    }
   }
 
   .feed-item:hover {
@@ -43,6 +50,10 @@ const PostStyles = styled(StyledLink).attrs({
     font-size: 14px;
     color: #000000;
     height: 100%;
+    @media (prefers-color-scheme: dark) {
+      background-color: ${invert('#fafafa')};
+      color: #fff;
+    }
 
     &::before,
     &::after {
@@ -57,6 +68,9 @@ const PostStyles = styled(StyledLink).attrs({
       height: 0;
       border: calc(${props => props.theme.arrowSize} - 3px) solid transparent;
       border-bottom: ${props => props.theme.arrowSize} solid black;
+      @media (prefers-color-scheme: dark) {
+        border-bottom-color: white;
+      }
     }
 
     &::after {
@@ -65,6 +79,9 @@ const PostStyles = styled(StyledLink).attrs({
       border-bottom: calc(${props => props.theme.arrowSize} - 3px) solid
         transparent;
       border-top: ${props => props.theme.arrowSize} solid black;
+      @media (prefers-color-scheme: dark) {
+        border-top-color: white;
+      }
     }
   }
 
@@ -80,6 +97,9 @@ const PostStyles = styled(StyledLink).attrs({
     background-repeat: no-repeat;
     background-color: #fafafa;
     border-radius: 10px;
+    @media (prefers-color-scheme: dark) {
+      background-color: ${invert('#fafafa')};
+    }
   }
 
   .feed-item__info {
@@ -106,6 +126,9 @@ const PostStyles = styled(StyledLink).attrs({
     white-space: pre;
     overflow: hidden;
     text-overflow: ellipsis;
+    @media (prefers-color-scheme: dark) {
+      color: white;
+    }
   }
 
   .feed_item__short-link {
@@ -121,6 +144,9 @@ const PostStyles = styled(StyledLink).attrs({
     width: 94%;
     text-align: left;
     color: #000000;
+    @media (prefers-color-scheme: dark) {
+      color: white;
+    }
   }
 
   .feed-item__comments {
@@ -130,6 +156,9 @@ const PostStyles = styled(StyledLink).attrs({
     color: black;
     font-size: 12px;
     font-weight: bold;
+    @media (prefers-color-scheme: dark) {
+      color: white;
+    }
 
     svg {
       margin-right: 1rem;

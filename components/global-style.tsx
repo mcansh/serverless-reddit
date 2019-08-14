@@ -1,6 +1,11 @@
 import { createGlobalStyle } from 'styled-components';
+import { invert } from 'polished';
 
 const GlobalStyle = createGlobalStyle`
+  :root {
+    color-scheme: light dark;
+  }
+
   html {
     font-size: 10px;
     box-sizing: border-box
@@ -21,6 +26,9 @@ const GlobalStyle = createGlobalStyle`
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
     background-color: #eaeaea;
+    @media (prefers-color-scheme: dark) {
+      background-color: ${invert('#eaeaea')};
+    }
   }
 
   html,

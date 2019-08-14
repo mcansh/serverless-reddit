@@ -3,6 +3,7 @@ import Link from 'next/link';
 import styled from 'styled-components';
 import clsx from 'clsx';
 
+import { invert } from 'polished';
 import StyledLink from './link';
 import SidebarSubreddit from './sidebar-subreddit';
 import { favorites, subscriptions } from '~/utils/subredditList';
@@ -25,6 +26,10 @@ const Aside = styled.aside.attrs({ className: 'section' })`
   overflow: auto;
   -webkit-overflow-scrolling: touch;
 
+  @media (prefers-color-scheme: dark) {
+    background-color: black;
+  }
+
   @media (min-width: 1024px) {
     display: block;
   }
@@ -37,6 +42,9 @@ const Aside = styled.aside.attrs({ className: 'section' })`
     font-weight: normal;
     text-align: left;
     color: #999999;
+    @media (prefers-color-scheme: dark) {
+      color: ${invert('#999')};
+    }
   }
 
   .section__list {
@@ -53,6 +61,9 @@ const Aside = styled.aside.attrs({ className: 'section' })`
     width: 20px;
     height: 20px;
     fill: #000;
+    @media (prefers-color-scheme: dark) {
+      fill: #fff;
+    }
   }
 
   .section__list-item-icon_compact {
@@ -72,6 +83,10 @@ const Aside = styled.aside.attrs({ className: 'section' })`
     font-size: 14px;
     color: #000000;
 
+    @media (prefers-color-scheme: dark) {
+      color: #fff;
+    }
+
     &:not(:last-child) {
       margin-bottom: 17px;
     }
@@ -86,70 +101,96 @@ interface Props {
   activeSubreddit: string;
 }
 
-const Sidebar = ({ activeSubreddit }: Props) => (
-  <Aside>
-    <h6 className="section__heading">Reddit Feeds</h6>
-    <ul className="section__list">
-      <li className="section__list-item">
-        <Home
-          className={clsx('section__list-item-icon', {
-            active: activeSubreddit === '',
-          })}
-        />
-        <Link href="/" as="/" passHref prefetch>
-          <StyledLink>Home</StyledLink>
-        </Link>
-      </li>
-      <li className="section__list-item">
-        <Popular />
-        <Link href="/r/[fetch]" as="/r/popular" passHref prefetch>
-          <StyledLink>Popular</StyledLink>
-        </Link>
-      </li>
-      <li className="section__list-item">
-        <All />
-        <Link href="/r/[fetch]" as="/r/all" passHref prefetch>
-          <StyledLink>All</StyledLink>
-        </Link>
-      </li>
-      <li className="section__list-item">
-        <OriginalContent />
-        <Link href="/r/[fetch]" as="/r/originalcontent" passHref prefetch>
-          <StyledLink>Original Content</StyledLink>
-        </Link>
-      </li>
-    </ul>
-    <h6 className="section__heading">Favorites</h6>
-    <ul className="section__list">
-      {favorites.map(subreddit => (
-        <SidebarSubreddit key={`${subreddit}-favorite`} subreddit={subreddit} />
-      ))}
-    </ul>
-    <h6 className="section__heading">Subscriptions</h6>
-    <ul className="section__list">
-      {subscriptions.map(subreddit => (
-        <SidebarSubreddit
-          key={`${subreddit}-subscription`}
-          subreddit={subreddit}
-        />
-      ))}
-    </ul>
-    <h6 className="section__heading">Other</h6>
-    <ul className="section__list">
-      <li className="section__list-item">
-        <Account />
-        <Link href="/r/[fetch]" as="/r/myaccount" passHref prefetch>
-          <StyledLink>My Account</StyledLink>
-        </Link>
-      </li>
-      <li className="section__list-item">
-        <Messages />
-        <Link href="/r/[fetch]" as="/r/messages" passHref prefetch>
-          <StyledLink>Messages</StyledLink>
-        </Link>
-      </li>
-    </ul>
-  </Aside>
-);
+const Sidebar = ({ activeSubreddit }: Props) => {
+  console.log(activeSubreddit);
+  return (
+    <Aside>
+      <h6 className="section__heading">Reddit Feeds</h6>
+      <ul className="section__list">
+        <li className="section__list-item">
+          <Home
+            className={clsx('section__list-item-icon', {
+              active: activeSubreddit === '',
+            })}
+          />
+          <Link href="/" as="/" passHref prefetch>
+            <StyledLink>Home</StyledLink>
+          </Link>
+        </li>
+        <li className="section__list-item">
+          <Popular
+            className={clsx('section__list-item-icon', {
+              active: activeSubreddit === 'popular',
+            })}
+          />
+          <Link href="/r/[fetch]" as="/r/popular" passHref prefetch>
+            <StyledLink>Popular</StyledLink>
+          </Link>
+        </li>
+        <li className="section__list-item">
+          <All
+            className={clsx('section__list-item-icon', {
+              active: activeSubreddit === 'all',
+            })}
+          />
+          <Link href="/r/[fetch]" as="/r/all" passHref prefetch>
+            <StyledLink>All</StyledLink>
+          </Link>
+        </li>
+        <li className="section__list-item">
+          <OriginalContent
+            className={clsx('section__list-item-icon', {
+              active: activeSubreddit === 'originalcontent',
+            })}
+          />
+          <Link href="/r/[fetch]" as="/r/originalcontent" passHref prefetch>
+            <StyledLink>Original Content</StyledLink>
+          </Link>
+        </li>
+      </ul>
+      <h6 className="section__heading">Favorites</h6>
+      <ul className="section__list">
+        {favorites.map(subreddit => (
+          <SidebarSubreddit
+            key={`${subreddit}-favorite`}
+            subreddit={subreddit}
+          />
+        ))}
+      </ul>
+      <h6 className="section__heading">Subscriptions</h6>
+      <ul className="section__list">
+        {subscriptions.map(subreddit => (
+          <SidebarSubreddit
+            key={`${subreddit}-subscription`}
+            subreddit={subreddit}
+          />
+        ))}
+      </ul>
+      <h6 className="section__heading">Other</h6>
+      <ul className="section__list">
+        <li className="section__list-item">
+          <Account
+            className={clsx('section__list-item-icon', {
+              active: activeSubreddit === 'myaccount',
+            })}
+          />
+          <Link href="/r/[fetch]" as="/r/myaccount" passHref prefetch>
+            <StyledLink>My Account</StyledLink>
+          </Link>
+        </li>
+        <li className="section__list-item">
+          <Messages
+            className={clsx('section__list-item-icon', {
+              active: activeSubreddit === 'messages',
+            })}
+          />
+          <Link href="/r/[fetch]" as="/r/messages" passHref prefetch>
+            <StyledLink>Messages</StyledLink>
+          </Link>
+        </li>
+      </ul>
+    </Aside>
+  );
+};
 
 export default Sidebar;
