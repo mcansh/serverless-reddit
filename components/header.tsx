@@ -30,8 +30,9 @@ const HeaderStyles = styled.header.attrs({ className: 'header' })`
 
     .header__logo {
       position: absolute;
-      top: 0;
-      left: 0;
+      top: 50%;
+      left: 50%;
+      transform: translate3d(-50%, -50%, 0);
       width: 100%;
       height: auto;
     }
@@ -136,8 +137,26 @@ const Header = () => {
     <HeaderStyles>
       <div className="header__logo-container">
         <picture>
-          <source srcSet="/static/img/reddit.webp" type="image/webp" />
-          <source srcSet="/static/img/reddit.png" type="image/png" />
+          <source
+            srcSet="/static/img/reddit.webp"
+            media="(prefers-color-scheme: light)"
+            type="image/webp"
+          />
+          <source
+            srcSet="/static/img/reddit.png"
+            media="(prefers-color-scheme: light)"
+            type="image/png"
+          />
+          <source
+            srcSet="/static/img/reddit-light.webp"
+            media="(prefers-color-scheme: dark)"
+            type="image/webp"
+          />
+          <source
+            srcSet="/static/img/reddit-light.png"
+            media="(prefers-color-scheme: dark)"
+            type="image/png"
+          />
           <img
             className="header__logo"
             alt="Logo"
