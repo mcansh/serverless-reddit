@@ -1,0 +1,16 @@
+on: push
+name: Build, Test, and Publish
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@master
+    - name: Install
+      uses: nuxt/actions-yarn@master
+      with:
+        args: install
+    - name: Validate
+      uses: nuxt/actions-yarn@master
+      with:
+        args: validate

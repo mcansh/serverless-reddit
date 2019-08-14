@@ -13,7 +13,8 @@
     "build": "next build",
     "start": "next start -p 4000",
     "type-check": "tsc",
-    "lint": "eslint . --ext \".js,.ts,.tsx\""
+    "lint": "eslint . --ext \".js,.ts,.tsx\"",
+    "validate": "yarn type-check && yarn lint"
   },
   "dependencies": {
     "@sentry/browser": "5.6.1",
