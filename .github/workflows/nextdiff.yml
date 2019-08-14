@@ -8,6 +8,9 @@ jobs:
     - uses: actions/checkout@master
     - name: nextdiff
       uses: zeit/nextdiff@master
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        ZEIT_TOKEN: ${{ secrets.ZEIT_TOKEN }}
       with:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         ZEIT_TOKEN: ${{ secrets.ZEIT_TOKEN }}
