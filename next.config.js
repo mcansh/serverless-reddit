@@ -9,11 +9,17 @@ const nextConfig = {
     VERSION: pkgJSON.version,
     DESCRIPTION: pkgJSON.description,
   },
-  webpack: config => {
+  webpack: (config, { buildId }) => {
     config.module.rules.push({
       test: /\.svg$/,
       use: ['@svgr/webpack'],
     });
+
+    config.plugins.push(
+      new webpack.DefinePlugin({
+        'process.env.BUILD_ID': JSON.stringify(buildId),
+      })
+    );
 
     return config;
   },
