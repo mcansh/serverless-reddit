@@ -66,6 +66,7 @@ const Index: NextPage<Props> = ({ subreddit }: Props) => {
                 h1: {
                   fontSize: '2.4rem',
                   fontFamily: "'SF Mono', menlo, monospace",
+                  color: 'var(--default)',
                 },
               }}
             >
