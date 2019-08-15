@@ -39,7 +39,7 @@ const GlobalStyle = createGlobalStyle`
     line-height: normal;
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
-    background-color: env(--background-color);
+    background-color: var(--background-color);
   }
 
   html,

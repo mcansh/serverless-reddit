@@ -10,11 +10,11 @@ const HeaderStyles = styled.header.attrs({ className: 'header' })`
   align-items: center;
   justify-content: space-between;
   height: 80px;
-  background-color: env(--reverse-default);
+  background-color: var(--reverse-default);
   position: fixed;
   width: 100%;
   z-index: ${props => props.theme.zIndexHeader};
-  border-bottom: 1px solid env(--background-color);
+  border-bottom: 1px solid var(--background-color);
   top: 0;
   left: 0;
   padding: 0 2rem;
@@ -36,20 +36,20 @@ const HeaderStyles = styled.header.attrs({ className: 'header' })`
   .header__search {
     -webkit-appearance: none;
     appearance: none;
-    background: env(--background-color);
-    border: 1px solid env(--background-color);
+    background: var(--background-color);
+    border: 1px solid var(--background-color);
     box-sizing: border-box;
     border-radius: 5px;
     padding: 14px;
     font-size: 14px;
     min-width: 400px;
     height: 40px;
-    color: env(--default);
+    color: var(--default);
     outline: none;
 
     &:hover,
     &:focus {
-      border-color: env(--search-border);
+      border-color: var(--search-border);
     }
   }
 
@@ -61,7 +61,7 @@ const HeaderStyles = styled.header.attrs({ className: 'header' })`
   }
 
   .header__username {
-    color: env(--default);
+    color: var(--default);
   }
 
   .header__karma-container {

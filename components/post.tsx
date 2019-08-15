@@ -15,14 +15,14 @@ const PostStyles = styled(StyledLink).attrs({
   display: block;
 
   &:not(:last-child) {
-    border-bottom: 1px solid env(--background-color);
+    border-bottom: 1px solid var(--background-color);
   }
 
   .feed-item {
     position: relative;
     display: flex;
     align-items: center;
-    background-color: env(--reverse-default);
+    background-color: var(--reverse-default);
     height: 73px;
     transition: 0.2s box-shadow ease;
   }
@@ -35,13 +35,13 @@ const PostStyles = styled(StyledLink).attrs({
 
   .feed-item__voting {
     position: relative;
-    background-color: env(--secondary-background-color);
+    background-color: var(--secondary-background-color);
     display: flex;
     align-items: center;
     justify-content: center;
     flex: 0 0 70px;
     font-size: 14px;
-    color: env(--default);
+    color: var(--default);
     height: 100%;
 
     &::before,
@@ -56,7 +56,7 @@ const PostStyles = styled(StyledLink).attrs({
       width: 0;
       height: 0;
       border: calc(${props => props.theme.arrowSize} - 3px) solid transparent;
-      border-bottom: ${props => props.theme.arrowSize} solid env(--default);
+      border-bottom: ${props => props.theme.arrowSize} solid var(--default);
     }
 
     &::after {
@@ -64,7 +64,7 @@ const PostStyles = styled(StyledLink).attrs({
       bottom: 6px;
       border-bottom: calc(${props => props.theme.arrowSize} - 3px) solid
         transparent;
-      border-top: ${props => props.theme.arrowSize} solid env(--default);
+      border-top: ${props => props.theme.arrowSize} solid var(--default);
     }
   }
 
@@ -78,7 +78,7 @@ const PostStyles = styled(StyledLink).attrs({
     margin: 0 16px;
     background-size: cover;
     background-repeat: no-repeat;
-    background-color: env(--secondary-background-color);
+    background-color: var(--secondary-background-color);
     border-radius: 10px;
   }
 
@@ -99,7 +99,7 @@ const PostStyles = styled(StyledLink).attrs({
   .feed-item__heading {
     margin: 0 12px 0 0;
     font-size: 14px;
-    color: env(--default);
+    color: var(--default);
     text-align: left;
     font-weight: bold;
     width: 80%;
@@ -120,14 +120,14 @@ const PostStyles = styled(StyledLink).attrs({
     font-size: 10px;
     width: 94%;
     text-align: left;
-    color: env(--default);
+    color: var(--default);
   }
 
   .feed-item__comments {
     display: none;
     margin: 0 30px 30px auto;
     align-self: flex-end;
-    color: env(--default);
+    color: var(--default);
     font-size: 12px;
     font-weight: bold;
 
