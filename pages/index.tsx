@@ -34,8 +34,8 @@ const App = styled.div.attrs({ className: 'App' })`
     margin-top: 80px;
     width: 100vw;
 
-    @supports (padding: env(safe-area-inset-bottom)) {
-      padding: 25px 25px env(safe-area-inset-bottom) 25px;
+    @supports (padding: env(safe-area-inset-bottom)) and (padding: max(0px)) {
+      padding: 25px 25px max(25px, env(safe-area-inset-bottom)) 25px;
     }
 
     @media (display-mode: standalone) {
