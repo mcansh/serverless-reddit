@@ -9,6 +9,7 @@ const nextConfig = {
     SENTRY: 'https://3adaab30151b41069d006c7631a1df0d@sentry.io/1352474',
     VERSION: pkgJSON.version,
     DESCRIPTION: pkgJSON.description,
+    REPO: `https://github.com/${pkgJSON.repository}`,
   },
   webpack: (config, { buildId }) => {
     config.module.rules.push({

@@ -14,13 +14,19 @@ Sentry.init({
 });
 
 export default class MyApp extends App {
-  public componentDidCatch(error: Error, errorInfo: any) {
+  public componentDidCatch(error: Error, errorInfo: React.ErrorInfo) {
     Sentry.withScope(scope => {
       scope.setExtras(errorInfo);
       Sentry.captureException(error);
     });
 
     super.componentDidCatch(error, errorInfo);
+  }
+
+  componentDidMount() {
+    console.log(`Version: ${process.env.VERSION}`);
+    console.log(`Next.js buildId: ${process.env.BUILD_ID}`);
+    console.log(`Source code: ${process.env.REPO}`);
   }
 
   render() {

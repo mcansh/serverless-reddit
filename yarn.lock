@@ -5430,14 +5430,6 @@ pkg-dir@^3.0.0:
   dependencies:
     find-up "^3.0.0"
 
-pluggable-babel-eslint@0.3.0:
-  version "0.3.0"
-  resolved "https://registry.npmjs.org/pluggable-babel-eslint/-/pluggable-babel-eslint-0.3.0.tgz#f1b4e74888099e8b5f6319de555d166321575408"
-  integrity sha512-VjYHTosuKaRk/9rZVqHnbsy1UT7KGVFqFqsSdiv4pmKkUKEidF7gXQtUaILvcnSbSzYJpl9befv1y5OKzvUmrw==
-  dependencies:
-    "@babel/traverse" "^7.1.0"
-    babel-eslint "^10.0.1"
-
 polished@3.4.1:
   version "3.4.1"
   resolved "https://registry.npmjs.org/polished/-/polished-3.4.1.tgz#1eb5597ec1792206365635811d465751f5cbf71c"
