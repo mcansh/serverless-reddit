@@ -20,6 +20,11 @@ const HeaderStyles = styled.header.attrs({ className: 'header' })`
   left: 0;
   padding: 0 2rem;
 
+  @media (display-mode: standalone) {
+    height: calc(env(safe-area-inset-top) + 80px);
+    padding-top: env(safe-area-inset-top);
+  }
+
   .header__logo-container {
     max-width: 100px;
     height: auto;

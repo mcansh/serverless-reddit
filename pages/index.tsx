@@ -30,6 +30,14 @@ const App = styled.div.attrs({ className: 'App' })`
     margin-top: 80px;
     width: 100vw;
 
+    @supports (padding: env(safe-area-inset-bottom)) {
+      padding: 25px 25px env(safe-area-inset-bottom) 25px;
+    }
+
+    @media (display-mode: standalone) {
+      margin-top: calc(env(safe-area-inset-top) + 80px);
+    }
+
     @media (min-width: 1024px) {
       display: grid;
       grid-template-columns: 280px 1fr;
