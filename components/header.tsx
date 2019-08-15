@@ -1,6 +1,7 @@
 import React from 'react';
 import Router, { useRouter } from 'next/router';
 import styled from 'styled-components';
+import Link from 'next/link';
 
 import Karma from '~/static/img/icons/karma.svg';
 import Reddit from '~/static/img/reddit.svg';
@@ -22,6 +23,8 @@ const HeaderStyles = styled.header.attrs({ className: 'header' })`
   .header__logo-container {
     max-width: 100px;
     height: auto;
+    display: block;
+    text-decoration: none;
 
     svg {
       height: 100%;
@@ -121,18 +124,20 @@ const Header = () => {
   const { fetch } = useRouter().query;
   return (
     <HeaderStyles>
-      <div className="header__logo-container">
-        <Reddit
-          css={{
-            'g g': {
-              fill: 'black',
-              '@media (prefers-color-scheme: dark)': {
-                fill: '#D7DADC',
+      <Link href="/">
+        <a aria-label="Reddit" className="header__logo-container">
+          <Reddit
+            css={{
+              'g g': {
+                fill: 'black',
+                '@media (prefers-color-scheme: dark)': {
+                  fill: '#D7DADC',
+                },
               },
-            },
-          }}
-        />
-      </div>
+            }}
+          />
+        </a>
+      </Link>
       <div className="header__search-container">
         <form
           method="POST"
