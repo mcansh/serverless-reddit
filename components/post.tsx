@@ -103,10 +103,7 @@ const PostStyles = styled(StyledLink).attrs({
     color: var(--default);
     text-align: left;
     font-weight: bold;
-    width: 80%;
-    white-space: pre;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    ${ellipsis('80%')};
   }
 
   .feed_item__short-link {
@@ -119,11 +116,10 @@ const PostStyles = styled(StyledLink).attrs({
   .feed-item__meta {
     line-height: normal;
     font-size: 10px;
-    width: 94%;
     text-align: left;
     color: var(--default);
     ${ellipsis('100%')};
-}
+    width: 100%;
   }
 
   .feed-item__comments {
@@ -171,7 +167,6 @@ const PostStyles = styled(StyledLink).attrs({
 
     .feed-item__meta {
       font-size: 12px;
-      width: auto;
     }
 
     .feed-item__info {
@@ -184,6 +179,7 @@ const PostStyles = styled(StyledLink).attrs({
 const Post = ({ post }: { post: Props }) => {
   const hasThumbnail =
     post.thumbnail && /^$|self|default|nsfw/.test(post.thumbnail);
+
   const { host: url } = parse(post.url);
   return (
     <PostStyles href={post.url}>
