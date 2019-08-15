@@ -1,3 +1,4 @@
+const webpack = require('webpack');
 const withSourcemaps = require('@zeit/next-source-maps')();
 const pkgJSON = require('./package.json');
 
