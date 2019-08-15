@@ -3,6 +3,7 @@ import Router, { useRouter } from 'next/router';
 import styled from 'styled-components';
 
 import Karma from '~/static/img/icons/karma.svg';
+import Reddit from '~/static/img/reddit.svg';
 
 const HeaderStyles = styled.header.attrs({ className: 'header' })`
   display: flex;
@@ -19,17 +20,12 @@ const HeaderStyles = styled.header.attrs({ className: 'header' })`
   padding: 0 2rem;
 
   .header__logo-container {
-    width: 100px;
-    position: relative;
-    height: 36px;
+    max-width: 100px;
+    height: auto;
 
-    .header__logo {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate3d(-50%, -50%, 0);
+    svg {
+      height: 100%;
       width: 100%;
-      height: auto;
     }
   }
 
@@ -126,34 +122,16 @@ const Header = () => {
   return (
     <HeaderStyles>
       <div className="header__logo-container">
-        <picture>
-          <source
-            srcSet="/static/img/reddit.webp"
-            media="(prefers-color-scheme: light)"
-            type="image/webp"
-          />
-          <source
-            srcSet="/static/img/reddit.png"
-            media="(prefers-color-scheme: light)"
-            type="image/png"
-          />
-          <source
-            srcSet="/static/img/reddit-light.webp"
-            media="(prefers-color-scheme: dark)"
-            type="image/webp"
-          />
-          <source
-            srcSet="/static/img/reddit-light.png"
-            media="(prefers-color-scheme: dark)"
-            type="image/png"
-          />
-          <img
-            className="header__logo"
-            alt="Logo"
-            src="/static/img/reddit.png"
-            importance="low"
-          />
-        </picture>
+        <Reddit
+          css={{
+            'g g': {
+              fill: 'black',
+              '@media (prefers-color-scheme: dark)': {
+                fill: '#D7DADC',
+              },
+            },
+          }}
+        />
       </div>
       <div className="header__search-container">
         <form
