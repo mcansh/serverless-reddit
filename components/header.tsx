@@ -1,5 +1,6 @@
 import React from 'react';
 import Router, { useRouter } from 'next/router';
+import { useAmp } from 'next/amp';
 import styled from 'styled-components';
 import Link from 'next/link';
 
@@ -127,6 +128,7 @@ const HeaderStyles = styled.header.attrs({ className: 'header' })`
 
 const Header = () => {
   const { fetch } = useRouter().query;
+  const isAmp = useAmp();
   return (
     <HeaderStyles>
       <Link href="/">
@@ -145,7 +147,8 @@ const Header = () => {
       </Link>
       <div className="header__search-container">
         <form
-          method="POST"
+          target={isAmp ? '_top' : undefined}
+          method="GET"
           onSubmit={event => {
             event.preventDefault();
             const { value } = event.currentTarget.fetch;
@@ -162,6 +165,7 @@ const Header = () => {
             placeholder="Enter a Subreddit..."
             defaultValue={fetch}
           />
+          {isAmp && <input type="hidden" value="1" name="amp" />}
         </form>
       </div>
       <div className="header__user-area">
@@ -173,16 +177,37 @@ const Header = () => {
           </div>
         </div>
         <div className="header__avatar-container">
-          <picture>
-            <source srcSet="/static/img/evilrabbit_.webp" type="image/webp" />
-            <source srcSet="/static/img/evilrabbit_.jpeg" type="image/jpeg" />
-            <img
-              className="header__avatar"
+          {isAmp ? (
+            <amp-img
               alt="Evil Rabbit"
-              src="/static/img/evilrabbit_.jpeg"
-              importance="low"
-            />
-          </picture>
+              width={30}
+              height={30}
+              src="/static/img/evilrabbit_.webp"
+              className="header__avatar"
+              layout="responsive"
+            >
+              <amp-img
+                alt="Evil Rabbit"
+                width={30}
+                height={30}
+                src="/static/img/evilrabbit_.jpeg"
+                className="header__avatar"
+                fallback
+                layout="responsive"
+              />
+            </amp-img>
+          ) : (
+            <picture>
+              <source srcSet="/static/img/evilrabbit_.webp" type="image/webp" />
+              <source srcSet="/static/img/evilrabbit_.jpeg" type="image/jpeg" />
+              <img
+                className="header__avatar"
+                alt="Evil Rabbit"
+                src="/static/img/evilrabbit_.jpeg"
+                importance="low"
+              />
+            </picture>
+          )}
         </div>
       </div>
     </HeaderStyles>

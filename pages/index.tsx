@@ -11,6 +11,10 @@ import Post from '~/components/post';
 import { Post as PostType } from '~/@types/Post';
 import Header from '~/components/header';
 
+const config = {
+  amp: 'hybrid',
+};
+
 interface Props {
   subreddit: {
     data: {
@@ -102,3 +106,4 @@ Index.getInitialProps = async ({ req, query }) => {
 };
 
 export default Index;
+export { config };
