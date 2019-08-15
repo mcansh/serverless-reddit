@@ -1,8 +1,26 @@
 const webpack = require('webpack');
 const withSourcemaps = require('@zeit/next-source-maps')();
+const withOffline = require('next-offline');
 const pkgJSON = require('./package.json');
 
 const nextConfig = {
+  // next-offline
+  dontAutoRegisterSw: true,
+  workboxOpts: {
+    swDest: 'static/sw.js',
+    runtimeCaching: [
+      {
+        handler: 'StaleWhileRevalidate',
+        urlPattern: /[.](webp|png|jpg|svg|css|woff|woff2)/,
+      },
+      {
+        handler: 'NetworkFirst',
+        urlPattern: /^https?.*/,
+      },
+    ],
+  },
+
+  // next config
   crossOrigin: 'anonymous',
   target: 'serverless',
   env: {
@@ -30,4 +48,4 @@ const nextConfig = {
   },
 };
 
-module.exports = withSourcemaps(nextConfig);
+module.exports = withOffline(withSourcemaps(nextConfig));

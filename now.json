@@ -33,6 +33,14 @@
       }
     },
     {
+      "src": "/sw.js",
+      "dest": "/_next/static/sw.js",
+      "headers": {
+        "cache-control": "max-age=0",
+        "Service-Worker-Allowed": "/"
+      }
+    },
+    {
       "src": "/_next(/static/(?:[^/]+/pages|chunks|runtime)/.+)",
       "headers": {
         "cache-control": "immutable,max-age=31536000"
