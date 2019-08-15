@@ -1,6 +1,7 @@
+import { parse } from 'url';
 import * as React from 'react';
-import URL from 'url-parse';
 import styled from 'styled-components';
+import { ellipsis } from 'polished';
 
 import StyledLink from './link';
 import { Post as Props } from '~/@types/Post';
@@ -121,6 +122,8 @@ const PostStyles = styled(StyledLink).attrs({
     width: 94%;
     text-align: left;
     color: var(--default);
+    ${ellipsis('100%')};
+}
   }
 
   .feed-item__comments {
@@ -181,7 +184,7 @@ const PostStyles = styled(StyledLink).attrs({
 const Post = ({ post }: { post: Props }) => {
   const hasThumbnail =
     post.thumbnail && /^$|self|default|nsfw/.test(post.thumbnail);
-  const url = new URL(post.url).host;
+  const { host: url } = parse(post.url);
   return (
     <PostStyles href={post.url}>
       <div className="feed__feed-item feed-item">
