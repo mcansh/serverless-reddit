@@ -19,15 +19,11 @@ const Aside = styled.aside.attrs({ className: 'section' })`
   width: 280px;
   top: 105px;
   left: 25px;
-  background-color: white;
+  background-color: env(--reverse-default);
   padding: 18px;
   height: calc(100vh - 80px - 50px);
   overflow: auto;
   -webkit-overflow-scrolling: touch;
-
-  @media (prefers-color-scheme: dark) {
-    background-color: black;
-  }
 
   @media (min-width: 1024px) {
     display: block;
@@ -56,10 +52,7 @@ const Aside = styled.aside.attrs({ className: 'section' })`
     margin-right: 16px;
     width: 20px;
     height: 20px;
-    fill: #000;
-    @media (prefers-color-scheme: dark) {
-      fill: #fff;
-    }
+    fill: env(--default);
   }
 
   .section__list-item-icon_compact {
@@ -77,11 +70,7 @@ const Aside = styled.aside.attrs({ className: 'section' })`
   .section__list-item {
     line-height: normal;
     font-size: 14px;
-    color: #000000;
-
-    @media (prefers-color-scheme: dark) {
-      color: #fff;
-    }
+    color: env(--default);
 
     &:not(:last-child) {
       margin-bottom: 17px;

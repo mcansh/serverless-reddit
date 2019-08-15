@@ -22,12 +22,9 @@ const PostStyles = styled(StyledLink).attrs({
     position: relative;
     display: flex;
     align-items: center;
-    background-color: white;
+    background-color: env(--reverse-default);
     height: 73px;
     transition: 0.2s box-shadow ease;
-    @media (prefers-color-scheme: dark) {
-      background-color: black;
-    }
   }
 
   .feed-item:hover {
@@ -44,11 +41,8 @@ const PostStyles = styled(StyledLink).attrs({
     justify-content: center;
     flex: 0 0 70px;
     font-size: 14px;
-    color: #000000;
+    color: env(--default);
     height: 100%;
-    @media (prefers-color-scheme: dark) {
-      color: #fff;
-    }
 
     &::before,
     &::after {
@@ -62,10 +56,7 @@ const PostStyles = styled(StyledLink).attrs({
       width: 0;
       height: 0;
       border: calc(${props => props.theme.arrowSize} - 3px) solid transparent;
-      border-bottom: ${props => props.theme.arrowSize} solid black;
-      @media (prefers-color-scheme: dark) {
-        border-bottom-color: white;
-      }
+      border-bottom: ${props => props.theme.arrowSize} solid env(--default);
     }
 
     &::after {
@@ -73,10 +64,7 @@ const PostStyles = styled(StyledLink).attrs({
       bottom: 6px;
       border-bottom: calc(${props => props.theme.arrowSize} - 3px) solid
         transparent;
-      border-top: ${props => props.theme.arrowSize} solid black;
-      @media (prefers-color-scheme: dark) {
-        border-top-color: white;
-      }
+      border-top: ${props => props.theme.arrowSize} solid env(--default);
     }
   }
 
@@ -111,16 +99,13 @@ const PostStyles = styled(StyledLink).attrs({
   .feed-item__heading {
     margin: 0 12px 0 0;
     font-size: 14px;
-    color: #000000;
+    color: env(--default);
     text-align: left;
     font-weight: bold;
     width: 80%;
     white-space: pre;
     overflow: hidden;
     text-overflow: ellipsis;
-    @media (prefers-color-scheme: dark) {
-      color: white;
-    }
   }
 
   .feed_item__short-link {
@@ -135,22 +120,16 @@ const PostStyles = styled(StyledLink).attrs({
     font-size: 10px;
     width: 94%;
     text-align: left;
-    color: #000000;
-    @media (prefers-color-scheme: dark) {
-      color: white;
-    }
+    color: env(--default);
   }
 
   .feed-item__comments {
     display: none;
     margin: 0 30px 30px auto;
     align-self: flex-end;
-    color: black;
+    color: env(--default);
     font-size: 12px;
     font-weight: bold;
-    @media (prefers-color-scheme: dark) {
-      color: white;
-    }
 
     svg {
       margin-right: 1rem;

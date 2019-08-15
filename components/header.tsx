@@ -9,7 +9,7 @@ const HeaderStyles = styled.header.attrs({ className: 'header' })`
   align-items: center;
   justify-content: space-between;
   height: 80px;
-  background-color: white;
+  background-color: env(--reverse-default);
   position: fixed;
   width: 100%;
   z-index: ${props => props.theme.zIndexHeader};
@@ -17,9 +17,6 @@ const HeaderStyles = styled.header.attrs({ className: 'header' })`
   top: 0;
   left: 0;
   padding: 0 2rem;
-  @media (prefers-color-scheme: dark) {
-    background: black;
-  }
 
   .header__logo-container {
     width: 100px;
@@ -51,12 +48,8 @@ const HeaderStyles = styled.header.attrs({ className: 'header' })`
     font-size: 14px;
     min-width: 400px;
     height: 40px;
-    color: black;
+    color: env(--default);
     outline: none;
-
-    @media (prefers-color-scheme: dark) {
-      color: white;
-    }
 
     &:hover,
     &:focus {
@@ -65,11 +58,14 @@ const HeaderStyles = styled.header.attrs({ className: 'header' })`
   }
 
   .header__user-area {
-    margin-left: auto;
     display: flex;
     align-items: center;
     text-align: left;
     line-height: 15px;
+  }
+
+  .header__username {
+    color: env(--default);
   }
 
   .header__karma-container {

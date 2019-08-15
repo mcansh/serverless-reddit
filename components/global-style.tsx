@@ -8,11 +8,15 @@ const GlobalStyle = createGlobalStyle`
     --secondary-background-color: #fafafa;
     --sidebar-color: #999999;
     --search-border: #d0d0d0;
+    --default: #000000;
+    --reverse-default: #ffffff;
     @media (prefers-color-scheme: dark) {
       --background-color: ${invert('#eaeaea')};
       --secondary-background-color: ${invert('#fafafa')};
       --sidebar-color: ${invert('#999999')};
       --search-border: ${invert('#d0d0d0')};
+      --default: #ffffff;
+      --reverse-default: #000000;
     }
   }
 
