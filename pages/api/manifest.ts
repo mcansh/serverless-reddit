@@ -8,7 +8,10 @@ const manifest = (req: NextApiRequest, res: NextApiResponse) => {
   const { path, ...query } = req.query;
   const startUrl = format({
     pathname: getFirstParam(path) || '.',
-    query,
+    query: {
+      ...query,
+      homescreen: 1,
+    },
   });
 
   return res.status(200).json({
