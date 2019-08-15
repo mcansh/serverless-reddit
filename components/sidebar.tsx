@@ -98,7 +98,6 @@ interface Props {
 }
 
 const Sidebar = ({ activeSubreddit }: Props) => {
-  console.log(activeSubreddit);
   return (
     <Aside>
       <h6 className="section__heading">Reddit Feeds</h6>
