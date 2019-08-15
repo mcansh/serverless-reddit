@@ -11,6 +11,9 @@ const nextConfig = {
     DESCRIPTION: pkgJSON.description,
     REPO: `https://github.com/${pkgJSON.repository}`,
   },
+  experimental: {
+    publicDirectory: true,
+  },
   webpack: (config, { buildId }) => {
     config.module.rules.push({
       test: /\.svg$/,
