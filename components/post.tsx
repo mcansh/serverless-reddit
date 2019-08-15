@@ -199,7 +199,7 @@ const Post = ({ post }: { post: Props }) => {
         <div className="feed-item__info">
           <div className="feed-item__header">
             <h2 className="feed-item__heading" title={post.title}>
-              {post.title.slice(0, 60)}
+              {post.title}
             </h2>
             <span className="feed_item__short-link">{url}</span>
           </div>

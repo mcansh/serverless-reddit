@@ -48,6 +48,10 @@ const App = styled.div.attrs({ className: 'App' })`
       grid-gap: 25px;
     }
   }
+
+  .feed {
+    overflow: hidden;
+  }
 `;
 
 const Index: NextPage<Props> = ({ subreddit }: Props) => {
