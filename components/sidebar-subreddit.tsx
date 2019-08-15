@@ -25,7 +25,7 @@ const SidebarSubreddit = ({ subreddit }: Props) => (
         importance="low"
       />
     </picture>
-    <Link href="/r/[fetch]" as={`/r/${subreddit}`} prefetch passHref>
+    <Link href="/r/[fetch]" as={`/r/${subreddit}`} passHref>
       <StyledLink>/r/{subreddit}</StyledLink>
     </Link>
   </li>
