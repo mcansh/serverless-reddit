@@ -1,16 +1,24 @@
+name: build and validate
 on: push
-name: Build, Test, and Publish
 jobs:
-  build:
-    name: Build
+  test:
+    name: test on node ${{ matrix.node_version }}
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node_version: [8, 10, 12]
     steps:
-    - uses: actions/checkout@master
-    - name: Install
-      uses: nuxt/actions-yarn@master
+    - uses: actions/checkout@v1
+    - name: node@${{ matrix.node_version }}
+      uses: actions/setup-node@v1
       with:
-        args: install
-    - name: Validate
-      uses: nuxt/actions-yarn@master
-      with:
-        args: validate
+        version: ${{ matrix.node_version }}
+
+    - name: install yarn
+      run: npm install -g yarn
+
+    - name: yarn install, build, and validate
+      run: |
+        yarn install
+        yarn build
+        yarn validate
