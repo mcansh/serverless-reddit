@@ -1,11 +1,12 @@
 import React from 'react';
 import * as Sentry from '@sentry/browser';
-import App from 'next/app';
+import App, { AppContext } from 'next/app';
 import { ThemeProvider } from 'styled-components';
 
 import Meta from '~/components/meta';
 import GlobalStyle from '~/components/global-style';
 import theme from '~/theme';
+import { getBaseURL } from '~/utils/get-base-url';
 
 Sentry.init({
   dsn: process.env.SENTRY,
@@ -13,7 +14,19 @@ Sentry.init({
   environment: process.env.NODE_ENV,
 });
 
-export default class MyApp extends App {
+export default class MyApp extends App<{ baseURL: string }> {
+  static getInitialProps = async ({ Component, ctx }: AppContext) => {
+    let pageProps = {};
+
+    if (Component.getInitialProps) {
+      pageProps = await Component.getInitialProps(ctx);
+    }
+
+    const baseURL = getBaseURL(ctx.req);
+
+    return { pageProps, baseURL };
+  };
+
   public componentDidCatch(error: Error, errorInfo: React.ErrorInfo) {
     Sentry.withScope(scope => {
       scope.setExtras(errorInfo);
@@ -30,10 +43,10 @@ export default class MyApp extends App {
   }
 
   render() {
-    const { Component, pageProps } = this.props;
+    const { Component, pageProps, baseURL } = this.props;
     return (
       <React.StrictMode>
-        <Meta />
+        <Meta baseURL={baseURL} />
         <ThemeProvider theme={theme}>
           <>
             <GlobalStyle />

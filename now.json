@@ -5,10 +5,7 @@
   "builds": [
     {
       "src": "package.json",
-      "use": "@now/next@canary",
-      "config": {
-        "useBuildUtils": "@now/build-utils@canary"
-      }
+      "use": "@now/next@canary"
     }
   ],
   "regions": [
@@ -17,7 +14,7 @@
   "routes": [
     {
       "src": "^/(manifest.webmanifest|manifest.json)$",
-      "dest": "/manifest.webmanifest",
+      "dest": "/api/manifest",
       "headers": {
         "content-type": "application/manifest+json",
         "Cache-Control": "public, max-age=43200, immutable"
