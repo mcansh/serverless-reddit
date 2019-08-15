@@ -18,6 +18,7 @@
   },
   "dependencies": {
     "@sentry/browser": "5.6.1",
+    "@svgr/webpack": "4.3.2",
     "@zeit/next-source-maps": "0.0.4-canary.1",
     "babel-plugin-root-import": "6.4.1",
     "babel-plugin-ts-optchain": "1.1.5",
@@ -41,7 +42,6 @@
     "@typescript-eslint/eslint-plugin": "1.13.0",
     "@typescript-eslint/parser": "1.13.0",
     "babel-eslint": "10.0.2",
-    "babel-plugin-inline-react-svg": "1.1.0",
     "babel-plugin-styled-components": "1.10.6",
     "eslint": "6.1.0",
     "eslint-config-airbnb": "18.0.1",

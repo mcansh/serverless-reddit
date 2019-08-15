@@ -3,11 +3,6 @@ module.exports = api => {
 
   return {
     presets: ['next/babel'],
-    plugins: [
-      'styled-components',
-      'root-import',
-      ['inline-react-svg', { svgo: false }],
-      'ts-optchain',
-    ],
+    plugins: ['styled-components', 'root-import', 'ts-optchain'],
   };
 };

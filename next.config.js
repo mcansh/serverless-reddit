@@ -1,7 +1,7 @@
 const withSourcemaps = require('@zeit/next-source-maps')();
 const pkgJSON = require('./package.json');
 
-const config = {
+const nextConfig = {
   crossOrigin: 'anonymous',
   target: 'serverless',
   env: {
@@ -9,6 +9,14 @@ const config = {
     VERSION: pkgJSON.version,
     DESCRIPTION: pkgJSON.description,
   },
+  webpack: config => {
+    config.module.rules.push({
+      test: /\.svg$/,
+      use: ['@svgr/webpack'],
+    });
+
+    return config;
+  },
 };
 
-module.exports = withSourcemaps(config);
+module.exports = withSourcemaps(nextConfig);
