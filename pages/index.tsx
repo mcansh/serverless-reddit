@@ -1,3 +1,4 @@
+/* eslint-disable no-nested-ternary */
 import React from 'react';
 import { NextPage } from 'next';
 import styled from 'styled-components';
@@ -6,6 +7,7 @@ import Head from 'next/head';
 import { oc } from 'ts-optchain';
 import { useRouter } from 'next/router';
 
+import { getFirstParam } from '~/utils/get-first-param';
 import Sidebar from '~/components/sidebar';
 import Post from '~/components/post';
 import { Post as PostType } from '~/@types/Post';
@@ -56,9 +58,7 @@ const App = styled.div.attrs({ className: 'App' })`
 
 const Index: NextPage<Props> = ({ subreddit }: Props) => {
   const router = useRouter();
-  const query = Array.isArray(router.query.fetch)
-    ? router.query.fetch[0]
-    : router.query.fetch;
+  const query = getFirstParam(router.query.fetch);
   const posts = oc(subreddit).data.children([]);
 
   React.useEffect(() => {
@@ -116,14 +116,24 @@ Index.getInitialProps = async ({ req, query }) => {
   const isServer = !!req;
   const proxy = isServer ? '' : 'https://cors-anywhere.herokuapp.com/';
 
-  const url = query.fetch
-    ? `${proxy}https://reddit.com/r/${query.fetch}.json`
-    : `${proxy}https://www.reddit.com/.json`;
+  const { fetch: subreddit, feed } = query;
 
-  const promise = await fetch(url);
-  const subreddit = await promise.json();
+  const feeds = ['hot', 'new', 'controversial', 'top', 'rising'];
 
-  return { subreddit };
+  const eligibleFeed = feeds.includes(getFirstParam(feed));
+
+  const base = 'https://www.reddit.com';
+
+  const url =
+    eligibleFeed && subreddit
+      ? `/r/${subreddit}/${feed}.json`
+      : subreddit && !eligibleFeed
+      ? `/r/${query.fetch}.json`
+      : `/.json`;
+
+  const promise = await fetch(`${proxy}${base}${url}`);
+
+  return { subreddit: await promise.json() };
 };
 
 export default Index;
