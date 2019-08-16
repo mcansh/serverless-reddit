@@ -155,7 +155,7 @@ const Header = () => {
             if (!value) {
               Router.push('/');
             } else {
-              Router.push(`/r/[fetch]`, `/r/${value}`);
+              Router.push(`/r/[fetch]`, `/r/${value.toLowerCase()}`);
             }
           }}
         >

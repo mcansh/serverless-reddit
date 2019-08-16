@@ -81,7 +81,7 @@ const Index: NextPage<Props> = ({ subreddit }: Props) => {
     <App>
       <Header />
       <Head>
-        <title>{query ? `${query} - ` : ''} Next.js: ZEIT Serverless SSR</title>
+        <title>{query ? `${query} - ` : ''} Serverless Reddit</title>
       </Head>
       <div className="main">
         <Sidebar activeSubreddit={query || ''} />
