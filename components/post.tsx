@@ -25,13 +25,20 @@ const PostStyles = styled(StyledLink).attrs({
     align-items: center;
     background-color: var(--reverse-default);
     height: 73px;
-    transition: 0.2s box-shadow ease;
+    transition: 0.2s box-shadow ease, 0.2s background-color ease;
   }
 
   .feed-item:hover {
     box-shadow: 0 0 50px #79797922;
     z-index: ${props => props.theme.zIndexFeedItem};
     cursor: pointer;
+    @media (prefers-color-scheme: dark) {
+      box-shadow: none;
+      &,
+      .feed-item__voting {
+        background-color: #99999911;
+      }
+    }
   }
 
   .feed-item__voting {
@@ -44,6 +51,7 @@ const PostStyles = styled(StyledLink).attrs({
     font-size: 14px;
     color: var(--default);
     height: 100%;
+    transition: 0.2s background-color ease;
 
     &::before,
     &::after {
