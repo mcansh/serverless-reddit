@@ -1,8 +1,6 @@
 import { format } from 'url';
 import { NextApiRequest, NextApiResponse } from 'next';
-
-const getFirstParam = (input: string | string[]) =>
-  Array.isArray(input) ? input[0] : input;
+import { getFirstParam } from '~/utils/get-first-param';
 
 const manifest = (req: NextApiRequest, res: NextApiResponse) => {
   const { path, ...query } = req.query;
