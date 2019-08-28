@@ -44,7 +44,7 @@ export default class MyApp extends App<{ baseURL: string }> {
       `Source code: ${process.env.REPO}`,
     ];
 
-    messages.forEach(console.log);
+    messages.forEach(m => console.log(m));
 
     if (
       process.env.NODE_ENV === 'production' &&
