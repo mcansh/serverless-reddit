@@ -35,7 +35,24 @@ const nextConfig = {
   webpack: (config, { buildId }) => {
     config.module.rules.push({
       test: /\.svg$/,
-      use: ['@svgr/webpack'],
+      use: [
+        {
+          loader: '@svgr/webpack',
+          options: {
+            svgoConfig: {
+              plugins: [
+                {
+                  prefixIds: {
+                    delim: '_',
+                    prefixIds: true,
+                    prefixClassNames: false,
+                  },
+                },
+              ],
+            },
+          },
+        },
+      ],
     });
 
     config.plugins.push(
