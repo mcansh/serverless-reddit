@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import React from 'react';
 import * as Sentry from '@sentry/browser';
 import App, { AppContext } from 'next/app';
@@ -43,7 +44,6 @@ export default class MyApp extends App<{ baseURL: string }> {
       `Source code: ${process.env.REPO}`,
     ];
 
-    // eslint-disable-next-line no-console
     messages.forEach(console.log);
 
     if (
