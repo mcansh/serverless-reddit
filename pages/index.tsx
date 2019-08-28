@@ -61,22 +61,6 @@ const Index: NextPage<Props> = ({ subreddit }: Props) => {
   const query = getFirstParam(router.query.subreddit);
   const posts = oc(subreddit).data.children([]);
 
-  React.useEffect(() => {
-    if (
-      process.env.NODE_ENV === 'production' &&
-      typeof window !== 'undefined' &&
-      'serviceWorker' in navigator
-    ) {
-      navigator.serviceWorker
-        .register('/sw.js')
-        .catch(() =>
-          console.error(
-            'Something went wrong when registering the service worker'
-          )
-        );
-    }
-  }, []);
-
   return (
     <App>
       <Header />

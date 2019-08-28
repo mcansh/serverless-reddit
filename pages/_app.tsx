@@ -15,7 +15,7 @@ Sentry.init({
 });
 
 export default class MyApp extends App<{ baseURL: string }> {
-  static getInitialProps = async ({ Component, ctx }: AppContext) => {
+  public static getInitialProps = async ({ Component, ctx }: AppContext) => {
     let pageProps = {};
 
     if (Component.getInitialProps) {
@@ -36,13 +36,32 @@ export default class MyApp extends App<{ baseURL: string }> {
     super.componentDidCatch(error, errorInfo);
   }
 
-  componentDidMount() {
-    console.log(`Version: ${process.env.VERSION}`);
-    console.log(`Next.js buildId: ${process.env.BUILD_ID}`);
-    console.log(`Source code: ${process.env.REPO}`);
+  public componentDidMount() {
+    const messages = [
+      `Version: ${process.env.VERSION}`,
+      `Next.js buildId: ${process.env.BUILD_ID}`,
+      `Source code: ${process.env.REPO}`,
+    ];
+
+    // eslint-disable-next-line no-console
+    messages.forEach(console.log);
+
+    if (
+      process.env.NODE_ENV === 'production' &&
+      typeof window !== 'undefined' &&
+      'serviceWorker' in navigator
+    ) {
+      navigator.serviceWorker
+        .register('/sw.js')
+        .catch(() =>
+          console.error(
+            'Something went wrong when registering the service worker'
+          )
+        );
+    }
   }
 
-  render() {
+  public render() {
     const { Component, pageProps, baseURL } = this.props;
     return (
       <React.StrictMode>

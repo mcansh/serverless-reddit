@@ -6,4 +6,11 @@ module.exports = {
       typescript: {},
     },
   },
+  rules: {
+    'import/no-extraneous-dependencies': [
+      'error',
+      { devDependencies: ['prettier.config.js'] },
+    ],
+    '@typescript-eslint/camelcase': ['error', { properties: 'never' }],
+  },
 };
