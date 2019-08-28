@@ -58,7 +58,7 @@ const App = styled.div.attrs({ className: 'App' })`
 
 const Index: NextPage<Props> = ({ subreddit }: Props) => {
   const router = useRouter();
-  const query = getFirstParam(router.query.fetch);
+  const query = getFirstParam(router.query.subreddit);
   const posts = oc(subreddit).data.children([]);
 
   React.useEffect(() => {
@@ -116,19 +116,19 @@ Index.getInitialProps = async ({ req, query }) => {
   const isServer = !!req;
   const proxy = isServer ? '' : 'https://cors-anywhere.herokuapp.com/';
 
-  const { fetch: subreddit, feed } = query;
+  const { subreddit, sort } = query;
 
   const feeds = ['hot', 'new', 'controversial', 'top', 'rising'];
 
-  const eligibleFeed = feeds.includes(getFirstParam(feed));
+  const eligibleFeed = feeds.includes(getFirstParam(sort));
 
   const base = 'https://www.reddit.com';
 
   const url =
     eligibleFeed && subreddit
-      ? `/r/${subreddit}/${feed}.json`
+      ? `/r/${subreddit}/${sort}.json`
       : subreddit && !eligibleFeed
-      ? `/r/${query.fetch}.json`
+      ? `/r/${subreddit}.json`
       : `/.json`;
 
   const promise = await fetch(`${proxy}${base}${url}`);

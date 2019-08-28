@@ -43,7 +43,6 @@ const HeaderStyles = styled.header.attrs({ className: 'header' })`
   }
 
   .header__search {
-    -webkit-appearance: none;
     appearance: none;
     background: var(--background-color);
     border: 1px solid var(--background-color);
@@ -127,7 +126,7 @@ const HeaderStyles = styled.header.attrs({ className: 'header' })`
 `;
 
 const Header = () => {
-  const { fetch } = useRouter().query;
+  const { subreddit } = useRouter().query;
   const isAmp = useAmp();
   return (
     <HeaderStyles>
@@ -151,19 +150,18 @@ const Header = () => {
           method="GET"
           onSubmit={event => {
             event.preventDefault();
-            const { value } = event.currentTarget.fetch;
+            const { value } = event.currentTarget.fetchFeed;
             if (!value) {
-              Router.push('/');
-            } else {
-              Router.push(`/r/[fetch]`, `/r/${value.toLowerCase()}`);
+              return Router.push('/');
             }
+            return Router.push('/r/[subreddit]', `/r/${value.toLowerCase()}`);
           }}
         >
           <input
-            name="fetch"
+            name="fetchFeed"
             className="header__search"
             placeholder="Enter a Subreddit..."
-            defaultValue={fetch}
+            defaultValue={subreddit}
           />
           {isAmp && <input type="hidden" value="1" name="amp" />}
         </form>

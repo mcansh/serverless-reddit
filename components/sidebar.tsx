@@ -107,7 +107,7 @@ const Sidebar = ({ activeSubreddit }: Props) => {
               active: activeSubreddit === 'popular',
             })}
           />
-          <Link href="/r/[fetch]" as="/r/popular" passHref>
+          <Link href="/r/[subreddit]" as="/r/popular" passHref>
             <StyledLink>Popular</StyledLink>
           </Link>
         </li>
@@ -117,7 +117,7 @@ const Sidebar = ({ activeSubreddit }: Props) => {
               active: activeSubreddit === 'all',
             })}
           />
-          <Link href="/r/[fetch]" as="/r/all" passHref>
+          <Link href="/r/[subreddit]" as="/r/all" passHref>
             <StyledLink>All</StyledLink>
           </Link>
         </li>
@@ -127,7 +127,7 @@ const Sidebar = ({ activeSubreddit }: Props) => {
               active: activeSubreddit === 'originalcontent',
             })}
           />
-          <Link href="/r/[fetch]" as="/r/originalcontent" passHref>
+          <Link href="/r/[subreddit]" as="/r/originalcontent" passHref>
             <StyledLink>Original Content</StyledLink>
           </Link>
         </li>
@@ -158,7 +158,7 @@ const Sidebar = ({ activeSubreddit }: Props) => {
               active: activeSubreddit === 'myaccount',
             })}
           />
-          <Link href="/r/[fetch]" as="/r/myaccount" passHref>
+          <Link href="/r/[subreddit]" as="/r/myaccount" passHref>
             <StyledLink>My Account</StyledLink>
           </Link>
         </li>
@@ -168,7 +168,7 @@ const Sidebar = ({ activeSubreddit }: Props) => {
               active: activeSubreddit === 'messages',
             })}
           />
-          <Link href="/r/[fetch]" as="/r/messages" passHref>
+          <Link href="/r/[subreddit]" as="/r/messages" passHref>
             <StyledLink>Messages</StyledLink>
           </Link>
         </li>
