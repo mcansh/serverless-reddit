@@ -19,12 +19,14 @@
     "validate": "yarn lint && yarn format && yarn type-check"
   },
   "dependencies": {
+    "@mcansh/next-nprogress": "1.1.2",
     "@sentry/browser": "5.6.2",
     "@svgr/webpack": "4.3.2",
     "@zeit/next-source-maps": "0.0.4-canary.1",
     "babel-plugin-root-import": "6.4.1",
     "babel-plugin-ts-optchain": "1.1.5",
     "clsx": "1.0.4",
+    "got": "9.6.0",
     "isomorphic-unfetch": "3.0.0",
     "next": "9.0.5",
     "next-offline": "4.0.5",
@@ -38,6 +40,7 @@
     "webpack": "4.39.3"
   },
   "devDependencies": {
+    "@types/got": "9.6.7",
     "@types/node": "12.7.2",
     "@types/react": "16.9.2",
     "@types/react-dom": "16.9.0",

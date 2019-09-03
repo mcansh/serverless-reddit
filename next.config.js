@@ -28,6 +28,7 @@ const nextConfig = {
     VERSION: pkgJSON.version,
     DESCRIPTION: pkgJSON.description,
     REPO: `https://github.com/${pkgJSON.repository}`,
+    API_BASE: 'https://www.reddit.com',
   },
   experimental: {
     publicDirectory: true,
