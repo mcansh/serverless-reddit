@@ -5,7 +5,7 @@ import clsx from 'clsx';
 
 import StyledLink from './link';
 import SidebarSubreddit from './sidebar-subreddit';
-import { favorites, subscriptions } from '~/utils/subredditList';
+import { favorites, subscriptions } from '~/utils/subreddit-list';
 import Account from '~/static/img/icons/account.svg';
 import All from '~/static/img/icons/all.svg';
 import Home from '~/static/img/icons/home.svg';

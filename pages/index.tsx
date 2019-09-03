@@ -7,6 +7,7 @@ import Head from 'next/head';
 import { oc } from 'ts-optchain';
 import { useRouter } from 'next/router';
 
+import { getBaseURL } from '~/utils/get-base-url';
 import { getFirstParam } from '~/utils/get-first-param';
 import Sidebar from '~/components/sidebar';
 import Post from '~/components/post';
@@ -97,25 +98,17 @@ const Index: NextPage<Props> = ({ subreddit }: Props) => {
 };
 
 Index.getInitialProps = async ({ req, query }) => {
-  const isServer = !!req;
-  const proxy = isServer ? '' : 'https://cors-anywhere.herokuapp.com/';
-
   const { subreddit, sort } = query;
-
-  const feeds = ['hot', 'new', 'controversial', 'top', 'rising'];
-
-  const eligibleFeed = feeds.includes(getFirstParam(sort));
-
-  const base = 'https://www.reddit.com';
+  const baseURL = getBaseURL(req);
 
   const url =
-    eligibleFeed && subreddit
-      ? `/r/${subreddit}/${sort}.json`
-      : subreddit && !eligibleFeed
-      ? `/r/${subreddit}.json`
-      : `/.json`;
+    subreddit && sort
+      ? `api/r/${subreddit}/${sort}`
+      : subreddit
+      ? `api/r/${subreddit}`
+      : 'api/r';
 
-  const promise = await fetch(`${proxy}${base}${url}`);
+  const promise = await fetch(`${baseURL}/${url}`);
 
   return { subreddit: await promise.json() };
 };
