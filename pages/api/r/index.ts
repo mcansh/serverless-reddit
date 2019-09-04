@@ -11,9 +11,8 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 
   try {
     const response = await got(url);
-
     res.json(response.body);
   } catch (error) {
-    res.status(500);
+    res.status(500).json({ message: error.message });
   }
 };
