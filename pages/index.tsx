@@ -5,10 +5,9 @@ import styled from 'styled-components';
 import fetch from 'isomorphic-unfetch';
 import Head from 'next/head';
 import { oc } from 'ts-optchain';
-import { useRouter } from 'next/router';
 
+import { getFirstParams } from '~/utils/get-first-param';
 import { getBaseURL } from '~/utils/get-base-url';
-import { getFirstParam } from '~/utils/get-first-param';
 import Sidebar from '~/components/sidebar';
 import Post from '~/components/post';
 import { Post as PostType } from '~/@types/Post';
@@ -19,8 +18,13 @@ const config = {
 };
 
 interface Props {
-  subreddit: {
+  subreddit?: string;
+  sort?: string;
+  data: {
     data: {
+      before: string | null;
+      after: string | null;
+      dist: number;
       children: {
         data: PostType;
       }[];
@@ -57,48 +61,48 @@ const App = styled.div.attrs({ className: 'App' })`
   }
 `;
 
-const Index: NextPage<Props> = ({ subreddit }: Props) => {
-  const router = useRouter();
-  const query = getFirstParam(router.query.subreddit);
-  const posts = oc(subreddit).data.children([]);
+const Index: NextPage<Props> = ({ data, subreddit }: Props) => {
+  const posts = oc(data).data.children([]);
 
   return (
     <App>
       <Header />
       <Head>
-        <title>{query ? `${query} - ` : ''} Serverless Reddit</title>
+        <title>{subreddit ? `${subreddit} -` : ''} Serverless Reddit</title>
       </Head>
       <div className="main">
-        <Sidebar activeSubreddit={query || ''} />
-        <div className="feed">
-          {posts.length ? (
-            posts.map(({ data }) => <Post key={data.id} post={data} />)
-          ) : (
-            <div
-              css={{
-                height: '100%',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                textAlign: 'center',
-                h1: {
-                  fontSize: '2.4rem',
-                  fontFamily: "'SF Mono', menlo, monospace",
-                  color: 'var(--default)',
-                },
-              }}
-            >
-              <h1>Sorry &quot;{query}&quot; has no posts</h1>
-            </div>
-          )}
-        </div>
+        <Sidebar activeSubreddit={subreddit || ''} />
+        {posts.length ? (
+          <div className="feed">
+            {posts.map(post => (
+              <Post key={post.data.id} post={post.data} />
+            ))}
+          </div>
+        ) : (
+          <div
+            css={{
+              height: '100%',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              textAlign: 'center',
+              h1: {
+                fontSize: '2.4rem',
+                fontFamily: "'SF Mono', menlo, monospace",
+                color: 'var(--default)',
+              },
+            }}
+          >
+            <h1>Sorry &quot;{subreddit}&quot; has no posts</h1>
+          </div>
+        )}
       </div>
     </App>
   );
 };
 
 Index.getInitialProps = async ({ req, query }) => {
-  const { subreddit, sort } = query;
+  const { subreddit, sort } = getFirstParams(query);
   const baseURL = getBaseURL(req);
 
   const url =
@@ -110,7 +114,11 @@ Index.getInitialProps = async ({ req, query }) => {
 
   const promise = await fetch(`${baseURL}/${url}`);
 
-  return { subreddit: await promise.json() };
+  return {
+    data: await promise.json(),
+    sort,
+    subreddit,
+  };
 };
 
 export default Index;
