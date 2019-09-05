@@ -130,7 +130,7 @@ const Header = () => {
   const isAmp = useAmp();
   return (
     <HeaderStyles>
-      <Link href="/">
+      <Link href={{ pathname: '/', query: isAmp ? { amp: '1' } : {} }}>
         <a aria-label="Reddit" className="header__logo-container">
           <Reddit
             css={{
