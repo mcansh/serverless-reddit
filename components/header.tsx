@@ -6,6 +6,7 @@ import Link from 'next/link';
 
 import Karma from '~/static/img/icons/karma.svg';
 import Reddit from '~/static/img/reddit.svg';
+import { feeds } from '~/constants';
 
 const HeaderStyles = styled.header.attrs({ className: 'header' })`
   display: flex;
@@ -126,7 +127,7 @@ const HeaderStyles = styled.header.attrs({ className: 'header' })`
 `;
 
 const Header = () => {
-  const { subreddit } = useRouter().query;
+  const { subreddit, sort, ...query } = useRouter().query;
   const isAmp = useAmp();
   return (
     <HeaderStyles>
@@ -150,11 +151,14 @@ const Header = () => {
           method="GET"
           onSubmit={event => {
             event.preventDefault();
-            const { value } = event.currentTarget.fetchFeed;
-            if (!value) {
-              return Router.push('/');
+            const fetchFeed = event.currentTarget.fetchFeed.value;
+            if (!fetchFeed) {
+              return Router.push({ pathname: '/', query });
             }
-            return Router.push('/r/[subreddit]', `/r/${value.toLowerCase()}`);
+            return Router.push(
+              { pathname: '/r/[subreddit]', query },
+              { pathname: `/r/${fetchFeed.toLowerCase()}`, query }
+            );
           }}
         >
           <input
@@ -164,6 +168,39 @@ const Header = () => {
             defaultValue={subreddit}
           />
           {isAmp && <input type="hidden" value="1" name="amp" />}
+          <select
+            css={`
+              appearance: none;
+              background: var(--background-color);
+              border: 1px solid var(--background-color);
+              box-sizing: border-box;
+              border-radius: 5px;
+              padding: 0 10px;
+              font-size: 14px;
+              height: 40px;
+              color: var(--default);
+              outline: none;
+              margin-left: 1rem;
+              &:hover,
+              &:focus {
+                border-color: var(--search-border);
+              }
+            `}
+            value={sort}
+            onChange={event => {
+              const { value } = event.target;
+              Router.push(
+                { pathname: '/r/[subreddit]/[sort]', query },
+                { pathname: `/r/${subreddit}/${value}`, query }
+              );
+            }}
+          >
+            {feeds.map(feed => (
+              <option key={feed} value={feed}>
+                {feed}
+              </option>
+            ))}
+          </select>
         </form>
       </div>
       <div className="header__user-area">

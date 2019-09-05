@@ -2,11 +2,10 @@ import { format } from 'url';
 import { NextApiRequest, NextApiResponse } from 'next';
 import got from 'got';
 import { getFirstParam } from '~/utils/get-first-param';
+import { feeds } from '~/constants';
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   const { subreddit, sort, ...query } = req.query;
-
-  const feeds = ['hot', 'new', 'controversial', 'top', 'rising'];
 
   if (!feeds.includes(getFirstParam(sort))) {
     return res
