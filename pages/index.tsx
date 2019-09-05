@@ -21,6 +21,7 @@ interface Props {
   subreddit?: string;
   sort?: string;
   data: {
+    message?: string;
     data: {
       before: string | null;
       after: string | null;
@@ -93,7 +94,9 @@ const Index: NextPage<Props> = ({ data, subreddit }: Props) => {
               },
             }}
           >
-            <h1>Sorry &quot;{subreddit}&quot; has no posts</h1>
+            <h1>
+              {data.message || `Sorry &quot;{subreddit}&quot; has no posts`}
+            </h1>
           </div>
         )}
       </div>

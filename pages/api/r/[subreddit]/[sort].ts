@@ -9,9 +9,9 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
   const feeds = ['hot', 'new', 'controversial', 'top', 'rising'];
 
   if (!feeds.includes(getFirstParam(sort))) {
-    res
+    return res
       .status(400)
-      .json({ message: `Sort '${sort}' not one of ${feeds.join(', ')}` });
+      .json({ message: `'${sort}' is not a valid sort option` });
   }
 
   const url = format({
@@ -22,8 +22,8 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 
   try {
     const response = await got(url);
-    res.json(response.body);
+    return res.json(response.body);
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    return res.status(500).json({ message: error.message });
   }
 };
