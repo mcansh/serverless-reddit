@@ -3,11 +3,11 @@ import React from 'react';
 import * as Sentry from '@sentry/browser';
 import App, { AppContext } from 'next/app';
 import { ThemeProvider } from 'styled-components';
+import { getBaseURL } from '@mcansh/next-now-base-url';
 
 import Meta from '~/components/meta';
 import GlobalStyle from '~/components/global-style';
 import theme from '~/theme';
-import { getBaseURL } from '~/utils/get-base-url';
 
 Sentry.init({
   dsn: process.env.SENTRY,

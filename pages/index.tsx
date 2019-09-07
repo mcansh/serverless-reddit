@@ -5,9 +5,9 @@ import styled from 'styled-components';
 import fetch from 'isomorphic-unfetch';
 import Head from 'next/head';
 import { oc } from 'ts-optchain';
+import { getBaseURL } from '@mcansh/next-now-base-url';
 
 import { getFirstParams } from '~/utils/get-first-param';
-import { getBaseURL } from '~/utils/get-base-url';
 import Sidebar from '~/components/sidebar';
 import Post from '~/components/post';
 import { Post as PostType } from '~/@types/Post';
