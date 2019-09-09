@@ -127,11 +127,16 @@ const HeaderStyles = styled.header.attrs({ className: 'header' })`
 `;
 
 const Header = () => {
-  const { subreddit, sort, ...query } = useRouter().query;
+  const {
+    query: { subreddit, sort, ...query },
+  } = useRouter();
+
   const isAmp = useAmp();
   return (
     <HeaderStyles>
-      <Link href={{ pathname: '/', query: isAmp ? { amp: '1' } : {} }}>
+      <Link
+        href={{ pathname: '/', query: isAmp ? { ...query, amp: '1' } : query }}
+      >
         <a aria-label="Reddit" className="header__logo-container">
           <Reddit
             css={{

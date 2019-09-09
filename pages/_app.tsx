@@ -4,6 +4,7 @@ import * as Sentry from '@sentry/browser';
 import App, { AppContext } from 'next/app';
 import { ThemeProvider } from 'styled-components';
 import { getBaseURL } from '@mcansh/next-now-base-url';
+import { NProgress } from '@mcansh/next-nprogress';
 
 import Meta from '~/components/meta';
 import GlobalStyle from '~/components/global-style';
@@ -69,6 +70,7 @@ export default class MyApp extends App<{ baseURL: string }> {
         <ThemeProvider theme={theme}>
           <>
             <GlobalStyle />
+            <NProgress color="#FF4500" showAfterMs={600} />
             <Component {...pageProps} />
           </>
         </ThemeProvider>
