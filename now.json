@@ -1,5 +1,5 @@
 {
-  "name": "reddit",
+  "name": "serverless-reddit-next.js",
   "alias": "reddit.loganmcansh.com",
   "version": 2,
   "builds": [
@@ -8,9 +8,7 @@
       "use": "@now/next@canary"
     }
   ],
-  "regions": [
-    "all"
-  ],
+  "regions": ["all"],
   "routes": [
     {
       "src": "^/(manifest.webmanifest|manifest.json)$",
