@@ -8,17 +8,17 @@ jobs:
       matrix:
         node_version: [10, 12]
     steps:
-    - uses: actions/checkout@v1
-    - name: node@${{ matrix.node_version }}
-      uses: actions/setup-node@v1
-      with:
-        version: ${{ matrix.node_version }}
+      - uses: actions/checkout@v1
+      - name: node@${{ matrix.node_version }}
+        uses: actions/setup-node@v1
+        with:
+          version: ${{ matrix.node_version }}
 
-    - name: install yarn
-      run: npm install -g yarn
+      - name: install yarn
+        run: npm install -g yarn
 
-    - name: yarn install, build, and validate
-      run: |
-        yarn install
-        yarn build
-        yarn validate
+      - name: yarn install, build, and validate
+        run: |
+          yarn install
+          yarn build
+          yarn validate
