@@ -1,10 +1,8 @@
-/* eslint-disable no-nested-ternary */
 import React from 'react';
 import { NextPage } from 'next';
 import styled from 'styled-components';
 import fetch from 'isomorphic-unfetch';
 import Head from 'next/head';
-import { oc } from 'ts-optchain';
 import { getBaseURL } from '@mcansh/next-now-base-url';
 
 import { getFirstParams } from '~/utils/get-first-param';
@@ -20,9 +18,9 @@ const config = {
 interface Props {
   subreddit?: string;
   sort?: string;
-  data: {
+  data?: {
     message?: string;
-    data: {
+    data?: {
       before: string | null;
       after: string | null;
       dist: number;
@@ -62,8 +60,9 @@ const App = styled.div.attrs({ className: 'App' })`
   }
 `;
 
-const Index: NextPage<Props> = ({ data, subreddit }: Props) => {
-  const posts = oc(data).data.children([]);
+const Index: NextPage<Props> = ({ data, subreddit }) => {
+  // prettier-ignore
+  const posts = data?.data?.children ?? [];
 
   return (
     <App>
@@ -95,7 +94,7 @@ const Index: NextPage<Props> = ({ data, subreddit }: Props) => {
             }}
           >
             <h1>
-              {data.message || `Sorry &quot;{subreddit}&quot; has no posts`}
+              {data?.message || `Sorry "${subreddit}" has no posts`}
             </h1>
           </div>
         )}

@@ -7,10 +7,11 @@ module.exports = {
     },
   },
   rules: {
+    '@typescript-eslint/camelcase': ['error', { properties: 'never' }],
+    'react/prop-types': 'off',
     'import/no-extraneous-dependencies': [
       'error',
       { devDependencies: ['prettier.config.js'] },
     ],
-    '@typescript-eslint/camelcase': ['error', { properties: 'never' }],
   },
 };
