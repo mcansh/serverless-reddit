@@ -31,6 +31,9 @@ const nextConfig = {
     API_BASE: 'https://www.reddit.com',
   },
   experimental: {
+    css: true,
+    granularChunks: true,
+    modern: true,
     publicDirectory: true,
   },
   webpack: (config, { buildId }) => {

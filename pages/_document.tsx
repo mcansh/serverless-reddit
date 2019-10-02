@@ -40,7 +40,22 @@ class MyDocument extends Document {
   render() {
     return (
       <Html lang="en">
-        <Head />
+        <Head>
+          <script
+            dangerouslySetInnerHTML={{
+              __html: `(() => {
+                window.theme = 'system';
+                try {
+                  const theme = window.localStorage.getItem('reddit-theme');
+                  if (theme) {
+                    document.querySelector('html')!.className = theme;
+                    window.theme = theme;
+                  }
+                } catch (err) {}
+              })()`,
+            }}
+          />
+        </Head>
         <body>
           <Main />
           <NextScript />

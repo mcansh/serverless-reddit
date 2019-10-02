@@ -141,10 +141,7 @@ const Header = () => {
           <Reddit
             css={{
               'g g': {
-                fill: 'black',
-                '@media (prefers-color-scheme: dark)': {
-                  fill: '#D7DADC',
-                },
+                fill: 'var(--reddit-logo-color)',
               },
             }}
           />

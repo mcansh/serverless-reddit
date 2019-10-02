@@ -12,6 +12,7 @@ import Home from '~/static/img/icons/home.svg';
 import Messages from '~/static/img/icons/messages.svg';
 import OriginalContent from '~/static/img/icons/original_content.svg';
 import Popular from '~/static/img/icons/popular.svg';
+import { ThemeToggle } from '~/components/theme';
 
 const Aside = styled.aside.attrs({ className: 'section' })`
   display: none;
@@ -87,6 +88,10 @@ interface Props {
 }
 
 const Sidebar = ({ activeSubreddit }: Props) => {
+  const [modalOpen, setModalOpen] = React.useState(false);
+
+  const toggleModal = () => setModalOpen(old => !old);
+
   return (
     <Aside>
       <h6 className="section__heading">Reddit Feeds</h6>
@@ -158,9 +163,17 @@ const Sidebar = ({ activeSubreddit }: Props) => {
               active: activeSubreddit === 'myaccount',
             })}
           />
-          <Link href="/r/[subreddit]" as="/r/myaccount" passHref>
-            <StyledLink>My Account</StyledLink>
-          </Link>
+          <button
+            css={`
+              all: unset;
+              color: var(--default);
+            `}
+            type="button"
+            onClick={toggleModal}
+          >
+            My Account
+          </button>
+          <ThemeToggle open={modalOpen} closeModal={toggleModal} />
         </li>
         <li className="section__list-item">
           <Messages
