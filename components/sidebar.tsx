@@ -5,6 +5,7 @@ import clsx from 'clsx';
 
 import StyledLink from './link';
 import SidebarSubreddit from './sidebar-subreddit';
+
 import { favorites, subscriptions } from '~/utils/subreddit-list';
 import Account from '~/static/img/icons/account.svg';
 import All from '~/static/img/icons/all.svg';
@@ -86,95 +87,90 @@ interface Props {
   activeSubreddit: string;
 }
 
-const Sidebar = ({ activeSubreddit }: Props) => {
-  return (
-    <Aside>
-      <h6 className="section__heading">Reddit Feeds</h6>
-      <ul className="section__list">
-        <li className="section__list-item">
-          <Home
-            className={clsx('section__list-item-icon', {
-              active: activeSubreddit === '',
-            })}
-          />
-          <Link href="/" as="/" passHref>
-            <StyledLink>Home</StyledLink>
-          </Link>
-        </li>
-        <li className="section__list-item">
-          <Popular
-            className={clsx('section__list-item-icon', {
-              active: activeSubreddit === 'popular',
-            })}
-          />
-          <Link href="/r/[subreddit]" as="/r/popular" passHref>
-            <StyledLink>Popular</StyledLink>
-          </Link>
-        </li>
-        <li className="section__list-item">
-          <All
-            className={clsx('section__list-item-icon', {
-              active: activeSubreddit === 'all',
-            })}
-          />
-          <Link href="/r/[subreddit]" as="/r/all" passHref>
-            <StyledLink>All</StyledLink>
-          </Link>
-        </li>
-        <li className="section__list-item">
-          <OriginalContent
-            className={clsx('section__list-item-icon', {
-              active: activeSubreddit === 'originalcontent',
-            })}
-          />
-          <Link href="/r/[subreddit]" as="/r/originalcontent" passHref>
-            <StyledLink>Original Content</StyledLink>
-          </Link>
-        </li>
-      </ul>
-      <h6 className="section__heading">Favorites</h6>
-      <ul className="section__list">
-        {favorites.map(subreddit => (
-          <SidebarSubreddit
-            key={`${subreddit}-favorite`}
-            subreddit={subreddit}
-          />
-        ))}
-      </ul>
-      <h6 className="section__heading">Subscriptions</h6>
-      <ul className="section__list">
-        {subscriptions.map(subreddit => (
-          <SidebarSubreddit
-            key={`${subreddit}-subscription`}
-            subreddit={subreddit}
-          />
-        ))}
-      </ul>
-      <h6 className="section__heading">Other</h6>
-      <ul className="section__list">
-        <li className="section__list-item">
-          <Account
-            className={clsx('section__list-item-icon', {
-              active: activeSubreddit === 'myaccount',
-            })}
-          />
-          <Link href="/r/[subreddit]" as="/r/myaccount" passHref>
-            <StyledLink>My Account</StyledLink>
-          </Link>
-        </li>
-        <li className="section__list-item">
-          <Messages
-            className={clsx('section__list-item-icon', {
-              active: activeSubreddit === 'messages',
-            })}
-          />
-          <Link href="/r/[subreddit]" as="/r/messages" passHref>
-            <StyledLink>Messages</StyledLink>
-          </Link>
-        </li>
-      </ul>
-    </Aside>
-  );
-};
+const Sidebar = ({ activeSubreddit }: Props) => (
+  <Aside>
+    <h6 className="section__heading">Reddit Feeds</h6>
+    <ul className="section__list">
+      <li className="section__list-item">
+        <Home
+          className={clsx('section__list-item-icon', {
+            active: activeSubreddit === '',
+          })}
+        />
+        <Link href="/" as="/" passHref>
+          <StyledLink>Home</StyledLink>
+        </Link>
+      </li>
+      <li className="section__list-item">
+        <Popular
+          className={clsx('section__list-item-icon', {
+            active: activeSubreddit === 'popular',
+          })}
+        />
+        <Link href="/r/[subreddit]" as="/r/popular" passHref>
+          <StyledLink>Popular</StyledLink>
+        </Link>
+      </li>
+      <li className="section__list-item">
+        <All
+          className={clsx('section__list-item-icon', {
+            active: activeSubreddit === 'all',
+          })}
+        />
+        <Link href="/r/[subreddit]" as="/r/all" passHref>
+          <StyledLink>All</StyledLink>
+        </Link>
+      </li>
+      <li className="section__list-item">
+        <OriginalContent
+          className={clsx('section__list-item-icon', {
+            active: activeSubreddit === 'originalcontent',
+          })}
+        />
+        <Link href="/r/[subreddit]" as="/r/originalcontent" passHref>
+          <StyledLink>Original Content</StyledLink>
+        </Link>
+      </li>
+    </ul>
+    <h6 className="section__heading">Favorites</h6>
+    <ul className="section__list">
+      {favorites.map(subreddit => (
+        <SidebarSubreddit key={`${subreddit}-favorite`} subreddit={subreddit} />
+      ))}
+    </ul>
+    <h6 className="section__heading">Subscriptions</h6>
+    <ul className="section__list">
+      {subscriptions.map(subreddit => (
+        <SidebarSubreddit
+          key={`${subreddit}-subscription`}
+          subreddit={subreddit}
+        />
+      ))}
+    </ul>
+    <h6 className="section__heading">Other</h6>
+    <ul className="section__list">
+      <li className="section__list-item">
+        <Account
+          className={clsx('section__list-item-icon', {
+            active: activeSubreddit === 'myaccount',
+          })}
+        />
+        <Link href="/r/[subreddit]" as="/r/myaccount" passHref>
+          <StyledLink>My Account</StyledLink>
+        </Link>
+      </li>
+      <li className="section__list-item">
+        <Messages
+          className={clsx('section__list-item-icon', {
+            active: activeSubreddit === 'messages',
+          })}
+        />
+        <Link href="/r/[subreddit]" as="/r/messages" passHref>
+          <StyledLink>Messages</StyledLink>
+        </Link>
+      </li>
+    </ul>
+  </Aside>
+);
 
 export default Sidebar;

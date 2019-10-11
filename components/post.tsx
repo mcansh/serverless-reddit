@@ -1,9 +1,11 @@
 import { parse } from 'url';
+
 import * as React from 'react';
 import styled from 'styled-components';
 import { ellipsis } from 'polished';
 
 import StyledLink from './link';
+
 import { Post as Props } from '~/@types/Post';
 import DefaultThumbnail from '~/static/img/icons/default_thumbnail.svg';
 import Comments from '~/static/img/icons/comments.svg';

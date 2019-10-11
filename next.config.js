@@ -1,6 +1,7 @@
 const webpack = require('webpack');
 const withSourcemaps = require('@zeit/next-source-maps')();
 const withOffline = require('next-offline');
+
 const pkgJSON = require('./package.json');
 
 const nextConfig = {
