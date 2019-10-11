@@ -92,9 +92,7 @@ const Index: NextPage<Props> = ({ data, subreddit }) => {
               },
             }}
           >
-            <h1>
-              {data?.message || `Sorry "${subreddit}" has no posts`}
-            </h1>
+            <h1>{data?.message || `Sorry "${subreddit}" has no posts`}</h1>
           </div>
         )}
       </div>
