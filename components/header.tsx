@@ -3,6 +3,9 @@ import Router, { useRouter } from 'next/router';
 import { useAmp } from 'next/amp';
 import styled from 'styled-components';
 import Link from 'next/link';
+import { DialogOverlay, DialogContent } from '@reach/dialog';
+import { hideVisually } from 'polished';
+import VisuallyHidden from '@reach/visually-hidden';
 
 import Karma from '~/static/img/icons/karma.svg';
 import Reddit from '~/static/img/reddit.svg';
@@ -95,6 +98,9 @@ const HeaderStyles = styled.header.attrs({ className: 'header' })`
   }
 
   .header__avatar-container {
+    background: none;
+    border: none;
+    padding: 0;
     width: 30px;
     height: 30px;
     margin-left: 20px;
@@ -130,8 +136,15 @@ const Header = () => {
   const {
     query: { subreddit, sort, ...query },
   } = useRouter();
-
   const isAmp = useAmp();
+  const [settingsModal, setSettingsModal] = React.useState(false);
+
+  const handleThemeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    document.documentElement.className = event.target.value;
+    document.cookie = `theme=${event.target.value}`;
+    setSettingsModal(false);
+  };
+
   return (
     <HeaderStyles>
       <Link
@@ -141,10 +154,7 @@ const Header = () => {
           <Reddit
             css={{
               'g g': {
-                fill: 'black',
-                '@media (prefers-color-scheme: dark)': {
-                  fill: '#D7DADC',
-                },
+                fill: 'var(--reddit-logo-color)',
               },
             }}
           />
@@ -216,7 +226,11 @@ const Header = () => {
             <div className="header__karma-counter">1 karma</div>
           </div>
         </div>
-        <div className="header__avatar-container">
+        <button
+          className="header__avatar-container"
+          onClick={() => setSettingsModal(true)}
+          type="button"
+        >
           {isAmp ? (
             <amp-img
               alt="Evil Rabbit"
@@ -248,7 +262,116 @@ const Header = () => {
               />
             </picture>
           )}
-        </div>
+        </button>
+        {settingsModal && (
+          <DialogOverlay
+            isOpen={settingsModal}
+            onDismiss={() => setSettingsModal(false)}
+            css={{
+              display: 'flex',
+              margin: '0',
+              justifyContent: 'center',
+              alignItems: 'center',
+              zIndex: 101,
+            }}
+          >
+            <DialogContent
+              css={`
+                @media (max-width: 500px) {
+                  width: 80%;
+                  max-width: 800px;
+                }
+                border-radius: 8px;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                position: relative;
+                h2 {
+                  margin-bottom: 1rem;
+                  font-size: 2rem;
+                  font-weight: normal;
+                }
+                label {
+                  margin: 0 1rem;
+                  span {
+                    display: inline-flex;
+                    justify-content: center;
+                    align-items: center;
+                    font-size: 1.6rem;
+                  }
+                  span::before {
+                    content: '';
+                    height: 1rem;
+                    width: 1rem;
+                    background: none;
+                    border: 1px solid black;
+                    border-radius: 50%;
+                    display: inline-block;
+                    margin-right: 0.5rem;
+                  }
+                  input {
+                    ${hideVisually()};
+                  }
+                  input:checked + span::before {
+                    background: black;
+                  }
+                }
+              `}
+            >
+              <button
+                onClick={() => setSettingsModal(false)}
+                type="button"
+                css={`
+                  position: absolute;
+                  top: 1rem;
+                  right: 1rem;
+                  font-size: 1.4rem;
+                  border: none;
+                  background: none;
+                `}
+              >
+                <VisuallyHidden>Close</VisuallyHidden>
+                <span aria-hidden>×</span>
+              </button>
+              <h2>Select a theme</h2>
+
+              <div>
+                <label htmlFor="system">
+                  <input
+                    type="radio"
+                    name="theme"
+                    value="system"
+                    id="system"
+                    onChange={handleThemeChange}
+                  />
+
+                  <span>System</span>
+                </label>
+                <label htmlFor="light">
+                  <input
+                    type="radio"
+                    name="theme"
+                    value="light"
+                    id="light"
+                    onChange={handleThemeChange}
+                  />
+                  <span>Light</span>
+                </label>
+                <label htmlFor="dark">
+                  <input
+                    type="radio"
+                    name="theme"
+                    value="dark"
+                    id="dark"
+                    onChange={handleThemeChange}
+                  />
+                  <span>Dark</span>
+                </label>
+              </div>
+            </DialogContent>
+          </DialogOverlay>
+        )}
       </div>
     </HeaderStyles>
   );

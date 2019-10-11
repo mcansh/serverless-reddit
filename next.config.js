@@ -32,7 +32,9 @@ const nextConfig = {
     API_BASE: 'https://www.reddit.com',
   },
   experimental: {
-    publicDirectory: true,
+    css: true,
+    granularChunks: true,
+    modern: true,
   },
   webpack: (config, { buildId }) => {
     config.module.rules.push({

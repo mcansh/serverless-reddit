@@ -100,7 +100,8 @@ const Index: NextPage<Props> = ({ data, subreddit }) => {
   );
 };
 
-Index.getInitialProps = async ({ req, query }) => {
+Index.getInitialProps = async context => {
+  const { req, query } = context;
   const { subreddit, sort } = getFirstParams(query);
   const baseURL = getBaseURL(req);
 
