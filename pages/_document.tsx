@@ -37,7 +37,7 @@ class MyDocument extends Document {
     };
   }
 
-  render() {
+  public render() {
     return (
       <Html lang="en">
         <Head />

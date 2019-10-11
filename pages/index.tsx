@@ -61,7 +61,6 @@ const App = styled.div.attrs({ className: 'App' })`
 `;
 
 const Index: NextPage<Props> = ({ data, subreddit }) => {
-  // prettier-ignore
   const posts = data?.data?.children ?? [];
 
   return (

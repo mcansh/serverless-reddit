@@ -1,5 +1,7 @@
 import { format } from 'url';
+
 import { NextApiRequest, NextApiResponse } from 'next';
+
 import { getFirstParam } from '~/utils/get-first-param';
 
 const manifest = (req: NextApiRequest, res: NextApiResponse) => {

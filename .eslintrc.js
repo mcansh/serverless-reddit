@@ -11,7 +11,7 @@ module.exports = {
     'react/prop-types': 'off',
     'import/no-extraneous-dependencies': [
       'error',
-      { devDependencies: ['prettier.config.js'] },
+      { devDependencies: ['prettier.config.js', 'next.config.js'] },
     ],
   },
 };

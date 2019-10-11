@@ -1,4 +1,5 @@
 import { format } from 'url';
+
 import { NextApiRequest, NextApiResponse } from 'next';
 import got from 'got';
 
