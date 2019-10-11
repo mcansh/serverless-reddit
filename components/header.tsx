@@ -44,6 +44,7 @@ const HeaderStyles = styled.header.attrs({ className: 'header' })`
   }
 
   .header__search {
+    --placeholder-color: rgba(0, 0, 0, 0.54);
     appearance: none;
     background: var(--background-color);
     border: 1px solid var(--background-color);
@@ -55,6 +56,14 @@ const HeaderStyles = styled.header.attrs({ className: 'header' })`
     height: 40px;
     color: var(--default);
     outline: none;
+
+    @media (prefers-color-scheme: dark) {
+      --placeholder-color: rgba(255, 255, 255, 0.54);
+    }
+
+    ::placeholder {
+      color: var(--placeholder-color);
+    }
 
     &:hover,
     &:focus {
