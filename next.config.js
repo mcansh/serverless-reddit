@@ -1,4 +1,3 @@
-const webpack = require('webpack');
 const withSourcemaps = require('@zeit/next-source-maps')();
 const withOffline = require('next-offline');
 
@@ -34,7 +33,7 @@ const nextConfig = {
   experimental: {
     publicDirectory: true,
   },
-  webpack: (config, { buildId }) => {
+  webpack: (config, { buildId, webpack }) => {
     config.module.rules.push({
       test: /\.svg$/,
       use: [
