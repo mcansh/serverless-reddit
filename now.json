@@ -2,12 +2,6 @@
   "name": "serverless-reddit-next.js",
   "alias": "reddit.loganmcansh.com",
   "version": 2,
-  "builds": [
-    {
-      "src": "package.json",
-      "use": "@now/next@canary"
-    }
-  ],
   "regions": ["all"],
   "routes": [
     {
