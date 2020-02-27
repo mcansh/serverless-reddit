@@ -98,7 +98,7 @@ const PostStyles = styled(StyledLink).attrs({
     margin-top: 16px;
     padding: 0 16px;
     max-width: 80%;
-    flex: 0 1 auto;
+    flex: 1 1 auto;
   }
 
   .feed-item__header {
