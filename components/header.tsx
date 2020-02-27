@@ -146,7 +146,14 @@ const Header = () => {
       <Link
         href={{ pathname: '/', query: isAmp ? { ...query, amp: '1' } : query }}
       >
-        <a aria-label="Reddit" className="header__logo-container">
+        <a
+          aria-label="Reddit"
+          className="header__logo-container"
+          onContextMenu={event => {
+            event.preventDefault();
+            location.assign(process.env.REPO);
+          }}
+        >
           <Reddit
             css={{
               'g g': {
