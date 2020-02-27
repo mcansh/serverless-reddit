@@ -4,8 +4,14 @@ import React from 'react';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 
-const Meta = ({ baseURL }: { baseURL: string }) => {
+import { useBaseUrl } from './base-url-context';
+import { useSubredditAbout } from './subreddit-context';
+
+const Meta = () => {
   const { asPath, query } = useRouter();
+  const baseURL = useBaseUrl();
+
+  const about = useSubredditAbout();
 
   const { pathname } = parse(asPath);
 
@@ -16,21 +22,34 @@ const Meta = ({ baseURL }: { baseURL: string }) => {
     },
   });
 
+  const description = about?.data?.public_description
+    ? `${about.data.public_description} | ${process.env.DESCRIPTION}`
+    : process.env.DESCRIPTION;
+
+  const title = `${
+    query.subreddit ? `${query.subreddit} |` : ''
+  } Serverless Reddit`;
+
   return (
     <Head>
-      <meta name="description" content={process.env.DESCRIPTION} />
+      <title key="title">{title}</title>
+      <meta key="description" name="description" content={description} />
       <meta charSet="utf-8" />
       <meta
         name="viewport"
         content="width=device-width, initial-scale=1, user-scalable=0, viewport-fit=cover"
       />
       <meta property="og:ttl" content="600" />
-      <meta property="og:site_name" content="serverless reddit" />
+      <meta key="og:site_name" property="og:site_name" content={title} />
       <meta property="twitter:site" content="@loganmcansh" />
-      <meta name="twitter:description" content={process.env.DESCRIPTION} />
+      <meta name="twitter:description" content={description} />
       <meta property="twitter:card" content="summary" />
-      <meta property="og:description" content={process.env.DESCRIPTION} />
-      <meta property="og:title" content="serverless reddit" />
+      <meta
+        key="og:description"
+        property="og:description"
+        content={description}
+      />
+      <meta key="og:title" property="og:title" content={title} />
       <meta property="twitter:title" content="loganmcansh" />
       <meta property="twitter:image" content={`${baseURL}/icon.png`} />
       <meta property="og:type" content="website" />

@@ -1,12 +1,12 @@
 import React from 'react';
 import { NextPage, GetServerSideProps } from 'next';
 import styled from 'styled-components';
-import Head from 'next/head';
 
 import Sidebar from '~/components/sidebar';
 import Post from '~/components/post';
-import { Post as PostType } from '~/@types/Post';
+import { Post as PostType, SubredditAbout } from '~/@types/Post';
 import Header from '~/components/header';
+import { SubredditAboutProvider } from '~/components/subreddit-context';
 
 const config = {
   amp: 'hybrid',
@@ -15,6 +15,7 @@ const config = {
 interface Props {
   subreddit?: string;
   sort?: string;
+  about?: SubredditAbout;
   data?: {
     message?: string;
     data?: {
@@ -57,42 +58,41 @@ const App = styled.div.attrs({ className: 'App' })`
   }
 `;
 
-const Index: NextPage<Props> = ({ data, subreddit }) => {
+const Index: NextPage<Props> = ({ data, subreddit, about }) => {
   const posts = data?.data?.children ?? [];
 
   return (
     <App>
-      <Header />
-      <Head>
-        <title>{subreddit ? `${subreddit} -` : ''} Serverless Reddit</title>
-      </Head>
-      <div className="main">
-        <Sidebar activeSubreddit={subreddit || ''} />
-        {posts.length ? (
-          <div className="feed">
-            {posts.map(post => (
-              <Post key={post.data.id} post={post.data} />
-            ))}
-          </div>
-        ) : (
-          <div
-            css={{
-              height: '100%',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              textAlign: 'center',
-              h1: {
-                fontSize: '2.4rem',
-                fontFamily: "'SF Mono', menlo, monospace",
-                color: 'var(--default)',
-              },
-            }}
-          >
-            <h1>{data?.message ?? `Sorry "${subreddit}" has no posts`}</h1>
-          </div>
-        )}
-      </div>
+      <SubredditAboutProvider value={about}>
+        <Header />
+        <div className="main">
+          <Sidebar activeSubreddit={subreddit || ''} />
+          {posts.length ? (
+            <div className="feed">
+              {posts.map(post => (
+                <Post key={post.data.id} post={post.data} />
+              ))}
+            </div>
+          ) : (
+            <div
+              css={{
+                height: '100%',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                textAlign: 'center',
+                h1: {
+                  fontSize: '2.4rem',
+                  fontFamily: "'SF Mono', menlo, monospace",
+                  color: 'var(--default)',
+                },
+              }}
+            >
+              <h1>{data?.message ?? `Sorry "${subreddit}" has no posts`}</h1>
+            </div>
+          )}
+        </div>
+      </SubredditAboutProvider>
     </App>
   );
 };
@@ -113,15 +113,22 @@ const getServerSideProps: GetServerSideProps = async ({ query, req }) => {
       ? `api/r/${subreddit}`
       : 'api/r';
 
-  const url = `${baseURL}/${pathname}`;
+  const promises = [fetch(`${baseURL}/${pathname}`).then(r => r.json())];
 
-  const promise = await fetch(url);
+  if (subreddit) {
+    promises.push(
+      fetch(`${baseURL}/api/r/${subreddit}/about`).then(r => r.json())
+    );
+  }
+
+  const [subredditData, subredditAboutData] = await Promise.all(promises);
 
   return {
     props: {
-      data: await promise.json(),
+      data: subredditData,
       sort,
       subreddit,
+      about: subredditAboutData,
     },
   };
 };

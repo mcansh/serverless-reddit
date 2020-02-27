@@ -9,6 +9,7 @@ import { NProgress } from '@mcansh/next-nprogress';
 import Meta from '~/components/meta';
 import GlobalStyle from '~/components/global-style';
 import theme from '~/theme';
+import { BaseUrlProvider } from '~/components/base-url-context';
 
 Sentry.init({
   dsn: process.env.SENTRY_DSN,
@@ -65,16 +66,14 @@ export default class MyApp extends App<{ baseURL: string }> {
   public render() {
     const { Component, pageProps, baseURL } = this.props;
     return (
-      <React.StrictMode>
-        <Meta baseURL={baseURL} />
+      <BaseUrlProvider baseUrl={baseURL}>
         <ThemeProvider theme={theme}>
-          <>
-            <GlobalStyle />
-            <NProgress color="#FF4500" showAfterMs={600} />
-            <Component {...pageProps} />
-          </>
+          <Meta />
+          <GlobalStyle />
+          <NProgress color="#FF4500" showAfterMs={600} />
+          <Component {...pageProps} />
         </ThemeProvider>
-      </React.StrictMode>
+      </BaseUrlProvider>
     );
   }
 }
