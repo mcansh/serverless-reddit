@@ -4,8 +4,8 @@ import { useAmp } from 'next/amp';
 import styled from 'styled-components';
 import Link from 'next/link';
 
-import Karma from '~/static/img/icons/karma.svg';
-import Reddit from '~/static/img/reddit.svg';
+import Karma from '~/public/static/img/icons/karma.svg';
+import Reddit from '~/public/static/img/reddit.svg';
 import { feeds } from '~/constants';
 
 const HeaderStyles = styled.header.attrs({ className: 'header' })`

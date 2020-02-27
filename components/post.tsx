@@ -7,8 +7,8 @@ import { ellipsis } from 'polished';
 import StyledLink from './link';
 
 import { Post as Props } from '~/@types/Post';
-import DefaultThumbnail from '~/static/img/icons/default_thumbnail.svg';
-import Comments from '~/static/img/icons/comments.svg';
+import DefaultThumbnail from '~/public/static/img/icons/default_thumbnail.svg';
+import Comments from '~/public/static/img/icons/comments.svg';
 
 const PostStyles = styled(StyledLink).attrs({
   className: 'feed__feed-link feed-link',

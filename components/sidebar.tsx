@@ -7,12 +7,12 @@ import StyledLink from './link';
 import SidebarSubreddit from './sidebar-subreddit';
 
 import { favorites, subscriptions } from '~/utils/subreddit-list';
-import Account from '~/static/img/icons/account.svg';
-import All from '~/static/img/icons/all.svg';
-import Home from '~/static/img/icons/home.svg';
-import Messages from '~/static/img/icons/messages.svg';
-import OriginalContent from '~/static/img/icons/original_content.svg';
-import Popular from '~/static/img/icons/popular.svg';
+import Account from '~/public/static/img/icons/account.svg';
+import All from '~/public/static/img/icons/all.svg';
+import Home from '~/public/static/img/icons/home.svg';
+import Messages from '~/public/static/img/icons/messages.svg';
+import OriginalContent from '~/public/static/img/icons/original_content.svg';
+import Popular from '~/public/static/img/icons/popular.svg';
 
 const Aside = styled.aside.attrs({ className: 'section' })`
   display: none;
