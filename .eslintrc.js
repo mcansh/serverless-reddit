@@ -3,7 +3,10 @@ module.exports = {
   rules: {
     '@typescript-eslint/camelcase': [
       'error',
-      { allow: ['unstable_getServerProps', 'Unstable_getServerProps'] },
+      {
+        allow: ['unstable_getServerProps', 'Unstable_getServerProps'],
+        properties: 'never',
+      },
     ],
     'import/no-extraneous-dependencies': [
       'error',
