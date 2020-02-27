@@ -1,8 +1,5 @@
-import { ParsedUrlQuery } from 'querystring';
-import { IncomingMessage, ServerResponse } from 'http';
-
 import React from 'react';
-import { NextPage } from 'next';
+import { NextPage, GetServerSideProps } from 'next';
 import styled from 'styled-components';
 import Head from 'next/head';
 
@@ -100,19 +97,7 @@ const Index: NextPage<Props> = ({ data, subreddit }) => {
   );
 };
 
-// this will eventually be exported by next.js, but for the meantime
-// https://github.com/zeit/next.js/pull/10077/files#diff-7506e9167e048e7a6b9582935826610cR37-R42
-type Unstable_getServerProps = (context: {
-  params: ParsedUrlQuery | undefined;
-  req: IncomingMessage;
-  res: ServerResponse;
-  query: ParsedUrlQuery;
-}) => Promise<{ [key: string]: any }>;
-
-const unstable_getServerProps: Unstable_getServerProps = async ({
-  query,
-  req,
-}) => {
+const getServerSideProps: GetServerSideProps = async ({ query, req }) => {
   const { default: fetch } = await import('isomorphic-unfetch');
   const { getBaseURL } = await import('@mcansh/next-now-base-url');
   const { getFirstParams } = await import('~/utils/get-first-param');
@@ -142,4 +127,4 @@ const unstable_getServerProps: Unstable_getServerProps = async ({
 };
 
 export default Index;
-export { config, unstable_getServerProps };
+export { config, getServerSideProps };

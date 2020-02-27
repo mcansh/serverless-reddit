@@ -1828,14 +1828,6 @@
     core-js "^2.6.5"
     regenerator-runtime "^0.13.2"
 
-"@babel/runtime-corejs2@7.7.2":
-  version "7.7.2"
-  resolved "https://registry.yarnpkg.com/@babel/runtime-corejs2/-/runtime-corejs2-7.7.2.tgz#5a8c4e2f8688ce58adc9eb1d8320b6e7341f96ce"
-  integrity sha512-GfVnHchOBvIMsweQ13l4jd9lT4brkevnavnVOej5g2y7PpTRY+R4pcQlCjWMZoUla5rMLFzaS/Ll2s59cB1TqQ==
-  dependencies:
-    core-js "^2.6.5"
-    regenerator-runtime "^0.13.2"
-
 "@babel/runtime@7.4.5":
   version "7.4.5"
   resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.4.5.tgz#582bb531f5f9dc67d2fcb682979894f75e253f12"
@@ -1935,6 +1927,15 @@
     debug "^4.1.0"
     globals "^11.1.0"
     lodash "^4.17.13"
+
+"@babel/types@7.7.4":
+  version "7.7.4"
+  resolved "https://registry.yarnpkg.com/@babel/types/-/types-7.7.4.tgz#516570d539e44ddf308c07569c258ff94fde9193"
+  integrity sha512-cz5Ji23KCi4T+YIE/BolWosrJuSmoZeN1EFnRtBwF+KKLi8GG/Z2c2hOJJeCXPk4mwk4QFvTmwIodJowXgttRA==
+  dependencies:
+    esutils "^2.0.2"
+    lodash "^4.17.13"
+    to-fast-properties "^2.0.0"
 
 "@babel/types@^7.0.0", "@babel/types@^7.2.0", "@babel/types@^7.3.0", "@babel/types@^7.4.4", "@babel/types@^7.5.5", "@babel/types@^7.6.0":
   version "7.6.1"
@@ -2257,10 +2258,10 @@
     react-dom "16.9.0"
     styled-components "4.3.2"
 
-"@next/polyfill-nomodule@9.2.2":
-  version "9.2.2"
-  resolved "https://registry.yarnpkg.com/@next/polyfill-nomodule/-/polyfill-nomodule-9.2.2.tgz#2687d5b64ba053b247700f057f083dfd392ee52e"
-  integrity sha512-J51QpynN0AxQ0saWkxgpr0JxWqSJFCBOOeQpbyn5hlgxjrcXR9dQ59tN677vbq2wJ8idLn898vZFaRmQsLq13A==
+"@next/polyfill-nomodule@9.2.3-canary.16":
+  version "9.2.3-canary.14"
+  resolved "https://registry.yarnpkg.com/@next/polyfill-nomodule/-/polyfill-nomodule-9.2.3-canary.14.tgz#2dd6d712d4629288670d4ebfaae2fb1e1d3f96f4"
+  integrity sha512-2oWBe7w+3LxbudMcuKUEDXZIMK4DcVFJKbh2T90BaHCyk9yIBtDpdKHDeRo0MKULwXF1eSllBD8X3rTjmVJZDQ==
 
 "@nodelib/fs.scandir@2.1.3":
   version "2.1.3"
@@ -3144,6 +3145,15 @@ amphtml-validator@1.0.23:
     colors "1.1.2"
     commander "2.9.0"
     promise "7.1.1"
+
+amphtml-validator@1.0.30:
+  version "1.0.30"
+  resolved "https://registry.yarnpkg.com/amphtml-validator/-/amphtml-validator-1.0.30.tgz#b722ea5e965d0cc028cbdc360fc76b97e669715e"
+  integrity sha512-CaEm2ivIi4M4QTiFnCE9t4MRgawCf88iAV/+VsS0zEw6T4VBU6zoXcgn4L+dt6/WZ/NYxKpc38duSoRLqZJhNQ==
+  dependencies:
+    colors "1.2.5"
+    commander "2.15.1"
+    promise "8.0.1"
 
 ansi-colors@^3.0.0:
   version "3.2.4"
@@ -4333,12 +4343,22 @@ colors@1.1.2:
   resolved "https://registry.yarnpkg.com/colors/-/colors-1.1.2.tgz#168a4701756b6a7f51a12ce0c97bfa28c084ed63"
   integrity sha1-FopHAXVran9RoSzgyXv6KMCE7WM=
 
+colors@1.2.5:
+  version "1.2.5"
+  resolved "https://registry.yarnpkg.com/colors/-/colors-1.2.5.tgz#89c7ad9a374bc030df8013241f68136ed8835afc"
+  integrity sha512-erNRLao/Y3Fv54qUa0LBB+//Uf3YwMUmdJinN20yMXm9zdKKqH9wt7R9IIVZ+K7ShzfpLV/Zg8+VyrBJYB4lpg==
+
 combined-stream@^1.0.6, combined-stream@~1.0.6:
   version "1.0.8"
   resolved "https://registry.yarnpkg.com/combined-stream/-/combined-stream-1.0.8.tgz#c3d45a8b34fd730631a110a8a2520682b31d5a7f"
   integrity sha512-FQN4MRfuJeHf7cBbBMJFXhKSDq+2kAArBlmRBvcvFE5BB1HZKXtSFASDhdlz9zOYwxh8lDdnvmMOe/+5cdoEdg==
   dependencies:
     delayed-stream "~1.0.0"
+
+commander@2.15.1:
+  version "2.15.1"
+  resolved "https://registry.yarnpkg.com/commander/-/commander-2.15.1.tgz#df46e867d0fc2aec66a34662b406a9ccafff5b0f"
+  integrity sha512-VlfT9F3V0v+jr4yxPc5gg9s62/fIVWsd2Bk2iD435um1NlGMYdVCq+MjcXnhYq2icNOizHr1kK+5TI6H0Hy0ag==
 
 commander@2.9.0:
   version "2.9.0"
@@ -8777,10 +8797,10 @@ next@9.0.5:
     webpack-sources "1.3.0"
     worker-farm "1.7.0"
 
-next@9.2.2:
-  version "9.2.2"
-  resolved "https://registry.yarnpkg.com/next/-/next-9.2.2.tgz#c41a793011747cc51dc7c9b3b5d2a932caca5c57"
-  integrity sha512-7ribVzmj5wvOvp7kTynujukftHqgpGcxOPfUA8lYEWyTJHjsl/JVHE+eay4Qe74VEuCfDRQE8679fe0SKtsNXw==
+next@9.2.3-canary.16:
+  version "9.2.3-canary.16"
+  resolved "https://registry.yarnpkg.com/next/-/next-9.2.3-canary.16.tgz#6dcf8a82c302f33383c89c0de46c7eb4628f142d"
+  integrity sha512-nCQVeX2OYt4FqXjggv6xwRvrqX8YbewJTkI79J+Y7mHL9R0DQJ5d2STuwWUzm2Z2+Go1FWttB1xj8i6pzd/Hxg==
   dependencies:
     "@ampproject/toolbox-optimizer" "2.0.0"
     "@babel/core" "7.7.2"
@@ -8797,9 +8817,9 @@ next@9.2.2:
     "@babel/preset-react" "7.7.0"
     "@babel/preset-typescript" "7.7.2"
     "@babel/runtime" "7.7.2"
-    "@babel/runtime-corejs2" "7.7.2"
-    "@next/polyfill-nomodule" "9.2.2"
-    amphtml-validator "1.0.23"
+    "@babel/types" "7.7.4"
+    "@next/polyfill-nomodule" "9.2.3-canary.16"
+    amphtml-validator "1.0.30"
     async-retry "1.2.3"
     async-sema "3.0.0"
     autodll-webpack-plugin "0.4.2"
@@ -8841,11 +8861,10 @@ next@9.2.2:
     mini-css-extract-plugin "0.8.0"
     mkdirp "0.5.1"
     node-fetch "2.6.0"
-    object-assign "4.1.1"
     ora "3.4.0"
     path-to-regexp "6.1.0"
     pnp-webpack-plugin "1.5.0"
-    postcss-flexbugs-fixes "4.1.0"
+    postcss-flexbugs-fixes "4.2.0"
     postcss-loader "3.0.0"
     postcss-preset-env "6.7.0"
     prop-types "15.7.2"
@@ -8868,12 +8887,11 @@ next@9.2.2:
     url "0.11.0"
     url-polyfill "1.1.7"
     use-subscription "1.1.1"
-    watchpack "2.0.0-beta.5"
+    watchpack "2.0.0-beta.13"
     webpack "4.41.2"
     webpack-dev-middleware "3.7.0"
     webpack-hot-middleware "2.25.0"
     webpack-sources "1.4.3"
-    whatwg-fetch "3.0.0"
 
 nice-try@^1.0.4:
   version "1.0.5"
@@ -9109,7 +9127,7 @@ oauth-sign@~0.9.0:
   resolved "https://registry.yarnpkg.com/oauth-sign/-/oauth-sign-0.9.0.tgz#47a7b016baa68b5fa0ecf3dee08a85c679ac6455"
   integrity sha512-fexhUFFPTGV8ybAtSIGbV6gOkSv8UtRbDBnAyLQw4QPKkgNlsH2ByPGtMUqdWkos6YCRmAqViwgZrJc/mRDzZQ==
 
-object-assign@4.1.1, object-assign@^4.0.1, object-assign@^4.1.0, object-assign@^4.1.1:
+object-assign@^4.0.1, object-assign@^4.1.0, object-assign@^4.1.1:
   version "4.1.1"
   resolved "https://registry.yarnpkg.com/object-assign/-/object-assign-4.1.1.tgz#2109adc7965887cfc05cbbd442cac8bfbb360863"
   integrity sha1-IQmtx5ZYh8/AXLvUQsrIv7s2CGM=
@@ -9793,12 +9811,12 @@ postcss-env-function@^2.0.2:
     postcss "^7.0.2"
     postcss-values-parser "^2.0.0"
 
-postcss-flexbugs-fixes@4.1.0:
-  version "4.1.0"
-  resolved "https://registry.yarnpkg.com/postcss-flexbugs-fixes/-/postcss-flexbugs-fixes-4.1.0.tgz#e094a9df1783e2200b7b19f875dcad3b3aff8b20"
-  integrity sha512-jr1LHxQvStNNAHlgco6PzY308zvLklh7SJVYuWUwyUQncofaAlD2l+P/gxKHOdqWKe7xJSkVLFF/2Tp+JqMSZA==
+postcss-flexbugs-fixes@4.2.0:
+  version "4.2.0"
+  resolved "https://registry.yarnpkg.com/postcss-flexbugs-fixes/-/postcss-flexbugs-fixes-4.2.0.tgz#662b3dcb6354638b9213a55eed8913bcdc8d004a"
+  integrity sha512-QRE0n3hpkxxS/OGvzOa+PDuy4mh/Jg4o9ui22/ko5iGYOG3M5dfJabjnAZjTdh2G9F85c7Hv8hWcEDEKW/xceQ==
   dependencies:
-    postcss "^7.0.0"
+    postcss "^7.0.26"
 
 postcss-focus-visible@^4.0.0:
   version "4.0.0"
@@ -10242,6 +10260,13 @@ promise@7.1.1:
   version "7.1.1"
   resolved "https://registry.yarnpkg.com/promise/-/promise-7.1.1.tgz#489654c692616b8aa55b0724fa809bb7db49c5bf"
   integrity sha1-SJZUxpJha4qlWwck+oCbt9tJxb8=
+  dependencies:
+    asap "~2.0.3"
+
+promise@8.0.1:
+  version "8.0.1"
+  resolved "https://registry.yarnpkg.com/promise/-/promise-8.0.1.tgz#e45d68b00a17647b6da711bf85ed6ed47208f450"
+  integrity sha1-5F1osAoXZHttpxG/he1u1HII9FA=
   dependencies:
     asap "~2.0.3"
 
@@ -12799,6 +12824,14 @@ walker@^1.0.7, walker@~1.0.5:
   integrity sha1-L3+bj9ENZ3JisYqITijRlhjgKPs=
   dependencies:
     makeerror "1.0.x"
+
+watchpack@2.0.0-beta.13:
+  version "2.0.0-beta.13"
+  resolved "https://registry.yarnpkg.com/watchpack/-/watchpack-2.0.0-beta.13.tgz#9d9b0c094b8402139333e04eb6194643c8384f55"
+  integrity sha512-ZEFq2mx/k5qgQwgi6NOm+2ImICb8ngAkA/rZ6oyXZ7SgPn3pncf+nfhYTCrs3lmHwOxnPtGLTOuFLfpSMh1VMA==
+  dependencies:
+    glob-to-regexp "^0.4.1"
+    graceful-fs "^4.1.2"
 
 watchpack@2.0.0-beta.5:
   version "2.0.0-beta.5"
