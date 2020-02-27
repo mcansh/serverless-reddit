@@ -1,6 +1,6 @@
 /* eslint-disable no-console */
 import React from 'react';
-import * as Sentry from '@sentry/browser';
+import * as Sentry from '@sentry/node';
 import App, { AppContext } from 'next/app';
 import { ThemeProvider } from 'styled-components';
 import { getBaseURL } from '@mcansh/next-now-base-url';
@@ -11,8 +11,8 @@ import GlobalStyle from '~/components/global-style';
 import theme from '~/theme';
 
 Sentry.init({
-  dsn: process.env.SENTRY,
-  release: `reddit@${process.env.VERSION}_${process.env.BUILD_ID}`,
+  dsn: process.env.SENTRY_DSN,
+  release: process.env.SENTRY_RELEASE,
   environment: process.env.NODE_ENV,
 });
 

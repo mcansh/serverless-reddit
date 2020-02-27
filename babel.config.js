@@ -3,11 +3,6 @@ module.exports = api => {
 
   return {
     presets: ['next/babel'],
-    plugins: [
-      'styled-components',
-      'root-import',
-      '@babel/plugin-proposal-nullish-coalescing-operator',
-      '@babel/plugin-proposal-optional-chaining',
-    ],
+    plugins: ['styled-components'],
   };
 };
