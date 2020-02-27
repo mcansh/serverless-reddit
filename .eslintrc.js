@@ -1,6 +1,10 @@
 module.exports = {
   extends: ['@mcansh/eslint-config/typescript'],
   rules: {
+    '@typescript-eslint/camelcase': [
+      'error',
+      { allow: ['unstable_getServerProps', 'Unstable_getServerProps'] },
+    ],
     'import/no-extraneous-dependencies': [
       'error',
       {

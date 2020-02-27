@@ -1,11 +1,11 @@
+import { ParsedUrlQuery } from 'querystring';
+import { IncomingMessage, ServerResponse } from 'http';
+
 import React from 'react';
 import { NextPage } from 'next';
 import styled from 'styled-components';
-import fetch from 'isomorphic-unfetch';
 import Head from 'next/head';
-import { getBaseURL } from '@mcansh/next-now-base-url';
 
-import { getFirstParams } from '~/utils/get-first-param';
 import Sidebar from '~/components/sidebar';
 import Post from '~/components/post';
 import { Post as PostType } from '~/@types/Post';
@@ -21,8 +21,8 @@ interface Props {
   data?: {
     message?: string;
     data?: {
-      before: string | null;
-      after: string | null;
+      before: string | undefined;
+      after: string | undefined;
       dist: number;
       children: {
         data: PostType;
@@ -100,25 +100,46 @@ const Index: NextPage<Props> = ({ data, subreddit }) => {
   );
 };
 
-Index.getInitialProps = async ({ req, query }) => {
+// this will eventually be exported by next.js, but for the meantime
+// https://github.com/zeit/next.js/pull/10077/files#diff-7506e9167e048e7a6b9582935826610cR37-R42
+type Unstable_getServerProps = (context: {
+  params: ParsedUrlQuery | undefined;
+  req: IncomingMessage;
+  res: ServerResponse;
+  query: ParsedUrlQuery;
+}) => Promise<{ [key: string]: any }>;
+
+const unstable_getServerProps: Unstable_getServerProps = async ({
+  query,
+  req,
+}) => {
+  const { default: fetch } = await import('isomorphic-unfetch');
+  const { getBaseURL } = await import('@mcansh/next-now-base-url');
+  const { getFirstParams } = await import('~/utils/get-first-param');
+
   const { subreddit, sort } = getFirstParams(query);
+
   const baseURL = getBaseURL(req);
 
-  const url =
+  const pathname =
     subreddit && sort
       ? `api/r/${subreddit}/${sort}`
       : subreddit
       ? `api/r/${subreddit}`
       : 'api/r';
 
-  const promise = await fetch(`${baseURL}/${url}`);
+  const url = `${baseURL}/${pathname}`;
+
+  const promise = await fetch(url);
 
   return {
-    data: await promise.json(),
-    sort,
-    subreddit,
+    props: {
+      data: await promise.json(),
+      sort,
+      subreddit,
+    },
   };
 };
 
 export default Index;
-export { config };
+export { config, unstable_getServerProps };
