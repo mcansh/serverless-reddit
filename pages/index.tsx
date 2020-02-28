@@ -91,19 +91,23 @@ const getServerSideProps: GetServerSideProps = async ({ query, req }) => {
   const { default: fetch } = await import('isomorphic-unfetch');
   const { getBaseURL } = await import('@mcansh/next-now-base-url');
   const { getFirstParams } = await import('~/utils/get-first-param');
+  const { format } = await import('url');
 
   const { subreddit, sort } = getFirstParams(query);
 
   const baseURL = getBaseURL(req);
 
-  const pathname =
-    subreddit && sort
-      ? `api/r/${subreddit}/${sort}`
-      : subreddit
-      ? `api/r/${subreddit}`
-      : 'api/r';
+  const pathname = format({
+    pathname:
+      subreddit && sort
+        ? `api/r/${subreddit}/${sort}`
+        : subreddit
+        ? `api/r/${subreddit}`
+        : 'api/r',
+    query,
+  });
 
-  const promises = [fetch(`${baseURL}/${pathname}`).then(r => r.json())];
+  const promises = [fetch(`${baseURL}/${pathname}?`).then(r => r.json())];
 
   if (subreddit) {
     promises.push(

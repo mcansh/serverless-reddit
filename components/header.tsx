@@ -137,7 +137,7 @@ const HeaderStyles = styled.header.attrs({ className: 'header' })`
 
 const Header = () => {
   const {
-    query: { subreddit, sort, ...query },
+    query: { subreddit, sort, t: time, ...query },
   } = useRouter();
 
   const isAmp = useAmp();
@@ -222,6 +222,54 @@ const Header = () => {
               </option>
             ))}
           </select>
+          {sort === 'top' && (
+            <select
+              css={`
+                appearance: none;
+                background: var(--background-color);
+                border: 1px solid var(--background-color);
+                box-sizing: border-box;
+                border-radius: 5px;
+                padding: 0 10px;
+                font-size: 14px;
+                height: 40px;
+                color: var(--default);
+                outline: none;
+                margin-left: 1rem;
+                &:hover,
+                &:focus {
+                  border-color: var(--search-border);
+                }
+              `}
+              value={time}
+              onChange={event => {
+                const { value } = event.currentTarget;
+                Router.push(
+                  {
+                    pathname: '/r/[subreddit]/[sort]',
+                    query: { ...query, t: value },
+                  },
+                  {
+                    pathname: `/r/${subreddit}/${sort}`,
+                    query: { ...query, t: value },
+                  }
+                );
+              }}
+            >
+              {[
+                { display: 'now', value: 'hour' },
+                { display: 'today', value: 'day' },
+                { display: 'this week', value: 'week' },
+                { display: 'this month', value: 'month' },
+                { display: 'this year', value: 'year' },
+                { display: 'all time', value: 'all' },
+              ].map(feed => (
+                <option key={feed.display} value={feed.value}>
+                  {feed.display}
+                </option>
+              ))}
+            </select>
+          )}
         </form>
       </div>
       <div className="header__user-area">
