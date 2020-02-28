@@ -30,6 +30,8 @@ const Meta = () => {
     query.subreddit ? `${query.subreddit} |` : ''
   } Serverless Reddit`;
 
+  const image = about?.data?.icon_img ?? `${baseURL}/icon.png`;
+
   return (
     <Head>
       <title key="title">{title}</title>
@@ -46,11 +48,11 @@ const Meta = () => {
       <meta name="twitter:card" content="summary" />
       <meta key="og:description" name="og:description" content={description} />
       <meta key="og:title" name="og:title" content={title} />
-      <meta name="twitter:title" content="loganmcansh" />
-      <meta name="twitter:image" content={`${baseURL}/icon.png`} />
+      <meta name="twitter:title" content={title} />
+      <meta name="twitter:image" content={image} />
       <meta name="og:type" content="website" />
       <meta name="og:url" content={`${baseURL}${asPath}`} />
-      <meta name="og:image" content={`${baseURL}/icon.png`} />
+      <meta name="og:image" content={image} />
       <meta name="og:image:width" content="256" />
       <meta name="og:image:height" content="256" />
       <link
