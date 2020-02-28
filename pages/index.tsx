@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 import Sidebar from '~/components/sidebar';
 import Post from '~/components/post';
-import { Post as PostType, SubredditAbout } from '~/@types/Post';
+import { Subreddit, SubredditAbout } from '~/@types/Post';
 import Header from '~/components/header';
 import { SubredditAboutProvider } from '~/components/subreddit-context';
 
@@ -16,17 +16,7 @@ interface Props {
   subreddit?: string;
   sort?: string;
   about?: SubredditAbout;
-  data?: {
-    message?: string;
-    data?: {
-      before: string | undefined;
-      after: string | undefined;
-      dist: number;
-      children: {
-        data: PostType;
-      }[];
-    };
-  };
+  data?: Subreddit & { message?: string };
 }
 
 const App = styled.div.attrs({ className: 'App' })`
