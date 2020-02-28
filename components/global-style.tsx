@@ -22,7 +22,8 @@ const GlobalStyle = createGlobalStyle`
 
   html {
     font-size: 10px;
-    box-sizing: border-box
+    box-sizing: border-box;
+    height: 100%;
   }
 
   *,
@@ -42,10 +43,9 @@ const GlobalStyle = createGlobalStyle`
     background-color: var(--background-color);
   }
 
-  html,
   body,
   #__next {
-    min-height: inherit;
+    height: inherit;
   }
 
   img {

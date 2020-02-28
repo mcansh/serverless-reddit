@@ -1,9 +1,8 @@
 /* eslint-disable no-console */
 import React from 'react';
 import * as Sentry from '@sentry/node';
-import App, { AppContext } from 'next/app';
+import App from 'next/app';
 import { ThemeProvider } from 'styled-components';
-import { getBaseURL } from '@mcansh/next-now-base-url';
 import { NProgress } from '@mcansh/next-nprogress';
 
 import Meta from '~/components/meta';
@@ -18,18 +17,6 @@ Sentry.init({
 });
 
 export default class MyApp extends App<{ baseURL: string }> {
-  public static getInitialProps = async ({ Component, ctx }: AppContext) => {
-    let pageProps = {};
-
-    if (Component.getInitialProps) {
-      pageProps = await Component.getInitialProps(ctx);
-    }
-
-    const baseURL = getBaseURL(ctx.req);
-
-    return { pageProps, baseURL };
-  };
-
   public componentDidCatch(error: Error, errorInfo: React.ErrorInfo) {
     Sentry.withScope(scope => {
       scope.setExtras(errorInfo);
@@ -66,7 +53,7 @@ export default class MyApp extends App<{ baseURL: string }> {
   public render() {
     const { Component, pageProps, baseURL } = this.props;
     return (
-      <BaseUrlProvider baseUrl={baseURL}>
+      <BaseUrlProvider baseUrl={baseURL ?? '_'}>
         <ThemeProvider theme={theme}>
           <Meta />
           <GlobalStyle />
