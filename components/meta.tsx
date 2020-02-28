@@ -39,24 +39,20 @@ const Meta = () => {
         name="viewport"
         content="width=device-width, initial-scale=1, user-scalable=0, viewport-fit=cover"
       />
-      <meta property="og:ttl" content="600" />
-      <meta key="og:site_name" property="og:site_name" content={title} />
-      <meta property="twitter:site" content="@loganmcansh" />
+      <meta name="og:ttl" content="600" />
+      <meta key="og:site_name" name="og:site_name" content={title} />
+      <meta name="twitter:site" content="@loganmcansh" />
       <meta name="twitter:description" content={description} />
-      <meta property="twitter:card" content="summary" />
-      <meta
-        key="og:description"
-        property="og:description"
-        content={description}
-      />
-      <meta key="og:title" property="og:title" content={title} />
-      <meta property="twitter:title" content="loganmcansh" />
-      <meta property="twitter:image" content={`${baseURL}/icon.png`} />
-      <meta property="og:type" content="website" />
-      <meta property="og:url" content={`${baseURL}${asPath}`} />
-      <meta property="og:image" content={`${baseURL}/icon.png`} />
-      <meta property="og:image:width" content="256" />
-      <meta property="og:image:height" content="256" />
+      <meta name="twitter:card" content="summary" />
+      <meta key="og:description" name="og:description" content={description} />
+      <meta key="og:title" name="og:title" content={title} />
+      <meta name="twitter:title" content="loganmcansh" />
+      <meta name="twitter:image" content={`${baseURL}/icon.png`} />
+      <meta name="og:type" content="website" />
+      <meta name="og:url" content={`${baseURL}${asPath}`} />
+      <meta name="og:image" content={`${baseURL}/icon.png`} />
+      <meta name="og:image:width" content="256" />
+      <meta name="og:image:height" content="256" />
       <link
         rel="apple-touch-icon"
         sizes="57x57"
