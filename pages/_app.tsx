@@ -16,7 +16,7 @@ Sentry.init({
   environment: process.env.NODE_ENV,
 });
 
-export default class MyApp extends App<{ baseURL: string }> {
+export default class MyApp extends App {
   public componentDidCatch(error: Error, errorInfo: React.ErrorInfo) {
     Sentry.withScope(scope => {
       scope.setExtras(errorInfo);
@@ -51,9 +51,9 @@ export default class MyApp extends App<{ baseURL: string }> {
   }
 
   public render() {
-    const { Component, pageProps, baseURL } = this.props;
+    const { Component, pageProps } = this.props;
     return (
-      <BaseUrlProvider baseUrl={baseURL ?? '_'}>
+      <BaseUrlProvider baseUrl="https://reddit.loganmcansh.com">
         <ThemeProvider theme={theme}>
           <Meta />
           <GlobalStyle />

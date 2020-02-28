@@ -7,7 +7,7 @@ import { getFirstParam } from '~/utils/get-first-param';
 const manifest = (req: NextApiRequest, res: NextApiResponse) => {
   const { path, ...query } = req.query;
   const startUrl = format({
-    pathname: getFirstParam(path) || '.',
+    pathname: getFirstParam(path) || '/',
     query: {
       ...query,
       homescreen: 1,

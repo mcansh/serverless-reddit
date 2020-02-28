@@ -5,6 +5,8 @@ const withOffline = require('next-offline');
 
 const pkgJSON = require('./package.json');
 
+const isProduction = process.env.NODE_ENV === 'production';
+
 const nextConfig = {
   // next-offline
   dontAutoRegisterSw: true,
@@ -34,8 +36,46 @@ const nextConfig = {
   },
   experimental: {
     modern: true,
-    pages404: true,
-    polyfillsOptimization: true,
+    rewrites: () => [
+      { source: '/manifest.json', destination: '/api/manifest' },
+      { source: '/manifest.webmanifest', destination: '/api/manifest' },
+      { source: '/sw.js', destination: '/_next/static/sw.js' },
+    ],
+    headers: () =>
+      [
+        {
+          source: '/(manifest.json|manifest.webmanifest)',
+          headers: [
+            { key: 'Content-Type', value: 'application/manifest+json' },
+            isProduction && {
+              key: 'Cache-Control',
+              value: 'public, max-age=43200, immutable',
+            },
+          ].filter(Boolean),
+        },
+        {
+          source: '/logos/:path*',
+          headers: [
+            isProduction && {
+              key: 'Cache-Control',
+              value: 's-maxage=31536000, maxage=0',
+            },
+          ].filter(Boolean),
+        },
+        isProduction && {
+          source: '/static/:path*',
+          headers: [
+            { key: 'Cache-Control', value: 's-maxage=31536000, maxage=0' },
+          ],
+        },
+        {
+          source: '/sw.js',
+          headers: [
+            { key: 'Cache-Control', value: 'max-age=0' },
+            { key: 'Service-Worker-Allowed', value: '/' },
+          ],
+        },
+      ].filter(Boolean),
   },
   webpack: (config, { isServer, buildId, webpack }) => {
     config.resolve.alias['~'] = path.resolve('./');

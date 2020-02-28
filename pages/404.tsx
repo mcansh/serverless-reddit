@@ -25,12 +25,16 @@ const Container = styled.div`
 const images = ['a', 'b', 'c', 'd', 'e'];
 
 const NotFound: NextPage = () => {
-  const random404 = images[Math.floor(Math.random() * images.length)];
+  const [image, setImage] = React.useState<string>('e');
+
+  React.useEffect(() => {
+    setImage(images[Math.floor(Math.random() * images.length)]);
+  }, []);
 
   return (
     <Container>
       <SimpleImg
-        src={`/static/img/404/reddit404${random404}.png`}
+        src={`/static/img/404/reddit404${image}.png`}
         width={500}
         height={448}
         placeholder="var(--background-color)"
