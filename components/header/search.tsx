@@ -2,6 +2,7 @@ import React from 'react';
 import Router, { useRouter } from 'next/router';
 import { useAmp } from 'next/amp';
 import { RequireExactlyOne } from 'type-fest';
+import Head from 'next/head';
 
 import { feeds } from '~/constants';
 
@@ -24,12 +25,14 @@ const Form = () => {
       <AmpWrap
         ampOnly={
           <>
-            <script
-              async
-              key="amp-form"
-              custom-element="amp-form"
-              src="https://cdn.ampproject.org/v0/amp-form-0.1.js"
-            />
+            <Head>
+              <script
+                async
+                key="amp-form"
+                custom-element="amp-form"
+                src="https://cdn.ampproject.org/v0/amp-form-0.1.js"
+              />
+            </Head>
             <form>
               <input
                 name="fetchFeed"
