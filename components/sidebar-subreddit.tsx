@@ -25,7 +25,7 @@ const SidebarSubreddit = ({ subreddit }: Props) => {
             className="section__list-item-icon section__list-item-icon_image"
             alt={subreddit}
             src={`/static/img/subreddits/${subreddit}.png`}
-            fallback
+            fallback=""
             layout="responsive"
             height={20}
             width={20}

@@ -194,7 +194,7 @@ const Header = () => {
                 height={30}
                 src="/static/img/evilrabbit_.jpeg"
                 className="header__avatar"
-                fallback
+                fallback=""
                 layout="responsive"
               />
             </amp-img>

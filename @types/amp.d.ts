@@ -4,7 +4,7 @@ declare namespace JSX {
       React.ImgHTMLAttributes<HTMLImageElement>,
       HTMLImageElement
     > {
-    fallback?: boolean;
+    fallback?: '';
     layout?:
       | 'fill'
       | 'fixed'
