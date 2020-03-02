@@ -110,7 +110,7 @@ const nextConfig = {
       new webpack.DefinePlugin({
         'process.env.BUILD_ID': JSON.stringify(buildId),
         'process.env.SENTRY_RELEASE': JSON.stringify(
-          `reddit@${pkgJSON.VERSION}_${buildId}`
+          `reddit@${pkgJSON.version}_${buildId}`
         ),
       })
     );
