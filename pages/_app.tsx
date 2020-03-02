@@ -1,32 +1,31 @@
 /* eslint-disable no-console */
 import React from 'react';
 import * as Sentry from '@sentry/node';
-import App from 'next/app';
+import { AppProps } from 'next/app';
 import { ThemeProvider } from 'styled-components';
 import { NProgress } from '@mcansh/next-nprogress';
+import ErrorBoundary from 'react-error-boundary';
+import dynamic from 'next/dynamic';
 
 import Meta from '~/components/meta';
 import GlobalStyle from '~/components/global-style';
 import theme from '~/theme';
 import { BaseUrlProvider } from '~/components/base-url-context';
+import { useServiceWorker } from '~/hooks/use-service-worker';
+
+const NextError = dynamic(() => import('next/error'));
 
 Sentry.init({
   dsn: process.env.SENTRY_DSN,
   release: process.env.SENTRY_RELEASE,
   environment: process.env.NODE_ENV,
+  enabled: process.env.NODE_ENV === 'production',
 });
 
-export default class MyApp extends App {
-  public componentDidCatch(error: Error, errorInfo: React.ErrorInfo) {
-    Sentry.withScope(scope => {
-      scope.setExtras(errorInfo);
-      Sentry.captureException(error);
-    });
+const App: React.FC<AppProps> = ({ Component, pageProps }) => {
+  useServiceWorker();
 
-    super.componentDidCatch(error, errorInfo);
-  }
-
-  public componentDidMount() {
+  React.useEffect(() => {
     const messages = [
       `Version: ${process.env.VERSION}`,
       `Next.js buildId: ${process.env.BUILD_ID}`,
@@ -34,33 +33,33 @@ export default class MyApp extends App {
     ];
 
     messages.forEach(m => console.log(m));
+  }, []);
 
-    if (
-      process.env.NODE_ENV === 'production' &&
-      typeof window !== 'undefined' &&
-      'serviceWorker' in navigator
-    ) {
-      navigator.serviceWorker
-        .register('/sw.js')
-        .catch(() =>
-          console.error(
-            'Something went wrong when registering the service worker'
-          )
-        );
-    }
-  }
-
-  public render() {
-    const { Component, pageProps } = this.props;
-    return (
+  return (
+    <ErrorBoundary
+      onError={error => {
+        Sentry.captureException(error);
+      }}
+      FallbackComponent={() => <NextError statusCode={500} />}
+    >
       <BaseUrlProvider baseUrl="https://reddit.loganmcansh.com">
         <ThemeProvider theme={theme}>
           <Meta />
           <GlobalStyle />
           <NProgress color="#FF4500" showAfterMs={600} />
+          <button
+            css={{ position: 'absolute', top: '50%', left: '50%', zIndex: 999 }}
+            onClick={() => {
+              throw new Error('lol');
+            }}
+          >
+            nice
+          </button>
           <Component {...pageProps} />
         </ThemeProvider>
       </BaseUrlProvider>
-    );
-  }
-}
+    </ErrorBoundary>
+  );
+};
+
+export default App;

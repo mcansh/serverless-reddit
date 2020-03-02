@@ -39,7 +39,10 @@ const nextConfig = {
     rewrites: () => [
       { source: '/manifest.json', destination: '/api/manifest' },
       { source: '/manifest.webmanifest', destination: '/api/manifest' },
-      { source: '/sw.js', destination: '/_next/static/sw.js' },
+      {
+        source: '/sw.js',
+        destination: isProduction ? '/_next/static/sw.js' : '/dummy-sw.js',
+      },
     ],
     headers: () =>
       [
