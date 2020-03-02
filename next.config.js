@@ -26,7 +26,7 @@ const nextConfig = {
 
   // next config
   crossOrigin: 'anonymous',
-  target: 'serverless',
+  target: 'experimental-serverless-trace',
   env: {
     SENTRY_DSN: 'https://3adaab30151b41069d006c7631a1df0d@sentry.io/1352474',
     VERSION: pkgJSON.version,
