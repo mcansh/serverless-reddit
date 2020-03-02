@@ -47,14 +47,6 @@ const App: React.FC<AppProps> = ({ Component, pageProps }) => {
           <Meta />
           <GlobalStyle />
           <NProgress color="#FF4500" showAfterMs={600} />
-          <button
-            css={{ position: 'absolute', top: '50%', left: '50%', zIndex: 999 }}
-            onClick={() => {
-              throw new Error('lol');
-            }}
-          >
-            nice
-          </button>
           <Component {...pageProps} />
         </ThemeProvider>
       </BaseUrlProvider>
