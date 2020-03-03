@@ -2,7 +2,7 @@
   "name": "reddit",
   "description": "a serverless now lambda reddit client",
   "version": "1.8.0",
-  "main": "index.js",
+  "main": "n/a",
   "author": "Logan McAnsh <logan@mcan.sh> (https://mcan.sh)",
   "license": "MIT",
   "engines": {
@@ -13,9 +13,9 @@
     "dev": "next dev -p 4000",
     "build": "next build",
     "start": "next start -p 4000",
-    "type-check": "tsc",
-    "lint": "eslint . --ext \".js,.ts,.tsx\"",
     "format": "prettier --write \"**/*.+(js|jsx|json|yml|yaml|css|less|scss|ts|tsx|md|graphql|mdx)\"",
+    "lint": "eslint . --ext \".js,.ts,.tsx\"",
+    "type-check": "tsc",
     "validate": "npm-run-all --parallel lint format type-check"
   },
   "dependencies": {
@@ -31,10 +31,13 @@
     "next": "9.3.6",
     "next-offline": "5.0.2",
     "polished": "3.6.2",
-    "react": "16.13.1",
-    "react-dom": "16.13.1",
+    "preact": "10.3.3",
+    "preact-render-to-string": "5.1.4",
+    "react": "github:preact-compat/react#1.0.0",
+    "react-dom": "github:preact-compat/react-dom#1.0.0",
     "react-error-boundary": "2.2.1",
     "react-simple-img": "2.3.9",
+    "react-ssr-prepass": "npm:preact-ssr-prepass@1.0.1",
     "styled-components": "5.1.0",
     "type-fest": "0.13.1"
   },

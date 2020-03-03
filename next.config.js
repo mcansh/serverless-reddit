@@ -38,6 +38,7 @@ const nextConfig = {
   },
   experimental: {
     modern: true,
+    polyfillsOptimization: true,
     rewrites: () => [
       { source: '/manifest.json', destination: '/api/manifest' },
       { source: '/manifest.webmanifest', destination: '/api/manifest' },
@@ -84,6 +85,24 @@ const nextConfig = {
   },
   webpack: (config, { isServer, buildId, webpack }) => {
     config.resolve.alias['~'] = path.resolve('./');
+
+    // start preact
+    const splitChunks = config.optimization && config.optimization.splitChunks;
+    if (splitChunks) {
+      const cacheGroups = splitChunks.cacheGroups;
+      const preactModules = /[\\/]node_modules[\\/](preact|preact-render-to-string|preact-context-provider)[\\/]/;
+      if (cacheGroups.framework) {
+        cacheGroups.preact = { ...cacheGroups.framework, test: preactModules };
+        cacheGroups.commons.name = 'framework';
+      } else {
+        cacheGroups.preact = {
+          name: 'commons',
+          chunks: 'all',
+          test: preactModules,
+        };
+      }
+    }
+    // end preact
 
     if (!isServer) {
       config.resolve.alias['@sentry/node'] = '@sentry/browser';
