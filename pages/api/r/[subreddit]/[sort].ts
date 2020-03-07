@@ -3,13 +3,13 @@ import { format } from 'url';
 import { NextApiRequest, NextApiResponse } from 'next';
 import got from 'got';
 
-import { getFirstParam } from '~/utils/get-first-param';
+import { getFirstParams } from '~/utils/get-first-param';
 import { feeds } from '~/constants';
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
-  const { subreddit, sort, ...query } = req.query;
+  const { subreddit, sort, ...query } = getFirstParams(req.query);
 
-  if (!feeds.includes(getFirstParam(sort))) {
+  if (!feeds.includes(sort)) {
     return res
       .status(400)
       .json({ message: `'${sort}' is not a valid sort option` });

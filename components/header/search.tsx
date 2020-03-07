@@ -52,6 +52,14 @@ const Form = () => {
             onSubmit={event => {
               event.preventDefault();
               const fetchFeed = event.currentTarget.fetchFeed.value;
+
+              if (fetchFeed.includes('/')) {
+                // eslint-disable-next-line no-alert
+                return alert(
+                  `We don't currently support subreddits with "/" in them, if you'd like to contribute, open a PR ${process.env.REPO}`
+                );
+              }
+
               if (!fetchFeed) {
                 return Router.push({ pathname: '/', query });
               }
