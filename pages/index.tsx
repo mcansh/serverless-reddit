@@ -56,7 +56,7 @@ const Index: NextPage<Props> = ({ data, subreddit, about }) => {
       <SubredditAboutProvider value={about}>
         <Header />
         <div className="main">
-          <Sidebar activeSubreddit={subreddit || ''} />
+          <Sidebar activeSubreddit={subreddit ?? ''} />
           {posts.length ? (
             <div className="feed">
               {posts.map(post => (
