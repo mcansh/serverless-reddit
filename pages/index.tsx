@@ -87,32 +87,33 @@ const Index: NextPage<Props> = ({ data, subreddit, about }) => {
   );
 };
 
-const getServerSideProps: GetServerSideProps = async ({ query, req }) => {
+const getServerSideProps: GetServerSideProps = async ({ query }) => {
   const { default: fetch } = await import('isomorphic-unfetch');
-  const { getBaseURL } = await import('@mcansh/next-now-base-url');
   const { getFirstParams } = await import('~/utils/get-first-param');
   const { format } = await import('url');
 
   const { subreddit, sort } = getFirstParams(query);
 
-  const baseURL = getBaseURL(req);
-
   const pathname = format({
+    protocol: 'https',
+    host: 'reddit.com',
     pathname:
       subreddit && sort
-        ? `api/r/${subreddit}/${sort}`
+        ? `r/${subreddit}/${sort}.json`
         : subreddit
-        ? `api/r/${subreddit}`
-        : 'api/r',
-    query,
+        ? `r/${subreddit}.json`
+        : '.json',
   });
 
-  const promises = [fetch(`${baseURL}/${pathname}?`).then(r => r.json())];
+  const promises = [fetch(pathname).then(r => r.json())];
 
   if (subreddit) {
-    promises.push(
-      fetch(`${baseURL}/api/r/${subreddit}/about`).then(r => r.json())
-    );
+    const aboutPathname = format({
+      protocol: 'https',
+      host: 'reddit.com',
+      pathname: `r/${subreddit}/about.json`,
+    });
+    promises.push(fetch(aboutPathname).then(r => r.json()));
   }
 
   const [subredditData, subredditAboutData] = await Promise.all(promises);
