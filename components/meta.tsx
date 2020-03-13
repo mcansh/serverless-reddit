@@ -13,6 +13,8 @@ const Meta = () => {
 
   const { pathname } = parse(asPath);
 
+  const canonical = `https://reddit.com${pathname}`;
+
   const manifestStartUrl = format({
     query: {
       path: pathname,
@@ -139,6 +141,7 @@ const Meta = () => {
         name="apple-mobile-web-app-status-bar-style"
         content="black-translucent"
       />
+      <link rel="canonical" href={canonical} />
     </Head>
   );
 };
