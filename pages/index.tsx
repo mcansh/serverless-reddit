@@ -7,6 +7,7 @@ import Post from '~/components/post';
 import { Subreddit, SubredditAbout } from '~/@types/Post';
 import Header from '~/components/header';
 import { SubredditAboutProvider } from '~/components/subreddit-context';
+import Meta from '~/components/meta';
 
 const config = {
   amp: 'hybrid',
@@ -54,6 +55,7 @@ const Index: NextPage<Props> = ({ data, subreddit, about }) => {
   return (
     <App>
       <SubredditAboutProvider value={about}>
+        <Meta />
         <Header />
         <div className="main">
           <Sidebar activeSubreddit={subreddit ?? ''} />
