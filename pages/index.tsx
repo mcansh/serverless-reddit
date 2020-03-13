@@ -119,8 +119,8 @@ const getServerSideProps: GetServerSideProps = async ({ query }) => {
     props: {
       data: subredditData,
       sort,
-      subreddit,
-      about: subredditAboutData,
+      subreddit: subreddit ?? '',
+      about: subredditAboutData ?? {},
     },
   };
 };
