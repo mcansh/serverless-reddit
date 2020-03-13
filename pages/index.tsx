@@ -92,17 +92,12 @@ const getServerSideProps: GetServerSideProps = async ({ query }) => {
   const { getFirstParams } = await import('~/utils/get-first-param');
   const { format } = await import('url');
 
-  const { subreddit, sort } = getFirstParams(query);
+  const { subreddit, sort = 'hot' } = getFirstParams(query);
 
   const pathname = format({
     protocol: 'https',
     host: 'reddit.com',
-    pathname:
-      subreddit && sort
-        ? `r/${subreddit}/${sort}.json`
-        : subreddit
-        ? `r/${subreddit}.json`
-        : '.json',
+    pathname: subreddit ? `r/${subreddit}/${sort}.json` : '.json',
   });
 
   const promises = [fetch(pathname).then(r => r.json())];
