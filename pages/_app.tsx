@@ -12,7 +12,6 @@ import Router from 'next/router';
 import Meta from '~/components/meta';
 import GlobalStyle from '~/components/global-style';
 import theme from '~/theme';
-import { BaseUrlProvider } from '~/components/base-url-context';
 import { useServiceWorker } from '~/hooks/use-service-worker';
 
 const NextError = dynamic(() => import('next/error'));
@@ -56,14 +55,12 @@ const App: React.FC<AppProps> = ({ Component, pageProps }) => {
       }}
       FallbackComponent={() => <NextError statusCode={500} />}
     >
-      <BaseUrlProvider baseUrl="https://reddit.loganmcansh.com">
-        <ThemeProvider theme={theme}>
-          <Meta />
-          <GlobalStyle />
-          <NProgress color="#FF4500" showAfterMs={600} />
-          <Component {...pageProps} />
-        </ThemeProvider>
-      </BaseUrlProvider>
+      <ThemeProvider theme={theme}>
+        <Meta />
+        <GlobalStyle />
+        <NProgress color="#FF4500" showAfterMs={600} />
+        <Component {...pageProps} />
+      </ThemeProvider>
     </ErrorBoundary>
   );
 };

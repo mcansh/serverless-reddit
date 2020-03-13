@@ -34,6 +34,7 @@ const nextConfig = {
     REPO: `https://github.com/${pkgJSON.repository}`,
     API_BASE: 'https://www.reddit.com',
     FATHOM_SITE_ID: 'UKNZVXBD',
+    BASE_URL: 'https://reddit.loganmcansh.com',
   },
   experimental: {
     modern: true,
