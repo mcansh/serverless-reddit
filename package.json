@@ -26,6 +26,7 @@
     "@sentry/node": "5.13.1",
     "@svgr/webpack": "5.2.0",
     "clsx": "1.1.0",
+    "fathom-client": "2.0.2",
     "got": "10.6.0",
     "isomorphic-unfetch": "3.0.0",
     "next": "9.2.3-canary.20",

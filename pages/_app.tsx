@@ -6,6 +6,8 @@ import { ThemeProvider } from 'styled-components';
 import { NProgress } from '@mcansh/next-nprogress';
 import ErrorBoundary from 'react-error-boundary';
 import dynamic from 'next/dynamic';
+import * as Fathom from 'fathom-client';
+import Router from 'next/router';
 
 import Meta from '~/components/meta';
 import GlobalStyle from '~/components/global-style';
@@ -14,6 +16,10 @@ import { BaseUrlProvider } from '~/components/base-url-context';
 import { useServiceWorker } from '~/hooks/use-service-worker';
 
 const NextError = dynamic(() => import('next/error'));
+
+Router.events.on('routeChangeComplete', () => {
+  Fathom.trackPageview();
+});
 
 Sentry.init({
   dsn: process.env.SENTRY_DSN,
@@ -24,6 +30,14 @@ Sentry.init({
 
 const App: React.FC<AppProps> = ({ Component, pageProps }) => {
   useServiceWorker();
+
+  React.useEffect(() => {
+    if (process.env.NODE_ENV === 'production') {
+      Fathom.load();
+      Fathom.setSiteId(process.env.FATHOM_SITE_ID);
+      Fathom.trackPageview();
+    }
+  }, []);
 
   React.useEffect(() => {
     const messages = [

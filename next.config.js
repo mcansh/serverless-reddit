@@ -33,6 +33,7 @@ const nextConfig = {
     DESCRIPTION: pkgJSON.description,
     REPO: `https://github.com/${pkgJSON.repository}`,
     API_BASE: 'https://www.reddit.com',
+    FATHOM_SITE_ID: 'UKNZVXBD',
   },
   experimental: {
     modern: true,

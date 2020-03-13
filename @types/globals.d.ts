@@ -10,5 +10,6 @@ declare namespace NodeJS {
     readonly API_BASE: string;
     readonly BUILD_ID: string;
     readonly SENTRY_RELEASE: string;
+    readonly FATHOM_SITE_ID: string;
   }
 }
