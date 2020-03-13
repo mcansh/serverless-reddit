@@ -3,6 +3,8 @@ import { NextPage } from 'next';
 import { SimpleImg } from 'react-simple-img';
 import styled from 'styled-components';
 
+import Meta from '~/components/meta';
+
 const Container = styled.div`
   text-align: center;
   height: 100%;
@@ -33,6 +35,7 @@ const NotFound: NextPage = () => {
 
   return (
     <Container>
+      <Meta />
       <SimpleImg
         src={`/static/img/404/reddit404${image}.png`}
         width={500}

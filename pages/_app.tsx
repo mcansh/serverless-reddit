@@ -9,7 +9,6 @@ import dynamic from 'next/dynamic';
 import * as Fathom from 'fathom-client';
 import Router from 'next/router';
 
-import Meta from '~/components/meta';
 import GlobalStyle from '~/components/global-style';
 import theme from '~/theme';
 import { useServiceWorker } from '~/hooks/use-service-worker';
@@ -56,7 +55,6 @@ const App: React.FC<AppProps> = ({ Component, pageProps }) => {
       FallbackComponent={() => <NextError statusCode={500} />}
     >
       <ThemeProvider theme={theme}>
-        <Meta />
         <GlobalStyle />
         <NProgress color="#FF4500" showAfterMs={600} />
         <Component {...pageProps} />
