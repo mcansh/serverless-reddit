@@ -121,6 +121,7 @@ const PostStyles = styled(StyledLink).attrs({
     font-size: 12px;
     color: #0076ff;
     display: none;
+    ${ellipsis()};
   }
 
   .feed-item__meta {
