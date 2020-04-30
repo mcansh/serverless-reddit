@@ -75,39 +75,41 @@ const Form = () => {
               placeholder="Enter a Subreddit..."
               defaultValue={subreddit}
             />
-            <select
-              css={`
-                appearance: none;
-                background: var(--background-color);
-                border: 1px solid var(--background-color);
-                box-sizing: border-box;
-                border-radius: 5px;
-                padding: 0 10px;
-                font-size: 14px;
-                height: 40px;
-                color: var(--default);
-                outline: none;
-                margin-left: 1rem;
-                &:hover,
-                &:focus {
-                  border-color: var(--search-border);
-                }
-              `}
-              value={sort}
-              onChange={event => {
-                const { value } = event.target;
-                Router.push(
-                  { pathname: '/r/[subreddit]/[sort]', query },
-                  { pathname: `/r/${subreddit}/${value}`, query }
-                );
-              }}
-            >
-              {feeds.map(feed => (
-                <option key={feed} value={feed}>
-                  {feed}
-                </option>
-              ))}
-            </select>
+            {subreddit && (
+              <select
+                css={`
+                  appearance: none;
+                  background: var(--background-color);
+                  border: 1px solid var(--background-color);
+                  box-sizing: border-box;
+                  border-radius: 5px;
+                  padding: 0 10px;
+                  font-size: 14px;
+                  height: 40px;
+                  color: var(--default);
+                  outline: none;
+                  margin-left: 1rem;
+                  &:hover,
+                  &:focus {
+                    border-color: var(--search-border);
+                  }
+                `}
+                value={sort}
+                onChange={event => {
+                  const { value } = event.target;
+                  Router.push(
+                    { pathname: '/r/[subreddit]/[sort]', query },
+                    { pathname: `/r/${subreddit}/${value}`, query }
+                  );
+                }}
+              >
+                {feeds.map(feed => (
+                  <option key={feed} value={feed}>
+                    {feed}
+                  </option>
+                ))}
+              </select>
+            )}
             {sort === 'top' && (
               <select
                 css={`
