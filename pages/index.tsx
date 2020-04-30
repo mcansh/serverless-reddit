@@ -1,6 +1,7 @@
 import React from 'react';
 import { NextPage, GetServerSideProps } from 'next';
 import styled from 'styled-components';
+import fetch from 'isomorphic-unfetch';
 
 import Sidebar from '~/components/sidebar';
 import Post from '~/components/post';
@@ -8,6 +9,7 @@ import { Subreddit, SubredditAbout } from '~/@types/Post';
 import Header from '~/components/header';
 import { SubredditAboutProvider } from '~/components/subreddit-context';
 import Meta from '~/components/meta';
+import { getFirstParams } from '~/utils/get-first-param';
 
 interface Props {
   subreddit?: string;
@@ -85,11 +87,10 @@ const Index: NextPage<Props> = ({ data, subreddit, about }) => {
   );
 };
 
-const getServerSideProps: GetServerSideProps<Props> = async ({ query }) => {
-  const { default: fetch } = await import('isomorphic-unfetch');
-  const { getFirstParams } = await import('~/utils/get-first-param');
-
-  const { subreddit, sort = 'hot' } = getFirstParams(query);
+const getServerSideProps: GetServerSideProps<Props> = async ({
+  params = {},
+}) => {
+  const { subreddit, sort = 'hot' } = getFirstParams(params);
 
   const pathname = subreddit ? `/r/${subreddit}/${sort}.json` : '/.json';
 
