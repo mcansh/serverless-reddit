@@ -56,7 +56,7 @@ const App: React.FC<AppProps> = ({ Component, pageProps }) => {
     >
       <ThemeProvider theme={theme}>
         <GlobalStyle />
-        <NProgress color="#FF4500" showAfterMs={600} />
+        <NProgress color="#FF4500" spinner={false} showAfterMs={600} />
         <Component {...pageProps} />
       </ThemeProvider>
     </ErrorBoundary>
