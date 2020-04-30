@@ -97,20 +97,18 @@ const getServerSideProps: GetServerSideProps = async ({ query }) => {
   const { subreddit, sort = 'hot' } = getFirstParams(query);
 
   const pathname = format({
-    protocol: 'https',
-    host: 'reddit.com',
     pathname: subreddit ? `r/${subreddit}/${sort}.json` : '.json',
   });
 
-  const promises = [fetch(pathname).then(r => r.json())];
+  const promises = [fetch(process.env.API_BASE + pathname).then(r => r.json())];
 
   if (subreddit) {
     const aboutPathname = format({
-      protocol: 'https',
-      host: 'reddit.com',
       pathname: `r/${subreddit}/about.json`,
     });
-    promises.push(fetch(aboutPathname).then(r => r.json()));
+    promises.push(
+      fetch(process.env.API_BASE + aboutPathname).then(r => r.json())
+    );
   }
 
   const [subredditData, subredditAboutData] = await Promise.all(promises);

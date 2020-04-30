@@ -13,7 +13,7 @@ const Meta = () => {
 
   const { pathname } = parse(asPath);
 
-  const canonical = `https://reddit.com${pathname}`;
+  const canonical = `${process.env.API_BASE}${pathname}`;
 
   const manifestStartUrl = format({
     query: {
