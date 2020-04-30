@@ -85,7 +85,7 @@ const Index: NextPage<Props> = ({ data, subreddit, about }) => {
   );
 };
 
-const getServerSideProps: GetServerSideProps = async ({ query }) => {
+const getServerSideProps: GetServerSideProps<Props> = async ({ query }) => {
   const { default: fetch } = await import('isomorphic-unfetch');
   const { getFirstParams } = await import('~/utils/get-first-param');
 
