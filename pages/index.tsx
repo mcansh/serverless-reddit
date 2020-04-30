@@ -9,10 +9,6 @@ import Header from '~/components/header';
 import { SubredditAboutProvider } from '~/components/subreddit-context';
 import Meta from '~/components/meta';
 
-const config = {
-  amp: 'hybrid',
-};
-
 interface Props {
   subreddit?: string;
   sort?: string;
@@ -119,4 +115,4 @@ const getServerSideProps: GetServerSideProps = async ({ query }) => {
 };
 
 export default Index;
-export { config, getServerSideProps };
+export { getServerSideProps };

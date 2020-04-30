@@ -1,6 +1,5 @@
 import React from 'react';
 import { useRouter } from 'next/router';
-import { useAmp } from 'next/amp';
 import styled from 'styled-components';
 import Link from 'next/link';
 
@@ -141,12 +140,9 @@ const Header = () => {
     query: { subreddit, sort, t: time, ...query },
   } = useRouter();
 
-  const isAmp = useAmp();
   return (
     <HeaderStyles>
-      <Link
-        href={{ pathname: '/', query: isAmp ? { ...query, amp: '1' } : query }}
-      >
+      <Link href={{ pathname: '/', query }}>
         <a
           aria-label="Reddit"
           className="header__logo-container"
@@ -179,37 +175,16 @@ const Header = () => {
           </div>
         </div>
         <div className="header__avatar-container">
-          {isAmp ? (
-            <amp-img
-              alt="Evil Rabbit"
-              width={30}
-              height={30}
-              src="/static/img/evilrabbit_.webp"
+          <picture>
+            <source srcSet="/static/img/evilrabbit_.webp" type="image/webp" />
+            <source srcSet="/static/img/evilrabbit_.jpeg" type="image/jpeg" />
+            <img
               className="header__avatar"
-              layout="responsive"
-            >
-              <amp-img
-                alt="Evil Rabbit"
-                width={30}
-                height={30}
-                src="/static/img/evilrabbit_.jpeg"
-                className="header__avatar"
-                fallback=""
-                layout="responsive"
-              />
-            </amp-img>
-          ) : (
-            <picture>
-              <source srcSet="/static/img/evilrabbit_.webp" type="image/webp" />
-              <source srcSet="/static/img/evilrabbit_.jpeg" type="image/jpeg" />
-              <img
-                className="header__avatar"
-                alt="Evil Rabbit"
-                src="/static/img/evilrabbit_.jpeg"
-                importance="low"
-              />
-            </picture>
-          )}
+              alt="Evil Rabbit"
+              src="/static/img/evilrabbit_.jpeg"
+              importance="low"
+            />
+          </picture>
         </div>
       </div>
     </HeaderStyles>
