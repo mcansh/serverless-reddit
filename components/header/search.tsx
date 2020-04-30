@@ -5,7 +5,7 @@ import { feeds } from '~/constants';
 
 const Form = () => {
   const {
-    query: { subreddit, sort, t: time, ...query },
+    query: { subreddit = '', sort, t: time, ...query },
   } = useRouter();
 
   return (
