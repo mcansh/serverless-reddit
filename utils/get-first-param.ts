@@ -6,7 +6,7 @@ const getFirstParam = <T>(input: T | T[]) =>
 function getFirstParams(input: ParsedUrlQuery): { [key: string]: string } {
   return Object.entries(input).reduce((acc, [key, values]) => {
     const value = getFirstParam(values);
-    if (value) return acc;
+    if (!value) return acc;
     return { ...acc, [key]: value };
   }, {});
 }
