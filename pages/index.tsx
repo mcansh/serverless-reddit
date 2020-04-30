@@ -92,20 +92,15 @@ const Index: NextPage<Props> = ({ data, subreddit, about }) => {
 const getServerSideProps: GetServerSideProps = async ({ query }) => {
   const { default: fetch } = await import('isomorphic-unfetch');
   const { getFirstParams } = await import('~/utils/get-first-param');
-  const { format } = await import('url');
 
   const { subreddit, sort = 'hot' } = getFirstParams(query);
 
-  const pathname = format({
-    pathname: subreddit ? `r/${subreddit}/${sort}.json` : '.json',
-  });
+  const pathname = subreddit ? `/r/${subreddit}/${sort}.json` : '/.json';
 
   const promises = [fetch(process.env.API_BASE + pathname).then(r => r.json())];
 
   if (subreddit) {
-    const aboutPathname = format({
-      pathname: `r/${subreddit}/about.json`,
-    });
+    const aboutPathname = `/r/${subreddit}/about.json`;
     promises.push(
       fetch(process.env.API_BASE + aboutPathname).then(r => r.json())
     );
