@@ -30,7 +30,11 @@ const Meta = () => {
     query.subreddit ? `${query.subreddit} |` : ''
   } Serverless Reddit`;
 
-  const image = about?.data?.icon_img ?? `${process.env.BASE_URL}/icon.png`;
+  const image = about?.data?.icon_img
+    ? about.data.icon_img
+    : about?.data?.community_icon
+    ? about.data.community_icon
+    : `${process.env.BASE_URL}/icon.png`;
 
   return (
     <Head>

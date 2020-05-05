@@ -1,7 +1,8 @@
 import React from 'react';
-import { NextPage, GetServerSideProps } from 'next';
+import { NextPage, GetStaticProps } from 'next';
 import styled from 'styled-components';
 import fetch from 'isomorphic-unfetch';
+import { useRouter } from 'next/router';
 
 import Sidebar from '~/components/sidebar';
 import Post from '~/components/post';
@@ -10,6 +11,35 @@ import Header from '~/components/header';
 import { SubredditAboutProvider } from '~/components/subreddit-context';
 import Meta from '~/components/meta';
 import { getFirstParams } from '~/utils/get-first-param';
+
+export const getStaticProps: GetStaticProps<Props> = async ({
+  params = {},
+}) => {
+  const { subreddit, sort = 'hot' } = getFirstParams(params);
+
+  const pathname = subreddit ? `/r/${subreddit}/${sort}.json` : '/.json';
+
+  const promises = [fetch(process.env.API_BASE + pathname).then(r => r.json())];
+
+  if (subreddit) {
+    const aboutPathname = `/r/${subreddit}/about.json`;
+    promises.push(
+      fetch(process.env.API_BASE + aboutPathname).then(r => r.json())
+    );
+  }
+
+  const [subredditData, subredditAboutData] = await Promise.all(promises);
+
+  return {
+    unstable_revalidate: 60,
+    props: {
+      data: subredditData,
+      sort,
+      subreddit: subreddit ?? '',
+      about: subredditAboutData ?? {},
+    },
+  };
+};
 
 interface Props {
   subreddit?: string;
@@ -47,8 +77,29 @@ const App = styled.div.attrs({ className: 'App' })`
   }
 `;
 
+const ErrorOrLoading: React.FC = ({ children }) => (
+  <div
+    css={{
+      height: '100%',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      textAlign: 'center',
+      h1: {
+        fontSize: '2.4rem',
+        fontFamily: "'SF Mono', menlo, monospace",
+        color: 'var(--default)',
+      },
+    }}
+  >
+    <h1>{children}</h1>
+  </div>
+);
+
 const Index: NextPage<Props> = ({ data, subreddit, about }) => {
   const posts = data?.data?.children ?? [];
+
+  const { isFallback } = useRouter();
 
   return (
     <App>
@@ -57,29 +108,18 @@ const Index: NextPage<Props> = ({ data, subreddit, about }) => {
         <Header />
         <div className="main">
           <Sidebar activeSubreddit={subreddit ?? ''} />
-          {posts.length ? (
+          {isFallback ? (
+            <ErrorOrLoading>Loading...</ErrorOrLoading>
+          ) : posts.length ? (
             <div className="feed">
               {posts.map(post => (
                 <Post key={post.data.id} post={post.data} />
               ))}
             </div>
           ) : (
-            <div
-              css={{
-                height: '100%',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                textAlign: 'center',
-                h1: {
-                  fontSize: '2.4rem',
-                  fontFamily: "'SF Mono', menlo, monospace",
-                  color: 'var(--default)',
-                },
-              }}
-            >
-              <h1>{data?.message ?? `Sorry "${subreddit}" has no posts`}</h1>
-            </div>
+            <ErrorOrLoading>
+              {data?.message ?? `Sorry "${subreddit}" has no posts`}
+            </ErrorOrLoading>
           )}
         </div>
       </SubredditAboutProvider>
@@ -87,33 +127,4 @@ const Index: NextPage<Props> = ({ data, subreddit, about }) => {
   );
 };
 
-const getServerSideProps: GetServerSideProps<Props> = async ({
-  params = {},
-}) => {
-  const { subreddit, sort = 'hot' } = getFirstParams(params);
-
-  const pathname = subreddit ? `/r/${subreddit}/${sort}.json` : '/.json';
-
-  const promises = [fetch(process.env.API_BASE + pathname).then(r => r.json())];
-
-  if (subreddit) {
-    const aboutPathname = `/r/${subreddit}/about.json`;
-    promises.push(
-      fetch(process.env.API_BASE + aboutPathname).then(r => r.json())
-    );
-  }
-
-  const [subredditData, subredditAboutData] = await Promise.all(promises);
-
-  return {
-    props: {
-      data: subredditData,
-      sort,
-      subreddit: subreddit ?? '',
-      about: subredditAboutData ?? {},
-    },
-  };
-};
-
 export default Index;
-export { getServerSideProps };
