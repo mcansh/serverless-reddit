@@ -2,6 +2,7 @@ import React from 'react';
 import { NextPage, GetStaticProps } from 'next';
 import styled from 'styled-components';
 import fetch from 'isomorphic-unfetch';
+import { useRouter } from 'next/router';
 
 import Sidebar from '~/components/sidebar';
 import Post from '~/components/post';
@@ -98,7 +99,7 @@ const ErrorOrLoading: React.FC = ({ children }) => (
 const Index: NextPage<Props> = ({ data, subreddit, about }) => {
   const posts = data?.data?.children ?? [];
 
-  const loading = !subreddit && posts.length === 0;
+  const { isFallback } = useRouter();
 
   return (
     <App>
@@ -107,7 +108,7 @@ const Index: NextPage<Props> = ({ data, subreddit, about }) => {
         <Header />
         <div className="main">
           <Sidebar activeSubreddit={subreddit ?? ''} />
-          {loading ? (
+          {isFallback ? (
             <ErrorOrLoading>Loading...</ErrorOrLoading>
           ) : posts.length ? (
             <div className="feed">
