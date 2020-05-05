@@ -31,7 +31,7 @@ export const getStaticProps: GetStaticProps<Props> = async ({
   const [subredditData, subredditAboutData] = await Promise.all(promises);
 
   return {
-    unstable_revalidate: 10,
+    unstable_revalidate: 60,
     props: {
       data: subredditData,
       sort,
