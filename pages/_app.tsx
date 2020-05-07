@@ -4,16 +4,14 @@ import * as Sentry from '@sentry/node';
 import { AppProps } from 'next/app';
 import { ThemeProvider } from 'styled-components';
 import { NProgress } from '@mcansh/next-nprogress';
-import ErrorBoundary from 'react-error-boundary';
-import dynamic from 'next/dynamic';
+import { ErrorBoundary } from 'react-error-boundary';
 import * as Fathom from 'fathom-client';
 import Router from 'next/router';
+import NextError from 'next/error';
 
 import GlobalStyle from '~/components/global-style';
 import theme from '~/theme';
 import { useServiceWorker } from '~/hooks/use-service-worker';
-
-const NextError = dynamic(() => import('next/error'));
 
 Router.events.on('routeChangeComplete', () => {
   Fathom.trackPageview();
