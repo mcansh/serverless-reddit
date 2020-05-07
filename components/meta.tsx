@@ -15,12 +15,7 @@ const Meta = () => {
 
   const canonical = `${process.env.API_BASE}${pathname}`;
 
-  const manifestStartUrl = format({
-    query: {
-      path: pathname,
-      ...query,
-    },
-  });
+  const manifestStartUrl = format({ query });
 
   const description = about?.data?.public_description
     ? `${about.data.public_description} | ${process.env.DESCRIPTION}`

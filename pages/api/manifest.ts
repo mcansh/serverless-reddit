@@ -2,12 +2,12 @@ import { format } from 'url';
 
 import { NextApiRequest, NextApiResponse } from 'next';
 
-import { getFirstParam } from '~/utils/get-first-param';
+import { getFirstParams } from '~/utils/get-first-param';
 
 const manifest = (req: NextApiRequest, res: NextApiResponse) => {
-  const { path, ...query } = req.query;
+  const { subreddit, sort = 'hot', ...query } = getFirstParams(req.query);
   const startUrl = format({
-    pathname: getFirstParam(path) || '/',
+    pathname: subreddit ? `/r/${subreddit}/${sort}` : '/',
     query: {
       ...query,
       homescreen: 1,
