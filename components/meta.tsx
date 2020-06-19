@@ -15,15 +15,18 @@ const Meta = () => {
 
   const canonical = `${process.env.API_BASE}${pathname}`;
 
-  const manifestStartUrl = format({ query });
+  const manifestUrl = format({
+    pathname: '/manifest.webmanifest',
+    query,
+  });
 
   const description = about?.data?.public_description
     ? `${about.data.public_description} | ${process.env.DESCRIPTION}`
     : process.env.DESCRIPTION;
 
   const title = `${
-    query.subreddit ? `${query.subreddit} |` : ''
-  } Serverless Reddit`;
+    query.subreddit ? `${query.subreddit} | ` : ''
+  }Serverless Reddit`;
 
   const image = about?.data?.icon_img
     ? about.data.icon_img
@@ -126,10 +129,7 @@ const Meta = () => {
         sizes="16x16"
         href={`${process.env.BASE_URL}/logo/favicon-16x16.png`}
       />
-      <link
-        rel="manifest"
-        href={`${process.env.BASE_URL}/manifest.webmanifest${manifestStartUrl}`}
-      />
+      <link rel="manifest" href={manifestUrl} />
       <meta name="msapplication-TileColor" content="#ffffff" />
       <meta
         name="msapplication-TileImage"
