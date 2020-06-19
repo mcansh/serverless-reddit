@@ -3,6 +3,7 @@ import { parse } from 'url';
 import * as React from 'react';
 import styled from 'styled-components';
 import { ellipsis } from 'polished';
+import { useMedia } from 'react-use';
 
 import StyledLink from './link';
 
@@ -191,22 +192,26 @@ const Post = ({ post }: { post: Props }) => {
   const hasThumbnail =
     post.thumbnail && /^$|self|default|nsfw/.test(post.thumbnail);
 
+  const showThumbnail = useMedia('(min-width: 768px)', false);
+
   const { host: url } = parse(post.url);
   return (
     <PostStyles href={post.url}>
       <div className="feed__feed-item feed-item">
         <div className="feed-item__voting">{post.score}</div>
-        <div
-          className="feed-item__image-container"
-          css={{
-            border: hasThumbnail ? '1px solid #eaeaea' : undefined,
-            backgroundImage: hasThumbnail
-              ? undefined
-              : `url(${post.thumbnail})`,
-          }}
-        >
-          {hasThumbnail && <DefaultThumbnail />}
-        </div>
+        {showThumbnail && (
+          <div
+            className="feed-item__image-container"
+            css={{
+              border: hasThumbnail ? '1px solid #eaeaea' : undefined,
+              backgroundImage: hasThumbnail
+                ? undefined
+                : `url(${post.thumbnail})`,
+            }}
+          >
+            {hasThumbnail && <DefaultThumbnail />}
+          </div>
+        )}
         <div className="feed-item__info">
           <div className="feed-item__header">
             <h2 className="feed-item__heading" title={post.title}>

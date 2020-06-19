@@ -3,6 +3,7 @@ import { NextPage, GetStaticProps } from 'next';
 import styled from 'styled-components';
 import fetch from 'isomorphic-unfetch';
 import { useRouter } from 'next/router';
+import { useMedia } from 'react-use';
 
 import Sidebar from '~/components/sidebar';
 import Post from '~/components/post';
@@ -101,13 +102,15 @@ const Index: NextPage<Props> = ({ data, subreddit, about }) => {
 
   const { isFallback } = useRouter();
 
+  const showSideBar = useMedia('(min-width: 1024px)', false);
+
   return (
     <App>
       <SubredditAboutProvider value={about}>
         <Meta />
         <Header />
         <div className="main">
-          <Sidebar activeSubreddit={subreddit ?? ''} />
+          {showSideBar && <Sidebar activeSubreddit={subreddit ?? ''} />}
           {isFallback ? (
             <ErrorOrLoading>Loading...</ErrorOrLoading>
           ) : posts.length ? (
