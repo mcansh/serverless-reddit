@@ -29,9 +29,9 @@ const App: React.FC<AppProps> = ({ Component, pageProps }) => {
 
   React.useEffect(() => {
     if (process.env.NODE_ENV === 'production') {
-      Fathom.load();
-      Fathom.setSiteId(process.env.FATHOM_SITE_ID);
-      Fathom.trackPageview();
+      Fathom.load(process.env.FATHOM_SITE_ID, {
+        excludedDomains: ['localhost'],
+      });
     }
   }, []);
 
