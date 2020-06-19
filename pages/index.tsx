@@ -4,14 +4,16 @@ import styled from 'styled-components';
 import fetch from 'isomorphic-unfetch';
 import { useRouter } from 'next/router';
 import { useMedia } from 'react-use';
+import dynamic from 'next/dynamic';
 
-import Sidebar from '~/components/sidebar';
 import Post from '~/components/post';
 import { Subreddit, SubredditAbout } from '~/@types/Post';
 import Header from '~/components/header';
 import { SubredditAboutProvider } from '~/components/subreddit-context';
 import Meta from '~/components/meta';
 import { getFirstParams } from '~/utils/get-first-param';
+
+const SideBar = dynamic(() => import('~/components/sidebar'));
 
 export const getStaticProps: GetStaticProps<Props> = async ({
   params = {},
@@ -110,7 +112,7 @@ const Index: NextPage<Props> = ({ data, subreddit, about }) => {
         <Meta />
         <Header />
         <div className="main">
-          {showSideBar && <Sidebar activeSubreddit={subreddit ?? ''} />}
+          {showSideBar && <SideBar activeSubreddit={subreddit ?? ''} />}
           {isFallback ? (
             <ErrorOrLoading>Loading...</ErrorOrLoading>
           ) : posts.length ? (
