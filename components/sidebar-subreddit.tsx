@@ -1,5 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
+import { SimpleImg } from 'react-simple-img';
 
 import StyledLink from './link';
 
@@ -18,11 +19,14 @@ const SidebarSubreddit = ({ subreddit }: Props) => (
         srcSet={`/static/img/subreddits/${subreddit}.png`}
         type="image/png"
       />
-      <img
+      <SimpleImg
         className="section__list-item-icon section__list-item-icon_image"
         alt={subreddit}
         src={`/static/img/subreddits/${subreddit}.png`}
         importance="low"
+        height={20}
+        width={20}
+        style={{ display: 'inline-block' }}
       />
     </picture>
     <Link href="/r/[subreddit]" as={`/r/${subreddit}`} passHref>

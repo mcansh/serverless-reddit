@@ -3,6 +3,7 @@ import { parse } from 'url';
 import * as React from 'react';
 import styled from 'styled-components';
 import { ellipsis } from 'polished';
+import { SimpleImg } from 'react-simple-img';
 
 import StyledLink from './link';
 
@@ -188,7 +189,7 @@ const PostStyles = styled(StyledLink).attrs({
 `;
 
 const Post = ({ post }: { post: Props }) => {
-  const hasThumbnail =
+  const hasNoThumbnail =
     post.thumbnail && /^$|self|default|nsfw/.test(post.thumbnail);
 
   const { host: url } = parse(post.url);
@@ -199,13 +200,19 @@ const Post = ({ post }: { post: Props }) => {
         <div
           className="feed-item__image-container"
           css={{
-            border: hasThumbnail ? '1px solid #eaeaea' : undefined,
-            backgroundImage: hasThumbnail
-              ? undefined
-              : `url(${post.thumbnail})`,
+            border: hasNoThumbnail ? '1px solid #eaeaea' : undefined,
           }}
         >
-          {hasThumbnail && <DefaultThumbnail />}
+          {hasNoThumbnail ? (
+            <DefaultThumbnail />
+          ) : (
+            <SimpleImg
+              width={70}
+              height={70}
+              src={post.thumbnail}
+              alt={post.title}
+            />
+          )}
         </div>
         <div className="feed-item__info">
           <div className="feed-item__header">
