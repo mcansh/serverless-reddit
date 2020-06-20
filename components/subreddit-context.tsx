@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { SubredditAbout } from '~/@types/Post';
+import { SubredditAbout } from '~/@types/post';
 
 const SubredditAboutContext = React.createContext<SubredditAbout | undefined>(
   undefined

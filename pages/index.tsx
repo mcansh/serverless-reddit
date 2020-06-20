@@ -6,7 +6,7 @@ import { useRouter } from 'next/router';
 
 import Sidebar from '~/components/sidebar';
 import Post from '~/components/post';
-import { Subreddit, SubredditAbout } from '~/@types/Post';
+import { Subreddit, SubredditAbout } from '~/@types/post';
 import Header from '~/components/header';
 import { SubredditAboutProvider } from '~/components/subreddit-context';
 import Meta from '~/components/meta';
