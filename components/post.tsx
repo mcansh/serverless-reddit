@@ -91,6 +91,7 @@ const PostStyles = styled(StyledLink).attrs({
     background-size: cover;
     background-repeat: no-repeat;
     background-color: var(--secondary-background-color);
+    overflow: hidden;
     border-radius: 10px;
   }
 
@@ -211,6 +212,7 @@ const Post = ({ post }: { post: Props }) => {
               height={70}
               src={post.thumbnail}
               alt={post.title}
+              imgStyle={{ objectFit: 'cover' }}
             />
           )}
         </div>
