@@ -1,12 +1,12 @@
 import React from 'react';
-import { NextPage, GetStaticProps } from 'next';
+import type { NextPage, GetStaticProps } from 'next';
 import styled from 'styled-components';
 import fetch from 'isomorphic-unfetch';
 import { useRouter } from 'next/router';
 
 import Sidebar from '~/components/sidebar';
 import Post from '~/components/post';
-import { Subreddit, SubredditAbout } from '~/@types/post';
+import type { Subreddit, SubredditAbout } from '~/@types/post';
 import Header from '~/components/header';
 import { SubredditAboutProvider } from '~/components/subreddit-context';
 import Meta from '~/components/meta';
@@ -31,7 +31,7 @@ export const getStaticProps: GetStaticProps<Props> = async ({
   const [subredditData, subredditAboutData] = await Promise.all(promises);
 
   return {
-    unstable_revalidate: 60 * 60, // 1 hour
+    revalidate: 60 * 60, // 1 hour
     props: {
       data: subredditData,
       sort,

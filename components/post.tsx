@@ -3,11 +3,11 @@ import { parse } from 'url';
 import * as React from 'react';
 import styled from 'styled-components';
 import { ellipsis } from 'polished';
-import { SimpleImg } from 'react-simple-img';
+import Image from 'next/image';
 
 import StyledLink from './link';
 
-import { Post as Props } from '~/@types/post';
+import type { Post as Props } from '~/@types/post';
 import DefaultThumbnail from '~/public/static/img/icons/default_thumbnail.svg';
 import Comments from '~/public/static/img/icons/comments.svg';
 
@@ -207,12 +207,11 @@ const Post = ({ post }: { post: Props }) => {
           {hasNoThumbnail ? (
             <DefaultThumbnail />
           ) : (
-            <SimpleImg
+            <Image
               width={70}
               height={70}
               src={post.thumbnail}
               alt={post.title}
-              imgStyle={{ objectFit: 'cover' }}
             />
           )}
         </div>

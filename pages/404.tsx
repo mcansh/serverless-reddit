@@ -1,6 +1,6 @@
 import React from 'react';
-import { NextPage } from 'next';
-import { SimpleImg } from 'react-simple-img';
+import type { NextPage } from 'next';
+import Image from 'next/image';
 import styled from 'styled-components';
 
 import Meta from '~/components/meta';
@@ -36,17 +36,10 @@ const NotFound: NextPage = () => {
   return (
     <Container>
       <Meta />
-      <SimpleImg
+      <Image
         src={`/static/img/404/reddit404${image}.png`}
         width={500}
         height={448}
-        placeholder="var(--background-color)"
-        imgStyle={{
-          maxHeight: '44.8rem',
-          maxWidth: '50rem',
-          width: '95%',
-          objectFit: 'contain',
-        }}
       />
       <h1>page not found</h1>
       <p>the page you requested does not exist</p>

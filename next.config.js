@@ -1,5 +1,3 @@
-const path = require('path');
-
 const withSourcemaps = require('@zeit/next-source-maps')();
 const withOffline = require('next-offline');
 
@@ -36,55 +34,53 @@ const nextConfig = {
     FATHOM_SITE_ID: 'UKNZVXBD',
     BASE_URL: 'https://reddit.loganmcansh.com',
   },
-  experimental: {
-    modern: true,
-    rewrites: () => [
-      { source: '/manifest.json', destination: '/api/manifest' },
-      { source: '/manifest.webmanifest', destination: '/api/manifest' },
+  images: {
+    domains: ['a.thumbs.redditmedia.com', 'b.thumbs.redditmedia.com'],
+  },
+  rewrites: () => [
+    { source: '/manifest.json', destination: '/api/manifest' },
+    { source: '/manifest.webmanifest', destination: '/api/manifest' },
+    {
+      source: '/sw.js',
+      destination: isProduction ? '/_next/static/sw.js' : '/dummy-sw.js',
+    },
+  ],
+  headers: () =>
+    [
+      {
+        source: '/(manifest.json|manifest.webmanifest)',
+        headers: [
+          { key: 'Content-Type', value: 'application/manifest+json' },
+          isProduction && {
+            key: 'Cache-Control',
+            value: 'public, max-age=43200, immutable',
+          },
+        ].filter(Boolean),
+      },
+      {
+        source: '/logos/:path*',
+        headers: [
+          isProduction && {
+            key: 'Cache-Control',
+            value: 's-maxage=31536000, maxage=0',
+          },
+        ].filter(Boolean),
+      },
+      isProduction && {
+        source: '/static/:path*',
+        headers: [
+          { key: 'Cache-Control', value: 's-maxage=31536000, maxage=0' },
+        ],
+      },
       {
         source: '/sw.js',
-        destination: isProduction ? '/_next/static/sw.js' : '/dummy-sw.js',
+        headers: [
+          { key: 'Cache-Control', value: 'max-age=0' },
+          { key: 'Service-Worker-Allowed', value: '/' },
+        ],
       },
-    ],
-    headers: () =>
-      [
-        {
-          source: '/(manifest.json|manifest.webmanifest)',
-          headers: [
-            { key: 'Content-Type', value: 'application/manifest+json' },
-            isProduction && {
-              key: 'Cache-Control',
-              value: 'public, max-age=43200, immutable',
-            },
-          ].filter(Boolean),
-        },
-        {
-          source: '/logos/:path*',
-          headers: [
-            isProduction && {
-              key: 'Cache-Control',
-              value: 's-maxage=31536000, maxage=0',
-            },
-          ].filter(Boolean),
-        },
-        isProduction && {
-          source: '/static/:path*',
-          headers: [
-            { key: 'Cache-Control', value: 's-maxage=31536000, maxage=0' },
-          ],
-        },
-        {
-          source: '/sw.js',
-          headers: [
-            { key: 'Cache-Control', value: 'max-age=0' },
-            { key: 'Service-Worker-Allowed', value: '/' },
-          ],
-        },
-      ].filter(Boolean),
-  },
+    ].filter(Boolean),
   webpack: (config, { isServer, buildId, webpack }) => {
-    config.resolve.alias['~'] = path.resolve('./');
-
     if (!isServer) {
       config.resolve.alias['@sentry/node'] = '@sentry/browser';
     }
