@@ -1,6 +1,6 @@
 import { format } from 'url';
 
-import { NextApiRequest, NextApiResponse } from 'next';
+import type { NextApiRequest, NextApiResponse } from 'next';
 
 import { getFirstParams } from '~/utils/get-first-param';
 

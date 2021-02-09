@@ -1,6 +1,6 @@
-import { CSSProp } from 'styled-components';
+import type { CSSProp } from 'styled-components';
 
-import theme from '../theme';
+import type theme from '../theme';
 
 type ThemeInterface = typeof theme;
 

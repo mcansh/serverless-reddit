@@ -1,4 +1,4 @@
-import { ParsedUrlQuery } from 'querystring';
+import type { ParsedUrlQuery } from 'querystring';
 
 const getFirstParam = <T>(input: T | T[]) =>
   Array.isArray(input) ? input[0] : input;

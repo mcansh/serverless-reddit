@@ -1,5 +1,3 @@
-import { parse } from 'url';
-
 import * as React from 'react';
 import styled from 'styled-components';
 import { ellipsis } from 'polished';
@@ -193,7 +191,7 @@ const Post = ({ post }: { post: Props }) => {
   const hasNoThumbnail =
     post.thumbnail && /^$|self|default|nsfw/.test(post.thumbnail);
 
-  const { host: url } = parse(post.url);
+  const { host: url } = new URL(post.url);
   return (
     <PostStyles href={post.url}>
       <div className="feed__feed-item feed-item">

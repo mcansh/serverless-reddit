@@ -1,6 +1,8 @@
 module.exports = {
   extends: ['@mcansh/eslint-config/typescript'],
   rules: {
+    'no-shadow': 'off',
+    '@typescript-eslint/no-shadow': 'error',
     'import/no-extraneous-dependencies': [
       'error',
       {

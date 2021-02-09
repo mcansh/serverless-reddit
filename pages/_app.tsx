@@ -1,7 +1,7 @@
 /* eslint-disable no-console */
 import React from 'react';
 import * as Sentry from '@sentry/node';
-import { AppProps } from 'next/app';
+import type { AppProps } from 'next/app';
 import { ThemeProvider } from 'styled-components';
 import { NProgress } from '@mcansh/next-nprogress';
 import { ErrorBoundary } from 'react-error-boundary';

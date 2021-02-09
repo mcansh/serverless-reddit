@@ -1,4 +1,4 @@
-import { parse, format } from 'url';
+import { format } from 'url';
 
 import React from 'react';
 import Head from 'next/head';
@@ -11,7 +11,7 @@ const Meta = () => {
 
   const about = useSubredditAbout();
 
-  const { pathname } = parse(asPath);
+  const { pathname } = new URL(asPath, 'https://reddit.com');
 
   const canonical = `${process.env.API_BASE}${pathname}`;
 

@@ -1,27 +1,11 @@
 const withSourcemaps = require('@zeit/next-source-maps')();
-const withOffline = require('next-offline');
+const withSVGR = require('@mcansh/next-svgr')();
 
 const pkgJSON = require('./package.json');
 
 const isProduction = process.env.NODE_ENV === 'production';
 
 const nextConfig = {
-  // next-offline
-  dontAutoRegisterSw: true,
-  workboxOpts: {
-    swDest: 'static/sw.js',
-    runtimeCaching: [
-      {
-        handler: 'StaleWhileRevalidate',
-        urlPattern: /[.](webp|png|jpg|svg|css|woff|woff2)/,
-      },
-      {
-        handler: 'NetworkFirst',
-        urlPattern: /^https?.*/,
-      },
-    ],
-  },
-
   // next config
   crossOrigin: 'anonymous',
   target: 'experimental-serverless-trace',
@@ -80,44 +64,22 @@ const nextConfig = {
         ],
       },
     ].filter(Boolean),
-  webpack: (config, { isServer, buildId, webpack }) => {
+  webpack: (config, { isServer }) => {
     if (!isServer) {
       config.resolve.alias['@sentry/node'] = '@sentry/browser';
     }
 
-    config.module.rules.push({
-      test: /\.svg$/,
-      use: [
-        {
-          loader: '@svgr/webpack',
-          options: {
-            svgoConfig: {
-              plugins: [
-                {
-                  prefixIds: {
-                    delim: '_',
-                    prefixIds: true,
-                    prefixClassNames: false,
-                  },
-                },
-              ],
-            },
-          },
-        },
-      ],
-    });
-
-    config.plugins.push(
-      new webpack.DefinePlugin({
-        'process.env.BUILD_ID': JSON.stringify(buildId),
-        'process.env.SENTRY_RELEASE': JSON.stringify(
-          `reddit@${pkgJSON.version}_${buildId}`
-        ),
-      })
-    );
+    // config.plugins.push(
+    //   new webpack.DefinePlugin({
+    //     'process.env.BUILD_ID': JSON.stringify(buildId),
+    //     'process.env.SENTRY_RELEASE': JSON.stringify(
+    //       `reddit@${pkgJSON.version}_${buildId}`
+    //     ),
+    //   })
+    // );
 
     return config;
   },
 };
 
-module.exports = withOffline(withSourcemaps(nextConfig));
+module.exports = withSVGR(withSourcemaps(nextConfig));
